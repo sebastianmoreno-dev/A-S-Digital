@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block title %}PixelForge Studio — Desarrollo Web Profesional{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="section" style="padding-top: 5rem; padding-bottom: 5rem; text-align: center;">
+  <div class="container">
+
+    <div class="badge badge-green" style="margin-bottom: 1.75rem;">
+      <span class="badge-dot"></span>
+      Sistema online. Listo para construir.
+    </div>
+
+    <h1>Forjando excelencia<br><span class="accent">digital</span></h1>
+
+    <p style="font-size: 16px; max-width: 500px; margin: 1.25rem auto 2.5rem;">
+      Desarrollamos aplicaciones web de alto rendimiento con tecnología moderna.
+      Frontend elegante, backend robusto, resultados reales.
+    </p>
+
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">
+        Iniciar proyecto
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="{{ url_for('main.portafolio') }}" class="btn btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        Ver portafolio
+      </a>
+    </div>
+
+    <div class="stats-strip" style="justify-content: center;">
+      <div><div class="stat-num">+40</div><div class="stat-label">proyectos entregados</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">clientes satisfechos</div></div>
+      <div><div class="stat-num">3–5</div><div class="stat-label">días de entrega promedio</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== COMPETENCIAS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Competencias principales</div>
+    <h2 class="section-title">Lo que construimos</h2>
+    <p class="section-sub">Arquitectura orientada a velocidad, calidad y escalabilidad real.</p>
+
+    <div class="grid-2">
+
+      <!-- Card 1: Frontend -->
+      <div class="card">
+        <div class="card-icon icon-violet">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Frontend de alto rendimiento</h3>
+        <p style="font-size: 14px;">Interfaces responsivas, accesibles y optimizadas. Se ven perfectas en cualquier dispositivo desde el primer render.</p>
+        <span class="card-tag">HTML · CSS · JavaScript</span>
+      </div>
+
+      <!-- Card 2: Backend -->
+      <div class="card">
+        <div class="card-icon icon-green">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Backend robusto y seguro</h3>
+        <p style="font-size: 14px;">APIs REST con Flask, autenticación JWT, base de datos relacional y lógica de negocio lista para escalar.</p>
+        <span class="card-tag">Python · Flask · MySQL</span>
+      </div>
+
+      <!-- Card 3: Stack (ancho completo) -->
+      <div class="card col-span-2">
+        <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 220px;">
+            <div class="card-icon icon-amber">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <h3 style="margin-bottom: 0.5rem;">Stack tecnológico moderno</h3>
+            <p style="font-size: 14px;">Usamos las herramientas correctas para cada proyecto, sin sobre-ingeniería, sin comprometer calidad.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">JWT</span>
+            </div>
+          </div>
+          <div class="code-block" style="flex: 1; min-width: 260px;">
+            <div class="code-dots">
+              <div class="code-dot dot-red"></div>
+              <div class="code-dot dot-amber"></div>
+              <div class="code-dot dot-green"></div>
+            </div>
+            <div><span class="kw">from</span> <span class="fn">flask</span> <span class="kw">import</span> <span class="wh">Flask, jsonify</span></div>
+            <div><span class="wh">app = </span><span class="fn">Flask</span><span class="wh">(__name__)</span></div>
+            <div>&nbsp;</div>
+            <div><span class="kw">@app</span><span class="wh">.route(</span><span class="str">'/api/proyecto'</span><span class="wh">)</span></div>
+            <div><span class="kw">def</span> <span class="fn">forge_project</span><span class="wh">():</span></div>
+            <div>&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">jsonify</span><span class="wh">({</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'status'</span><span class="wh">: </span><span class="str">'delivered'</span><span class="wh">,</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'quality'</span><span class="wh">: </span><span class="str">'uncompromising'</span></div>
+            <div>&nbsp;&nbsp;<span class="wh">})</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESO (resumen) ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Cómo trabajamos</div>
+    <h2 class="section-title">De la idea al sitio en vivo</h2>
+    <p class="section-sub">Cuatro pasos claros, sin sorpresas, con resultados desde el día uno.</p>
+
+    <div>
+      {% set pasos = [
+        ('01', 'Reunión de descubrimiento',  'Entendemos tu negocio, objetivos y qué necesitas que haga tu sitio.'),
+        ('02', 'Diseño y propuesta técnica', 'Wireframe visual y arquitectura Flask antes de escribir una sola línea de código.'),
+        ('03', 'Desarrollo full-stack',       'Frontend HTML/CSS/JS + backend Python Flask + base de datos, con actualizaciones constantes.'),
+        ('04', 'Deploy y soporte',            'Publicación en servidor, dominio y 30 días de soporte incluidos.')
+      ] %}
+      {% for num, titulo, desc in pasos %}
+      <div class="process-item">
+        <span class="process-num">{{ num }}</span>
+        <div class="process-body">
+          <h4>{{ titulo }}</h4>
+          <p>{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <a href="{{ url_for('main.proceso') }}" class="btn btn-ghost">Ver proceso completo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="section" style="text-align: center; border-bottom: none;">
+  <div class="container">
+    <div class="badge badge-violet" style="margin-bottom: 1.5rem;">
+      <span class="badge-dot"></span>
+      Plazas disponibles este mes
+    </div>
+    <h2 style="margin-bottom: 0.75rem;">¿Listo para empezar?</h2>
+    <p style="margin-bottom: 2rem;">Cuéntanos tu idea — te respondemos en menos de 24 horas con una propuesta.</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">
+      Cotizar mi proyecto
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+{% endblock %}

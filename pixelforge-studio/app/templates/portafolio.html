@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}Portafolio — PixelForge Studio{% endblock %}
+{% block meta_desc %}Proyectos web desarrollados por PixelForge Studio con Python, Flask, JavaScript, HTML y CSS.{% endblock %}
+
+{% block content %}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="page-header">
+  <div class="container">
+    <div class="badge badge-violet"><span class="badge-dot"></span>Trabajo reciente</div>
+    <h1>Portafolio</h1>
+    <p>Proyectos reales entregados a clientes reales. Cada uno con su stack, sus retos y sus resultados.</p>
+  </div>
+</div>
+
+<!-- ===== FILTROS ===== -->
+<section class="section" style="padding-top: 2rem; padding-bottom: 0; border-bottom: none;">
+  <div class="container">
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button class="btn btn-green filtro-btn active" data-filtro="todos">Todos</button>
+      <button class="btn btn-ghost filtro-btn" data-filtro="fullstack">Full-stack</button>
+      <button class="btn btn-ghost filtro-btn" data-filtro="frontend">Frontend</button>
+      <button class="btn btn-ghost filtro-btn" data-filtro="backend">Backend</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROYECTOS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2" id="proyectosGrid">
+
+      {% set proyectos = [
+        {
+          'nombre': 'EstateArch',
+          'desc': 'Plataforma inmobiliaria con tres roles de usuario (Comprador, Vendedor, Admin), JWT y panel de gestión de propiedades.',
+          'tags': ['Flask', 'MySQL', 'JavaScript', 'JWT'],
+          'tipo': 'fullstack',
+          'color': '#7c3aed'
+        },
+        {
+          'nombre': 'LandingCraft',
+          'desc': 'Landing page de alta conversión para agencia de marketing. Animaciones CSS, formulario con Flask y métricas de leads.',
+          'tags': ['HTML', 'CSS', 'Flask', 'Python'],
+          'tipo': 'fullstack',
+          'color': '#4ade80'
+        },
+        {
+          'nombre': 'Dashboard Analytics',
+          'desc': 'Panel administrativo con gráficas interactivas, tablas filtradas y exportación a CSV desde backend Flask.',
+          'tags': ['JavaScript', 'Flask', 'MySQL'],
+          'tipo': 'fullstack',
+          'color': '#fbbf24'
+        },
+        {
+          'nombre': 'RestaurantMenu',
+          'desc': 'Menú digital responsivo con carrito de pedidos en JavaScript puro, sin frameworks.',
+          'tags': ['HTML', 'CSS', 'JavaScript'],
+          'tipo': 'frontend',
+          'color': '#60a5fa'
+        },
+        {
+          'nombre': 'AuthAPI',
+          'desc': 'API de autenticación completa con registro, login, refresh token y roles. Documentada con Swagger.',
+          'tags': ['Python', 'Flask', 'JWT', 'MySQL'],
+          'tipo': 'backend',
+          'color': '#a78bfa'
+        },
+        {
+          'nombre': 'PortfolioKit',
+          'desc': 'Template de portafolio personal para desarrolladores con modo oscuro y CMS headless en Flask.',
+          'tags': ['HTML', 'CSS', 'Python', 'Flask'],
+          'tipo': 'fullstack',
+          'color': '#34d399'
+        },
+      ] %}
+
+      {% for p in proyectos %}
+      <div class="card portfolio-card proyecto-item" data-tipo="{{ p.tipo }}">
+        <!-- Imagen placeholder -->
+        <div class="portfolio-img">
+          <div class="portfolio-img-placeholder" style="color: {{ p.color }};">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+            <span style="font-size: 11px;">Vista previa próximamente</span>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom: 0.4rem;">{{ p.nombre }}</h3>
+        <p style="font-size: 13px; margin-bottom: 0.75rem;">{{ p.desc }}</p>
+
+        <div class="portfolio-meta">
+          <div class="portfolio-tags">
+            {% for tag in p.tags %}
+            <span class="tech-tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost" style="padding: 6px 14px; font-size: 12px;">
+            Ver más →
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section" style="text-align:center; border-bottom:none;">
+  <div class="container">
+    <h2 style="margin-bottom:0.75rem;">¿Quieres ser el próximo caso de éxito?</h2>
+    <p style="margin-bottom:2rem;">Trabajamos con negocios de todos los tamaños. Cuéntanos tu proyecto.</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Iniciar proyecto →</a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const btns = document.querySelectorAll('.filtro-btn');
+  const items = document.querySelectorAll('.proyecto-item');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => { b.classList.remove('btn-green', 'active'); b.classList.add('btn-ghost'); });
+      btn.classList.add('btn-green', 'active'); btn.classList.remove('btn-ghost');
+
+      const filtro = btn.dataset.filtro;
+      items.forEach(item => {
+        item.style.display = (filtro === 'todos' || item.dataset.tipo === filtro) ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+{% endblock %}

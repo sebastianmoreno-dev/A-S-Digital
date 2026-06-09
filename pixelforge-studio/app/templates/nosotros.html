@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Nosotros — PixelForge Studio{% endblock %}
+{% block meta_desc %}Conoce al equipo detrás de PixelForge Studio — desarrolladores apasionados por el código limpio y el diseño funcional.{% endblock %}
+
+{% block content %}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="page-header">
+  <div class="container">
+    <div class="badge badge-green"><span class="badge-dot"></span>El equipo</div>
+    <h1>Nosotros</h1>
+    <p>Somos desarrolladores que creemos que el buen software cambia negocios. Construimos con cuidado, entregamos con orgullo.</p>
+  </div>
+</div>
+
+<!-- ===== MISIÓN ===== -->
+<section class="section">
+  <div class="container">
+    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
+
+      <div style="flex: 1; min-width: 260px;">
+        <div class="section-eyebrow">Misión</div>
+        <h2 class="section-title">¿Por qué existimos?</h2>
+        <p style="margin-bottom: 1.25rem;">
+          Muchos negocios en México tienen ideas brillantes pero no el sitio web que las merece. Agencias grandes cobran de más, freelancers desaparecen a mitad del proyecto.
+        </p>
+        <p style="margin-bottom: 1.25rem;">
+          PixelForge Studio nació para cerrar esa brecha: desarrollo web profesional, con comunicación directa, precios justos y código que puedes mantener tú mismo el día de mañana.
+        </p>
+        <p>
+          Usamos Python, Flask, JavaScript, HTML y CSS — tecnologías probadas en producción, sin moda pasajera, sin dependencias innecesarias.
+        </p>
+      </div>
+
+      <div style="flex: 1; min-width: 260px;">
+        <div class="code-block">
+          <div class="code-dots">
+            <div class="code-dot dot-red"></div>
+            <div class="code-dot dot-amber"></div>
+            <div class="code-dot dot-green"></div>
+          </div>
+          <div><span class="cm"># pixelforge/values.py</span></div>
+          <div>&nbsp;</div>
+          <div><span class="kw">class</span> <span class="fn">PixelForgeStudio</span><span class="wh">:</span></div>
+          <div>&nbsp;&nbsp;<span class="wh">valores = [</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'código limpio'</span><span class="wh">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'entrega puntual'</span><span class="wh">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'comunicación directa'</span><span class="wh">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'sin costos ocultos'</span><span class="wh">,</span></div>
+          <div>&nbsp;&nbsp;<span class="wh">]</span></div>
+          <div>&nbsp;</div>
+          <div>&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">entregar</span><span class="wh">(self, proyecto):</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="wh">proyecto.deploy(</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">quality</span><span class="wh">=</span><span class="str">'uncompromising'</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wh">)</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== VALORES ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Valores</div>
+    <h2 class="section-title">Cómo trabajamos</h2>
+    <p class="section-sub">No son palabras en un cartel — son decisiones que tomamos todos los días.</p>
+
+    <div class="grid-3">
+      {% set valores = [
+        ('Código limpio',          'Escribimos código que puedas leer, entender y escalar. Sin magia negra, sin atajos que luego duelen.', 'icon-violet'),
+        ('Comunicación directa',   'Sin intermediarios. Hablas directo con el desarrollador. Respuesta en menos de 4 horas en días hábiles.', 'icon-green'),
+        ('Orientados a resultados','No entregamos sitios bonitos que no convierten. Cada decisión de diseño tiene una razón detrás.',         'icon-amber'),
+        ('Seguridad primero',      'Buenas prácticas desde el inicio: variables de entorno, JWT, validación de inputs, HTTPS.',             'icon-violet'),
+        ('Documentación real',     'Entregamos README útil, instrucciones de deploy y comentarios donde importan.',                         'icon-green'),
+        ('Mejora continua',        'Aprendemos en cada proyecto. Las tecnologías evolucionan y nosotros evolucionamos con ellas.',           'icon-amber'),
+      ] %}
+      {% for titulo, desc, icono in valores %}
+      <div class="card">
+        <div class="card-icon {{ icono }}">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h4 style="margin-bottom:0.4rem;">{{ titulo }}</h4>
+        <p style="font-size:13px;">{{ desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="grid-3" style="text-align:center;">
+      <div class="card">
+        <div style="font-size:40px; font-weight:700; color:var(--green); letter-spacing:-1.5px;">+40</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Proyectos entregados</div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; font-weight:700; color:var(--violet-light); letter-spacing:-1.5px;">100%</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Clientes satisfechos</div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; font-weight:700; color:var(--amber); letter-spacing:-1.5px;">3–5</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Días de entrega promedio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section" style="text-align:center; border-bottom:none;">
+  <div class="container">
+    <h2 style="margin-bottom:0.75rem;">¿Te identificas con nuestra forma de trabajar?</h2>
+    <p style="margin-bottom:2rem;">Hablemos. Sin compromiso, sin formularios interminables.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Iniciar conversación →</a>
+      <a href="{{ url_for('main.portafolio') }}" class="btn btn-ghost">Ver nuestro trabajo</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

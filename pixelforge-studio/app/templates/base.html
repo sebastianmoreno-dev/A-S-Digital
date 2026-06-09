@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{% block meta_desc %}PixelForge Studio — Desarrollo web profesional con Python, Flask, JavaScript, HTML y CSS.{% endblock %}" />
+  <title>{% block title %}PixelForge Studio{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container">
+      <a href="{{ url_for('main.index') }}" class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <span class="nav-logo-name">PixelForge Studio</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="{{ url_for('main.servicios') }}"  {% if request.endpoint == 'main.servicios'  %}class="active"{% endif %}>Servicios</a></li>
+        <li><a href="{{ url_for('main.portafolio') }}" {% if request.endpoint == 'main.portafolio' %}class="active"{% endif %}>Portafolio</a></li>
+        <li><a href="{{ url_for('main.nosotros') }}"   {% if request.endpoint == 'main.nosotros'   %}class="active"{% endif %}>Nosotros</a></li>
+        <li><a href="{{ url_for('main.proceso') }}"    {% if request.endpoint == 'main.proceso'    %}class="active"{% endif %}>Proceso</a></li>
+        <li><a href="{{ url_for('main.contacto') }}"   {% if request.endpoint == 'main.contacto'   %}class="active"{% endif %}>Contacto</a></li>
+      </ul>
+
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary nav-cta">Get Started</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== FLASH MESSAGES ===== -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container" style="padding-top:1rem;">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">PixelForge Studio</span>
+        <span class="footer-copy">© 2025 · Engineered for digital excellence</span>
+        <nav class="footer-links">
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://wa.me/521234567890" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

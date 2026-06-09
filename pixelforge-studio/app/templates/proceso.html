@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Proceso — PixelForge Studio{% endblock %}
+{% block meta_desc %}Cómo trabajamos en PixelForge Studio: del descubrimiento al deploy en pasos claros.{% endblock %}
+
+{% block content %}
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="page-header">
+  <div class="container">
+    <div class="badge badge-amber"><span class="badge-dot"></span>Metodología</div>
+    <h1>Nuestro proceso</h1>
+    <p>Transparencia total desde el primer mensaje. Sabes qué estamos haciendo en cada momento.</p>
+  </div>
+</div>
+
+<!-- ===== PASOS DETALLADOS ===== -->
+<section class="section">
+  <div class="container">
+
+    {% set pasos = [
+      {
+        'num': '01',
+        'titulo': 'Reunión de descubrimiento',
+        'desc': 'Empezamos con una videollamada o chat por WhatsApp donde entendemos tu negocio, tu audiencia y qué quieres que logre tu sitio. No hay formularios genéricos — hacemos las preguntas correctas.',
+        'detalle': ['¿Qué problema resuelve tu negocio?', '¿Quién es tu cliente ideal?', '¿Tienes referencia de sitios que te gusten?', '¿Cuál es tu presupuesto y fecha límite?'],
+        'icono': 'icon-violet',
+        'tiempo': '1–2 días'
+      },
+      {
+        'num': '02',
+        'titulo': 'Propuesta técnica y diseño',
+        'desc': 'Con la información recolectada, preparamos un wireframe visual y una propuesta técnica con el stack exacto que usaremos. Apruebas antes de que escribamos una sola línea de código.',
+        'detalle': ['Wireframe en Figma o boceto HTML', 'Arquitectura Flask (rutas, modelos, blueprints)', 'Diagrama de base de datos', 'Cronograma de entrega por etapas'],
+        'icono': 'icon-amber',
+        'tiempo': '2–3 días'
+      },
+      {
+        'num': '03',
+        'titulo': 'Desarrollo iterativo',
+        'desc': 'Construimos el proyecto en sprints cortos. Cada 2–3 días ves avances reales en un servidor de staging. Puedes dar feedback en cualquier momento — los cambios no tienen costo adicional durante el desarrollo.',
+        'detalle': ['Frontend: HTML5, CSS3, JavaScript', 'Backend: Python + Flask + SQLAlchemy', 'Base de datos: MySQL con migraciones', 'Staging URL para revisión constante'],
+        'icono': 'icon-green',
+        'tiempo': '5–12 días'
+      },
+      {
+        'num': '04',
+        'titulo': 'QA y pruebas',
+        'desc': 'Antes de publicar probamos todo: responsividad en distintos dispositivos, velocidad de carga, seguridad de la API y flujos de usuario completos. Si algo falla, lo corregimos.',
+        'detalle': ['Pruebas en Chrome, Firefox, Safari, Edge', 'Responsive: móvil, tablet, desktop', 'Test de endpoints con Postman', 'Revisión de seguridad: headers, CORS, JWT'],
+        'icono': 'icon-violet',
+        'tiempo': '1–2 días'
+      },
+      {
+        'num': '05',
+        'titulo': 'Deploy y entrega',
+        'desc': 'Publicamos el sitio en el servidor de tu elección (o recomendamos uno según tu presupuesto). Configuramos el dominio, HTTPS y variables de entorno. Te entregamos acceso completo al código.',
+        'detalle': ['Deploy en VPS, Railway, Render o tu servidor', 'Configuración de dominio y SSL', 'Variables de entorno seguras (.env)', 'Repositorio Git con historial limpio'],
+        'icono': 'icon-green',
+        'tiempo': '1 día'
+      },
+      {
+        'num': '06',
+        'titulo': '30 días de soporte',
+        'desc': 'No desaparecemos después de entregar. Durante 30 días tienes acceso directo para reportar bugs, hacer ajustes menores o preguntar cómo funciona algo. Sin costo adicional.',
+        'detalle': ['Corrección de bugs sin costo', 'Ajustes menores de diseño', 'Soporte por WhatsApp o email', 'Documentación básica del proyecto'],
+        'icono': 'icon-amber',
+        'tiempo': '30 días'
+      }
+    ] %}
+
+    {% for paso in pasos %}
+    <div style="display: flex; gap: 2rem; align-items: flex-start; padding: 2.5rem 0; border-bottom: 0.5px solid var(--border);">
+
+      <!-- Número -->
+      <div style="min-width: 56px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px;">Paso</div>
+        <div style="font-size: 28px; font-weight: 700; color: var(--text-muted); letter-spacing: -1px;">{{ paso.num }}</div>
+      </div>
+
+      <!-- Contenido -->
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; flex-wrap: wrap;">
+          <h3>{{ paso.titulo }}</h3>
+          <span class="badge badge-green" style="font-size: 11px; padding: 3px 10px;">{{ paso.tiempo }}</span>
+        </div>
+        <p style="font-size: 14px; margin-bottom: 1.25rem;">{{ paso.desc }}</p>
+
+        <div class="grid-2" style="gap: 8px;">
+          {% for item in paso.detalle %}
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            {{ item }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<!-- ===== GARANTÍAS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Garantías</div>
+    <h2 class="section-title">Lo que prometemos</h2>
+    <div class="grid-3">
+      {% for titulo, desc in [
+        ('Entrega puntual', 'Si acordamos una fecha, la cumplimos. Si hay algún retraso, te avisamos con anticipación.'),
+        ('Código tuyo', 'Todo el código fuente te pertenece. Lo entregamos en un repositorio con historial limpio.'),
+        ('Sin costos ocultos', 'El precio que acordamos es el precio final. Los cambios durante desarrollo no se cobran extra.'),
+      ] %}
+      <div class="card">
+        <div class="card-icon icon-green">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4 style="margin-bottom:0.4rem;">{{ titulo }}</h4>
+        <p style="font-size:13px;">{{ desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section" style="text-align:center; border-bottom:none;">
+  <div class="container">
+    <h2 style="margin-bottom:0.75rem;">¿Todo claro? Empecemos.</h2>
+    <p style="margin-bottom:2rem;">El primer paso es gratis — cuéntanos tu proyecto y te respondemos hoy.</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Agendar reunión →</a>
+  </div>
+</section>
+
+{% endblock %}
