@@ -1,26 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Portafolio — PixelForge Studio{% endblock %}
-{% block meta_desc %}Proyectos web desarrollados por PixelForge Studio con Python, Flask, JavaScript, HTML y CSS.{% endblock %}
+{% block title %}Portafolio — AS Vertex{% endblock %}
+{% block meta_desc %}Experiencia técnica y proyectos web desarrollados por AS Vertex con Python, Flask, JavaScript, HTML y CSS.{% endblock %}
 
 {% block content %}
 
 <!-- ===== PAGE HEADER ===== -->
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-violet"><span class="badge-dot"></span>Trabajo reciente</div>
-    <h1>Portafolio</h1>
-    <p>Proyectos reales entregados a clientes reales. Cada uno con su stack, sus retos y sus resultados.</p>
+    <div class="badge badge-violet"><span class="badge-dot"></span>Nuestro Trabajo</div>
+    <h1>Portafolio de AS Vertex</h1>
+    <p style="max-width: 600px; margin: 0 auto;">Casos de estudio, herramientas a medida y demostraciones de nuestra capacidad técnica. Cada proyecto refleja nuestro compromiso con el código limpio y la arquitectura sólida.</p>
   </div>
 </div>
 
 <!-- ===== FILTROS ===== -->
 <section class="section" style="padding-top: 2rem; padding-bottom: 0; border-bottom: none;">
   <div class="container">
-    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
       <button class="btn btn-green filtro-btn active" data-filtro="todos">Todos</button>
       <button class="btn btn-ghost filtro-btn" data-filtro="fullstack">Full-stack</button>
       <button class="btn btn-ghost filtro-btn" data-filtro="frontend">Frontend</button>
-      <button class="btn btn-ghost filtro-btn" data-filtro="backend">Backend</button>
+      <button class="btn btn-ghost filtro-btn" data-filtro="backend">Backend & APIs</button>
     </div>
   </div>
 </section>
@@ -33,46 +33,32 @@
       {% set proyectos = [
         {
           'nombre': 'EstateArch',
-          'desc': 'Plataforma inmobiliaria con tres roles de usuario (Comprador, Vendedor, Admin), JWT y panel de gestión de propiedades.',
+          'desc': 'Plataforma web inmobiliaria a medida. Implementa un sistema completo con tres roles de usuario distintos (Comprador, Vendedor, Administrador) y un panel privado para la gestión de propiedades.',
           'tags': ['Flask', 'MySQL', 'JavaScript', 'JWT'],
           'tipo': 'fullstack',
           'color': '#7c3aed'
         },
         {
-          'nombre': 'LandingCraft',
-          'desc': 'Landing page de alta conversión para agencia de marketing. Animaciones CSS, formulario con Flask y métricas de leads.',
-          'tags': ['HTML', 'CSS', 'Flask', 'Python'],
+          'nombre': 'R.A.S.A. (Sistema Médico)',
+          'desc': 'Sistema de gestión médica desarrollado como proyecto académico. Demostración técnica de diseño de bases de datos relacionales y flujos de usuario (Nota: proyecto exclusivo de exhibición técnica, no alojado en producción continua).',
+          'tags': ['Python', 'Flask', 'MySQL', 'Arquitectura'],
           'tipo': 'fullstack',
           'color': '#4ade80'
         },
         {
-          'nombre': 'Dashboard Analytics',
-          'desc': 'Panel administrativo con gráficas interactivas, tablas filtradas y exportación a CSV desde backend Flask.',
-          'tags': ['JavaScript', 'Flask', 'MySQL'],
-          'tipo': 'fullstack',
+          'nombre': 'Presencia Web Comercial',
+          'desc': 'Desarrollo de sitio web corporativo para un negocio local. Optimizado para tiempos de carga ultrarrápidos, SEO técnico y una experiencia de usuario fluida en dispositivos móviles.',
+          'tags': ['HTML5', 'CSS3', 'JavaScript'],
+          'tipo': 'frontend',
           'color': '#fbbf24'
         },
         {
-          'nombre': 'RestaurantMenu',
-          'desc': 'Menú digital responsivo con carrito de pedidos en JavaScript puro, sin frameworks.',
-          'tags': ['HTML', 'CSS', 'JavaScript'],
-          'tipo': 'frontend',
-          'color': '#60a5fa'
-        },
-        {
-          'nombre': 'AuthAPI',
-          'desc': 'API de autenticación completa con registro, login, refresh token y roles. Documentada con Swagger.',
-          'tags': ['Python', 'Flask', 'JWT', 'MySQL'],
+          'nombre': 'HTTP Header Inspector',
+          'desc': 'Herramienta técnica orientada a desarrolladores que intercepta, analiza y expone las cabeceras HTTP del navegador. Útil para auditorías de seguridad, pruebas de red y depuración.',
+          'tags': ['Python', 'Flask', 'APIs', 'Redes'],
           'tipo': 'backend',
-          'color': '#a78bfa'
-        },
-        {
-          'nombre': 'PortfolioKit',
-          'desc': 'Template de portafolio personal para desarrolladores con modo oscuro y CMS headless en Flask.',
-          'tags': ['HTML', 'CSS', 'Python', 'Flask'],
-          'tipo': 'fullstack',
-          'color': '#34d399'
-        },
+          'color': '#60a5fa'
+        }
       ] %}
 
       {% for p in proyectos %}
@@ -84,7 +70,7 @@
               <rect x="2" y="3" width="20" height="14" rx="2"/>
               <path d="M8 21h8M12 17v4"/>
             </svg>
-            <span style="font-size: 11px;">Vista previa próximamente</span>
+            <span style="font-size: 11px;">Vista técnica</span>
           </div>
         </div>
 
@@ -97,9 +83,7 @@
             <span class="tech-tag">{{ tag }}</span>
             {% endfor %}
           </div>
-          <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost" style="padding: 6px 14px; font-size: 12px;">
-            Ver más →
-          </a>
+          <!-- Se removió el botón "Ver más" simulado para evitar enlaces rotos si no tienen páginas individuales -->
         </div>
       </div>
       {% endfor %}
@@ -111,9 +95,9 @@
 <!-- ===== CTA ===== -->
 <section class="section" style="text-align:center; border-bottom:none;">
   <div class="container">
-    <h2 style="margin-bottom:0.75rem;">¿Quieres ser el próximo caso de éxito?</h2>
-    <p style="margin-bottom:2rem;">Trabajamos con negocios de todos los tamaños. Cuéntanos tu proyecto.</p>
-    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Iniciar proyecto →</a>
+    <h2 style="margin-bottom:0.75rem;">¿Buscas una solución técnica similar?</h2>
+    <p style="margin-bottom:2rem;">Nuestra experiencia abarca desde interfaces rápidas hasta motores de bases de datos complejos.</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Hablemos de tu proyecto →</a>
   </div>
 </section>
 

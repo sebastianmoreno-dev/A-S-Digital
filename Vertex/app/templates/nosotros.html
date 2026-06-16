@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Nosotros — PixelForge Studio{% endblock %}
-{% block meta_desc %}Conoce al equipo detrás de PixelForge Studio — desarrolladores apasionados por el código limpio y el diseño funcional.{% endblock %}
+{% block title %}Nosotros — AS Vertex{% endblock %}
+{% block meta_desc %}Conoce al equipo detrás de AS Vertex — ingenieros en sistemas apasionados por el código limpio y la arquitectura web funcional.{% endblock %}
 
 {% block content %}
 
 <!-- ===== PAGE HEADER ===== -->
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-green"><span class="badge-dot"></span>El equipo</div>
-    <h1>Nosotros</h1>
-    <p>Somos desarrolladores que creemos que el buen software cambia negocios. Construimos con cuidado, entregamos con orgullo.</p>
+    <div class="badge badge-green"><span class="badge-dot"></span>Nuestra Esencia</div>
+    <h1>El equipo detrás del código</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Somos desarrolladores que creemos que el buen software transforma negocios. Construimos con rigor técnico, entregamos con orgullo.</p>
   </div>
 </div>
 
@@ -19,16 +19,16 @@
     <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
 
       <div style="flex: 1; min-width: 260px;">
-        <div class="section-eyebrow">Misión</div>
+        <div class="section-eyebrow">Nuestra Historia</div>
         <h2 class="section-title">¿Por qué existimos?</h2>
-        <p style="margin-bottom: 1.25rem;">
-          Muchos negocios en México tienen ideas brillantes pero no el sitio web que las merece. Agencias grandes cobran de más, freelancers desaparecen a mitad del proyecto.
+        <p style="margin-bottom: 1.25rem; text-align: justify;">
+          Muchos negocios tienen ideas brillantes pero están limitados por herramientas genéricas o plantillas lentas. Las agencias tradicionales a menudo cobran de más por soluciones empaquetadas, y el rigor técnico queda en segundo plano.
         </p>
-        <p style="margin-bottom: 1.25rem;">
-          PixelForge Studio nació para cerrar esa brecha: desarrollo web profesional, con comunicación directa, precios justos y código que puedes mantener tú mismo el día de mañana.
+        <p style="margin-bottom: 1.25rem; text-align: justify;">
+          <strong>AS Vertex</strong> nació en la Ciudad de México para cerrar esa brecha. Fundado por Sebastián y Ángel, un equipo especializado en Ingeniería en Sistemas Computacionales, nuestro objetivo es llevar estándares de desarrollo de software profesional a las aplicaciones web de nuestros clientes.
         </p>
-        <p>
-          Usamos Python, Flask, JavaScript, HTML y CSS — tecnologías probadas en producción, sin moda pasajera, sin dependencias innecesarias.
+        <p style="text-align: justify;">
+          No seguimos modas pasajeras. Usamos Python, Flask, bases de datos relacionales y JavaScript nativo. Tecnologías robustas, probadas en producción, que garantizan que tu sistema sea rápido, seguro y escalable.
         </p>
       </div>
 
@@ -39,19 +39,21 @@
             <div class="code-dot dot-amber"></div>
             <div class="code-dot dot-green"></div>
           </div>
-          <div><span class="cm"># pixelforge/values.py</span></div>
+          <div><span class="cm"># as_vertex/core.py</span></div>
           <div>&nbsp;</div>
-          <div><span class="kw">class</span> <span class="fn">PixelForgeStudio</span><span class="wh">:</span></div>
+          <div><span class="kw">class</span> <span class="fn">ASVertexTeam</span><span class="wh">:</span></div>
+          <div>&nbsp;&nbsp;<span class="wh">fundadores = [</span><span class="str">'Sebastián'</span><span class="wh">, </span><span class="str">'Ángel'</span><span class="wh">]</span></div>
           <div>&nbsp;&nbsp;<span class="wh">valores = [</span></div>
           <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'código limpio'</span><span class="wh">,</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'entrega puntual'</span><span class="wh">,</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'comunicación directa'</span><span class="wh">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'arquitectura escalable'</span><span class="wh">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'comunicación sin intermediarios'</span><span class="wh">,</span></div>
           <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'sin costos ocultos'</span><span class="wh">,</span></div>
           <div>&nbsp;&nbsp;<span class="wh">]</span></div>
           <div>&nbsp;</div>
-          <div>&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">entregar</span><span class="wh">(self, proyecto):</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="wh">proyecto.deploy(</span></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">quality</span><span class="wh">=</span><span class="str">'uncompromising'</span></div>
+          <div>&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">desarrollar</span><span class="wh">(self, proyecto):</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="wh">proyecto.build(</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">quality</span><span class="wh">=</span><span class="str">'uncompromising'</span><span class="wh">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">framework</span><span class="wh">=</span><span class="str">'Flask'</span></div>
           <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wh">)</span></div>
         </div>
       </div>
@@ -63,18 +65,18 @@
 <!-- ===== VALORES ===== -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Valores</div>
-    <h2 class="section-title">Cómo trabajamos</h2>
-    <p class="section-sub">No son palabras en un cartel — son decisiones que tomamos todos los días.</p>
+    <div class="section-eyebrow">ADN del Estudio</div>
+    <h2 class="section-title">Nuestros principios de ingeniería</h2>
+    <p class="section-sub">No son frases de marketing — son decisiones técnicas que tomamos todos los días.</p>
 
     <div class="grid-3">
       {% set valores = [
-        ('Código limpio',          'Escribimos código que puedas leer, entender y escalar. Sin magia negra, sin atajos que luego duelen.', 'icon-violet'),
-        ('Comunicación directa',   'Sin intermediarios. Hablas directo con el desarrollador. Respuesta en menos de 4 horas en días hábiles.', 'icon-green'),
-        ('Orientados a resultados','No entregamos sitios bonitos que no convierten. Cada decisión de diseño tiene una razón detrás.',         'icon-amber'),
-        ('Seguridad primero',      'Buenas prácticas desde el inicio: variables de entorno, JWT, validación de inputs, HTTPS.',             'icon-violet'),
-        ('Documentación real',     'Entregamos README útil, instrucciones de deploy y comentarios donde importan.',                         'icon-green'),
-        ('Mejora continua',        'Aprendemos en cada proyecto. Las tecnologías evolucionan y nosotros evolucionamos con ellas.',           'icon-amber'),
+        ('Código limpio y propio',         'Escribimos código que puedes leer, entender y escalar. Sin constructores visuales, sin atajos que luego te cuestan caro.', 'icon-violet'),
+        ('Trato de ingeniero a cliente',   'Sin vendedores ni intermediarios. Hablas directamente con los desarrolladores que están escribiendo tu plataforma.', 'icon-green'),
+        ('Orientados al rendimiento',      'No entregamos sitios que tardan en cargar. Optimizamos cada consulta a la base de datos y cada recurso del frontend.',         'icon-amber'),
+        ('Seguridad desde el diseño',      'Buenas prácticas desde la línea uno: variables de entorno encriptadas, autenticación JWT, validación estricta y despliegue seguro.',             'icon-violet'),
+        ('Transparencia total',            'Entregamos repositorios Git con historial limpio, instrucciones claras y bases de datos estructuradas que te pertenecen.',                         'icon-green'),
+        ('Mejora continua',                'Como ingenieros, estudiamos y nos actualizamos constantemente. Aplicamos las mejores prácticas vigentes de la industria en cada entrega.',           'icon-amber'),
       ] %}
       {% for titulo, desc, icono in valores %}
       <div class="card">
@@ -89,21 +91,21 @@
   </div>
 </section>
 
-<!-- ===== STATS ===== -->
+<!-- ===== STATS (Reales y congruentes) ===== -->
 <section class="section">
   <div class="container">
     <div class="grid-3" style="text-align:center;">
       <div class="card">
-        <div style="font-size:40px; font-weight:700; color:var(--green); letter-spacing:-1.5px;">+40</div>
-        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Proyectos entregados</div>
+        <div style="font-size:40px; font-weight:700; color:var(--green); letter-spacing:-1.5px;">100%</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Desarrollo a medida</div>
       </div>
       <div class="card">
-        <div style="font-size:40px; font-weight:700; color:var(--violet-light); letter-spacing:-1.5px;">100%</div>
-        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Clientes satisfechos</div>
+        <div style="font-size:40px; font-weight:700; color:var(--violet-light); letter-spacing:-1.5px;">1:1</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Atención directa con fundadores</div>
       </div>
       <div class="card">
-        <div style="font-size:40px; font-weight:700; color:var(--amber); letter-spacing:-1.5px;">3–5</div>
-        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Días de entrega promedio</div>
+        <div style="font-size:40px; font-weight:700; color:var(--amber); letter-spacing:-1.5px;">6</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Meses de garantía técnica</div>
       </div>
     </div>
   </div>
@@ -112,11 +114,11 @@
 <!-- ===== CTA ===== -->
 <section class="section" style="text-align:center; border-bottom:none;">
   <div class="container">
-    <h2 style="margin-bottom:0.75rem;">¿Te identificas con nuestra forma de trabajar?</h2>
-    <p style="margin-bottom:2rem;">Hablemos. Sin compromiso, sin formularios interminables.</p>
+    <h2 style="margin-bottom:0.75rem;">¿Te identificas con nuestra forma de construir software?</h2>
+    <p style="margin-bottom:2rem;">Hablemos de ingeniería. Sin compromiso y sin intermediarios.</p>
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
       <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Iniciar conversación →</a>
-      <a href="{{ url_for('main.portafolio') }}" class="btn btn-ghost">Ver nuestro trabajo</a>
+      <a href="{{ url_for('main.portafolio') }}" class="btn btn-ghost">Ver demostraciones técnicas</a>
     </div>
   </div>
 </section>

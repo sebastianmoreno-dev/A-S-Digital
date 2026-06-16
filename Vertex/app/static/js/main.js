@@ -1,12 +1,14 @@
-// PixelForge Studio — main.js
+// AS Vertex — main.js
 
 // Navbar mobile toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks  = document.getElementById('navLinks');
+const navCTA    = document.querySelector('.nav-cta');
 
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
     navLinks.classList.toggle('open');
+    if (navCTA) navCTA.classList.toggle('open');
   });
 }
 
@@ -14,6 +16,7 @@ if (navToggle && navLinks) {
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     if (navLinks) navLinks.classList.remove('open');
+    if (navCTA) navCTA.classList.remove('open');
   });
 });
 
@@ -36,18 +39,23 @@ document.querySelectorAll('.alert').forEach(alert => {
   }, 4000);
 });
 
-// Animación de entrada suave para cards
+// Animación dinámica de entrada para cards (Scroll continuo)
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        // Al entrar en pantalla: se hace visible y sube
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
+      } else {
+        // Al salir de pantalla: vuelve a ocultarse para repetir la animación
+        entry.target.style.opacity = '0';
+        entry.target.style.transform = 'translateY(16px)';
       }
     });
   }, { threshold: 0.1 });
 
+  // Estado inicial de las tarjetas antes de ser observadas
   document.querySelectorAll('.card').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(16px)';

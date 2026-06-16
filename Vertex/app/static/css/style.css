@@ -287,19 +287,40 @@ select option { background: var(--bg-card); }
 .pricing-feature svg { width: 15px; height: 15px; stroke: var(--green); fill: none; stroke-width: 2.5; flex-shrink: 0; }
 
 /* ---------- Responsive ---------- */
+
+/* 1. Tablets (Pantallas medianas: iPads, laptops pequeñas) */
+@media (max-width: 1024px) {
+  .grid-3 { 
+    grid-template-columns: repeat(2, 1fr); /* Pasa de 3 columnas a 2 */
+  }
+  .container {
+    padding: 0 1.5rem; /* Reduce un poco los márgenes laterales */
+  }
+}
+
+/* 2. Móviles (Pantallas pequeñas: Celulares) */
 @media (max-width: 768px) {
-  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; } /* Todo a 1 columna */
   .col-span-2 { grid-column: span 1; }
-  .stats-strip { gap: 1.5rem; flex-wrap: wrap; }
+  
+  .stats-strip { gap: 1.5rem; flex-wrap: wrap; justify-content: center; text-align: center; }
+  
   .nav-links, .nav-cta { display: none; }
   .nav-toggle { display: block; }
+  
   .nav-links.open {
     display: flex; flex-direction: column; position: absolute;
     top: 64px; left: 0; right: 0;
     background: var(--bg-card); border-bottom: 0.5px solid var(--border);
     padding: 1.5rem 2rem; gap: 16px;
   }
-  .nav-links.open + .nav-cta { display: block; }
-  .footer-inner { flex-direction: column; text-align: center; }
+  .nav-links.open + .nav-cta { display: block; width: 100%; text-align: center; margin-top: 10px; }
+  
+  .footer-inner { flex-direction: column; text-align: center; gap: 1.5rem; }
   .section { padding: 3.5rem 0; }
+}
+
+/* 3. Móviles muy pequeños (iPhone SE, etc.) */
+@media (max-width: 380px) {
+  h1 { font-size: 28px; } /* Ajuste fino para evitar que títulos largos se corten */
 }
