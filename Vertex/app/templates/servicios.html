@@ -1,123 +1,166 @@
 {% extends "base.html" %}
 {% block title %}Servicios — AS Vertex{% endblock %}
-{% block meta_desc %}Servicios de ingeniería web: Frontend, Backend / API y desarrollo Full Stack con Python, Flask, JavaScript y SQL.{% endblock %}
+{% block meta_desc %}Servicios de desarrollo web de AS Vertex: Landing Page, Frontend, Backend, Sitio Completo y Blog/CMS. Elige el que más se adapta a tu negocio.{% endblock %}
 
 {% block content %}
 
-<!-- ===== PAGE HEADER ===== -->
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-green"><span class="badge-dot"></span>Lo que ofrecemos</div>
-    <h1>Servicios Técnicos</h1>
-    <p>Elige la integración exacta que necesitas o permítenos construir una arquitectura completa desde cero.</p>
+    <div class="badge badge-green"><span class="badge-dot"></span>¿Qué necesitas?</div>
+    <h1>Elige tu servicio</h1>
+    <p>Cada negocio es diferente. Lee cada opción y escoge la que más se adapta a lo que quieres lograr — si tienes dudas, nosotros te orientamos sin costo.</p>
   </div>
 </div>
 
-<!-- ===== PAQUETES ===== -->
-<section class="section">
+<section class="section" style="border-bottom: none;">
   <div class="container">
-    <div class="section-eyebrow">Paquetes</div>
-    <h2 class="section-title">Elige tu plan</h2>
-    <p class="section-sub">Precios claros. Cotizaciones técnicas precisas. Sin costos ocultos.</p>
 
-    <!-- Agregamos padding-top: 1.5rem aquí para darle espacio a la etiqueta superior -->
-    <div class="grid-3" style="align-items: start; margin-top: 2rem; padding-top: 1.5rem;">
-
-      <!-- Frontend -->
-      <div class="card pricing-card">
-        <div class="pricing-name">Frontend</div>
-        <div class="pricing-price">$5,500 <span>MXN</span></div>
-        <p style="font-size: 13px; margin-top: 0.5rem;">Interfaz visual optimizada, lista para conectarse a cualquier backend.</p>
-        <div class="pricing-divider"></div>
-        {% for feat in ['Diseño responsivo mobile-first', 'Estructura HTML5 semántica', 'CSS3 con animaciones fluidas', 'JavaScript puro / ES6+', 'Optimización de tiempos de carga', 'Entrega estimada: 1–2 semanas'] %}
-        <div class="pricing-feature">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          {{ feat }}
-        </div>
-        {% endfor %}
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost" style="width: 100%; justify-content: center;">Contratar Frontend</a>
-        </div>
+    <!-- Guía rápida -->
+    <div class="card" style="margin-bottom: 2.5rem; border-color: var(--green-border); background: var(--green-dim); padding: 1.25rem 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <h4 style="color: var(--green); font-size: 14px;">¿Cómo elegir?</h4>
       </div>
-
-      <!-- Full-stack (featured) -->
-      <!-- Cambiamos el margin negativo por transform: translateY para evitar cortes -->
-      <div class="card pricing-card featured" style="position: relative; transform: translateY(-12px);">
-        <div class="pricing-badge">Más completo</div>
-        <div class="pricing-name">Sitio Full Stack</div>
-        <div class="pricing-price"> Cotizacion</div>
-        <p style="font-size: 13px; margin-top: 0.5rem;">Arquitectura de extremo a extremo. Entregamos y desplegamos tu sistema.</p>
-        <div class="pricing-divider"></div>
-        {% for feat in ['Integración Frontend y Backend', 'API REST segura con Flask', 'Arquitectura de base de datos SQL', 'Autenticación mediante JWT', 'Despliegue en servidor de producción', '6 meses de mantenimiento incluido', 'Entrega estimada: 2–4 semanas'] %}
-        <div class="pricing-feature">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          {{ feat }}
-        </div>
-        {% endfor %}
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="width: 100%; justify-content: center;">Cotizar Full Stack</a>
-        </div>
-      </div>
-
-      <!-- Backend -->
-      <div class="card pricing-card">
-        <div class="pricing-name">Backend / API</div>
-        <div class="pricing-price">$7,500 <span>MXN</span></div>
-        <p style="font-size: 13px; margin-top: 0.5rem;">Lógica de negocio robusta para conectar con tu interfaz existente.</p>
-        <div class="pricing-divider"></div>
-        {% for feat in ['Desarrollo de API REST con Flask', 'Modelado de base de datos relacional', 'Control de accesos y JWT', 'Documentación de endpoints', 'Gestión de variables de entorno', 'Entrega estimada: 1–2 semanas'] %}
-        <div class="pricing-feature">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          {{ feat }}
-        </div>
-        {% endfor %}
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost" style="width: 100%; justify-content: center;">Contratar Backend</a>
-        </div>
-      </div>
-
+      <p style="font-size: 13px; color: var(--text-secondary);">
+        Haz clic en el servicio que más te llame la atención para ver todos los detalles, qué incluye, para quién es ideal y cuánto cuesta. Si aún no sabes cuál necesitas, <a href="{{ url_for('main.contacto') }}" style="color: var(--green); text-decoration: underline;">escríbenos y te orientamos</a>.
+      </p>
     </div>
-  </div>
-</section>
 
-<!-- ===== STACK TECNOLÓGICO ===== -->
-<section class="section">
-  <div class="container">
-    <div class="section-eyebrow">Tecnologías</div>
-    <h2 class="section-title">Arquitectura de Software</h2>
-    <p class="section-sub">Herramientas probadas en entornos de producción, enfocadas en la eficiencia y escalabilidad.</p>
+    <!-- Grid de servicios -->
+    <div class="grid-2" style="gap: 16px;">
 
-    <div class="grid-3">
-      {% set techs = [
-        ('Python',      'Lenguaje principal del backend. Altamente escalable, seguro y mantenible.',             'icon-green'),
-        ('Flask',       'Microframework web. Permite construir arquitecturas limpias y APIs RESTful eficientes.',          'icon-green'),
-        ('JavaScript',  'Interactividad avanzada en el cliente sin la sobrecarga de dependencias innecesarias.',                'icon-violet'),
-        ('HTML5',       'Estructura de vistas semántica, accesible y totalmente optimizada para los navegadores.',                     'icon-violet'),
-        ('CSS3',        'Arquitectura de estilos moderna, garantizando interfaces 100% responsivas en cualquier dispositivo.',               'icon-violet'),
-        ('SQL',         'Diseño e implementación de bases de datos relacionales robustas para mantener la integridad de los datos.',  'icon-amber'),
-        ('JWT',         'Estándar de autenticación stateless para garantizar la seguridad en el acceso a las APIs.',                          'icon-amber'),
-        ('Entornos',    'Despliegues configurados de forma segura utilizando variables de entorno y servidores estructurados.',        'icon-green'),
+      {% set servicios = [
+        {
+          'slug':    'landing-page',
+          'nombre':  'Landing Page',
+          'tagline': 'Una página que convierte visitas en clientes',
+          'desc':    'Ideal si quieres presentar un producto, servicio o campaña con un objetivo claro: que el visitante llame, compre o deje sus datos.',
+          'para':    'Negocios que lanzan un producto, campañas publicitarias, profesionales independientes.',
+          'desde':   '3,500',
+          'plazo':   '2–4 días',
+          'icono':   'icon-green',
+          'badge':   'badge-green',
+          'popular': True,
+          'svg': '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'
+        },
+        {
+          'slug':    'frontend',
+          'nombre':  'Diseño Frontend',
+          'tagline': 'Interfaz visual moderna y responsiva',
+          'desc':    'Construimos la parte visual de tu sitio: lo que el usuario ve e interactúa. Perfecto si ya tienes backend o solo necesitas renovar la imagen.',
+          'para':    'Empresas con backend existente, rediseños, proyectos con equipo técnico propio.',
+          'desde':   '6,000',
+          'plazo':   '3–5 días',
+          'icono':   'icon-violet',
+          'badge':   'badge-violet',
+          'popular': False,
+          'svg': '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>'
+        },
+        {
+          'slug':    'backend',
+          'nombre':  'Desarrollo Backend',
+          'tagline': 'La lógica y base de datos de tu aplicación',
+          'desc':    'Creamos la API, base de datos y toda la lógica de servidor de tu aplicación con Python y Flask. Ideal si ya tienes diseño o quieres solo el motor.',
+          'para':    'Apps que manejan usuarios, pedidos, inventarios o cualquier dato dinámico.',
+          'desde':   '7,000',
+          'plazo':   '4–6 días',
+          'icono':   'icon-amber',
+          'badge':   'badge-amber',
+          'popular': False,
+          'svg': '<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/>'
+        },
+        {
+          'slug':    'fullstack',
+          'nombre':  'Sitio Web Completo',
+          'tagline': 'Frontend + Backend + Deploy. Todo incluido.',
+          'desc':    'El paquete completo: diseño, código, base de datos, hosting y publicación. Tú solo nos das la idea y nosotros entregamos el sitio funcionando.',
+          'para':    'Negocios que parten de cero y quieren un sitio listo para generar clientes.',
+          'desde':   'Cotizacion',
+          'plazo':   '7–12 días',
+          'icono':   'icon-violet',
+          'badge':   'badge-violet',
+          'popular': True,
+          'svg': '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
+        },
+        {
+          'slug':    'blog-cms',
+          'nombre':  'Blog / CMS',
+          'tagline': 'Publica contenido tú mismo, sin saber código',
+          'desc':    'Un sitio con panel de administración donde tú (o tu equipo) puedes crear, editar y publicar artículos, noticias o productos sin tocar código.',
+          'para':    'Negocios con contenido frecuente: noticias, recetas, tutoriales, catálogos.',
+          'desde':   '9,000',
+          'plazo':   '6–10 días',
+          'icono':   'icon-green',
+          'badge':   'badge-green',
+          'popular': False,
+          'svg': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>'
+        },
       ] %}
-      {% for nombre, desc, icono in techs %}
-      <div class="card">
-        <div class="card-icon {{ icono }}">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+
+      {% for s in servicios %}
+      <a href="{{ url_for('main.servicio_detalle', slug=s.slug) }}"
+         class="card servicio-card"
+         style="display: block; cursor: pointer; text-decoration: none; position: relative;">
+
+        {% if s.popular %}
+        <div style="position: absolute; top: 1.25rem; right: 1.25rem;">
+          <span class="{{ s.badge }}" style="font-size: 10px; padding: 3px 10px;">Popular</span>
         </div>
-        <h4 style="margin-bottom: 0.35rem;">{{ nombre }}</h4>
-        <p style="font-size: 13px;">{{ desc }}</p>
-      </div>
+        {% endif %}
+
+        <div class="card-icon {{ s.icono }}" style="margin-bottom: 1rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">{{ s.svg | safe }}</svg>
+        </div>
+
+        <h3 style="font-size: 18px; margin-bottom: 0.3rem;">{{ s.nombre }}</h3>
+        <p style="font-size: 13px; color: var(--green); font-weight: 600; margin-bottom: 0.75rem;">{{ s.tagline }}</p>
+        <p style="font-size: 13px; margin-bottom: 1.25rem; line-height: 1.7;">{{ s.desc }}</p>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 1rem; border-top: 0.5px solid var(--border);">
+          <div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px;">Desde</div>
+            <div style="font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: -0.5px;">${{ s.desde }} <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px;">Entrega</div>
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">{{ s.plazo }}</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--violet-light);">
+          Ver detalles
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+
+      </a>
       {% endfor %}
+
     </div>
+
+    <!-- Comparativa rápida -->
+    <div style="margin-top: 3rem; padding-top: 3rem; border-top: 0.5px solid var(--border);">
+      <h2 style="font-size: 20px; margin-bottom: 1.5rem; text-align: center;">¿Aún no sabes cuál elegir?</h2>
+      <div class="grid-3" style="gap: 10px;">
+        {% for pregunta, recomendacion, slug in [
+          ('Quiero atraer clientes con un anuncio o campaña', 'Landing Page', 'landing-page'),
+          ('Quiero un sitio completo sin complicaciones', 'Sitio Completo', 'fullstack'),
+          ('Quiero publicar contenido yo mismo', 'Blog / CMS', 'blog-cms'),
+        ] %}
+        <a href="{{ url_for('main.servicio_detalle', slug=slug) }}" class="card" style="text-align: center; text-decoration: none; padding: 1.25rem;">
+          <p style="font-size: 13px; margin-bottom: 0.75rem;">"{{ pregunta }}"</p>
+          <span class="badge badge-green">→ {{ recomendacion }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ===== CTA ===== -->
-<section class="section" style="text-align:center; border-bottom:none;">
-  <div class="container">
-    <h2 style="margin-bottom:0.75rem;">¿Dudas sobre la arquitectura que requiere tu proyecto?</h2>
-    <p style="margin-bottom:2rem;">Cuéntanos los requerimientos técnicos de tu idea y te estructuramos el plan ideal sin compromiso.</p>
-    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Hablar con los desarrolladores →</a>
-  </div>
-</section>
+{% endblock %}
 
+{% block extra_css %}
+<style>
+  .servicio-card:hover .card-icon { box-shadow: 0 0 20px var(--violet-glow); }
+</style>
 {% endblock %}

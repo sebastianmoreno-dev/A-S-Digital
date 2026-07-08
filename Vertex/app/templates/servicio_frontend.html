@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}Diseño Frontend — AS Vertex{% endblock %}
+{% block meta_desc %}Interfaces modernas, responsivas y rápidas con HTML5, CSS3 y JavaScript. Diseño frontend profesional para tu negocio.{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <a href="{{ url_for('main.servicios') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-secondary)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Todos los servicios
+    </a>
+    <div class="badge badge-violet" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Diseño Frontend</div>
+    <h1>La interfaz que<br><span class="text-gradient">tus usuarios merecen</span></h1>
+    <p style="margin-top: 1rem; font-size: 16px; max-width: 520px;">
+      Construimos la parte visual de tu sitio o aplicación. Lo que el usuario ve, toca e interactúa — optimizado para todos los dispositivos.
+    </p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Cotizar diseño →</a>
+      <span class="badge badge-violet" style="padding: 10px 16px;">Desde $4,500 MXN</span>
+      <span class="badge badge-green" style="padding: 10px 16px;">Entrega 3–5 días</span>
+    </div>
+  </div>
+</div>
+
+<!-- ¿QUÉ ES? -->
+<section class="section">
+  <div class="container">
+    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 260px;">
+        <div class="section-eyebrow">¿Qué es?</div>
+        <h2 class="section-title">El lado visible de tu negocio digital</h2>
+        <p style="margin-bottom: 1.25rem;">El frontend es todo lo que el usuario ve en su pantalla: colores, tipografía, botones, formularios, animaciones. Es la primera impresión de tu negocio en línea.</p>
+        <p style="margin-bottom: 1.25rem;">Un buen frontend no solo se ve bien — carga rápido, funciona en celular, es accesible y guía al usuario hacia la acción que tú quieres.</p>
+        <p>Lo construimos con HTML5, CSS3 y JavaScript puro, sin dependencias innecesarias que hagan lento tu sitio.</p>
+      </div>
+      <div style="flex: 1; min-width: 260px;">
+        <div class="code-block">
+          <div class="code-dots"><div class="code-dot dot-red"></div><div class="code-dot dot-amber"></div><div class="code-dot dot-green"></div></div>
+          <div><span class="cm">&lt;!-- Tu interfaz, optimizada --&gt;</span></div>
+          <div>&nbsp;</div>
+          <div><span class="kw">&lt;section</span> <span class="fn">class</span><span class="wh">=</span><span class="str">"hero"</span><span class="kw">&gt;</span></div>
+          <div>&nbsp;&nbsp;<span class="kw">&lt;h1&gt;</span><span class="wh">Tu negocio,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">en línea</span><span class="kw">&lt;/h1&gt;</span></div>
+          <div>&nbsp;&nbsp;<span class="kw">&lt;button</span> <span class="fn">class</span><span class="wh">=</span><span class="str">"cta"</span><span class="kw">&gt;</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wh">Contáctanos</span></div>
+          <div>&nbsp;&nbsp;<span class="kw">&lt;/button&gt;</span></div>
+          <div><span class="kw">&lt;/section&gt;</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN ES -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Para quién es?</div>
+    <h2 class="section-title">Este servicio es ideal si…</h2>
+    <div class="grid-3">
+      {% for caso in [
+        ('Ya tienes backend o API', 'Solo necesitas conectarle una interfaz visual profesional.'),
+        ('Quieres rediseñar tu sitio actual', 'Tu contenido está bien pero el diseño ya quedó viejo o no es responsivo.'),
+        ('Tienes un equipo técnico', 'Tu equipo maneja el servidor pero necesita apoyo con el diseño.'),
+        ('Quieres separar responsabilidades', 'Frontend independiente que se conecta a cualquier backend vía API.'),
+        ('Necesitas un prototipo visual', 'Maqueta funcional para presentar a inversores o clientes.'),
+        ('Tu sitio no carga rápido', 'Optimizamos assets, eliminamos código innecesario y mejoramos el rendimiento.'),
+      ] %}
+      <div class="card">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--violet-light); margin-bottom: 0.85rem;"></div>
+        <h4 style="margin-bottom: 0.35rem; font-size: 14px;">{{ caso[0] }}</h4>
+        <p style="font-size: 13px;">{{ caso[1] }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Qué incluye?</div>
+    <h2 class="section-title">Entregamos más que código</h2>
+    <div class="grid-2">
+      {% for categoria, items in [
+        ('Diseño visual', ['Diseño a medida con tu identidad de marca', 'Paleta de colores, tipografía y espaciado consistentes', 'Componentes reutilizables (botones, cards, formularios)', 'Dark mode o temas personalizados si se requiere']),
+        ('Código', ['HTML5 semántico y accesible (ARIA)', 'CSS3 con variables, flexbox y grid', 'JavaScript vanilla / ES6+ sin frameworks pesados', 'Código comentado y documentado']),
+        ('Rendimiento', ['Imágenes en formato WebP optimizadas', 'CSS y JS minificados', 'Lazy loading en imágenes y secciones', 'Core Web Vitals optimizados (LCP, CLS, FID)']),
+        ('Entrega', ['Archivos listos para conectar a cualquier backend', 'Compatible con Flask, Node.js, WordPress o cualquier servidor', '1 ronda de revisiones incluida', '15 días de soporte post-entrega']),
+      ] %}
+      <div class="card">
+        <h4 style="color: var(--violet-light); font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
+        {% for item in items %}
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 0.5px solid var(--border);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
+          <p style="font-size: 13px;">{{ item }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGÍAS -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Stack</div>
+    <h2 class="section-title">Lo que usamos</h2>
+    <div class="tech-tags" style="margin-top: 0;">
+      {% for t in ['HTML5', 'CSS3', 'JavaScript ES6+', 'Flexbox', 'CSS Grid', 'Animaciones CSS', 'Web Fonts', 'SVG', 'WebP', 'Jinja2 (Flask)'] %}
+      <span class="tech-tag">{{ t }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Precios</div>
+    <h2 class="section-title">Según tu proyecto</h2>
+    <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
+      {% for nombre, precio, plazo, features, destacado in [
+        ('Starter', '4,500', '3–4 días', ['Hasta 5 secciones', 'Diseño responsivo', 'HTML + CSS + JS', 'Sin backend', '15 días soporte'], False),
+        ('Pro', '7,000', '4–5 días', ['Secciones ilimitadas', 'Animaciones personalizadas', 'Conexión a API/backend', 'Optimización de rendimiento', 'Dark mode incluido', '30 días soporte'], True),
+        ('Enterprise', 'A cotizar', '5–8 días', ['Todo lo del plan Pro', 'Sistema de diseño completo', 'Componentes reutilizables', 'Documentación técnica', 'Capacitación al equipo'], False),
+      ] %}
+      <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
+        {% if destacado %}<div class="pricing-badge">Más elegido</div>{% endif %}
+        <div class="pricing-name">{{ nombre }}</div>
+        <div class="pricing-price">{% if precio != 'A cotizar' %}${% endif %}{{ precio }} {% if precio != 'A cotizar' %}<span>MXN</span>{% endif %}</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Entrega en {{ plazo }}</p>
+        <div class="pricing-divider"></div>
+        {% for f in features %}
+        <div class="pricing-feature">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}
+        </div>
+        {% endfor %}
+        <div style="margin-top: 1.5rem;">
+          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">
+            Quiero este →
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align: center; border-bottom: none;">
+  <div class="container">
+    <h2 style="margin-bottom: 0.75rem;">¿Tu interfaz merece mejor diseño?</h2>
+    <p style="margin-bottom: 2rem;">Cuéntanos qué tienes actualmente y qué quieres lograr. Te respondemos en menos de 24 horas.</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Cotizar mi diseño →</a>
+  </div>
+</section>
+
+{% endblock %}

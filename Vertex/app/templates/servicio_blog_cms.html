@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Blog / CMS — AS Vertex{% endblock %}
+{% block meta_desc %}Sistema de gestión de contenido hecho a medida con Flask. Publica artículos, noticias y productos sin tocar código.{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <a href="{{ url_for('main.servicios') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-secondary)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Todos los servicios
+    </a>
+    <div class="badge badge-green" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Blog / CMS</div>
+    <h1>Publica tu contenido<br><span class="text-gradient">sin depender de nadie</span></h1>
+    <p style="margin-top: 1rem; font-size: 16px; max-width: 520px;">
+      Un sitio con panel de administración donde tú (o tu equipo) crean, editan y publican contenido desde el navegador, sin tocar una sola línea de código.
+    </p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Cotizar mi CMS →</a>
+      <span class="badge badge-green" style="padding: 10px 16px;">Desde $8,000 MXN</span>
+      <span class="badge badge-violet" style="padding: 10px 16px;">Entrega 6–10 días</span>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 260px;">
+        <div class="section-eyebrow">¿Qué es?</div>
+        <h2 class="section-title">Tu propio WordPress, pero hecho a tu medida</h2>
+        <p style="margin-bottom: 1.25rem;">Un CMS (Content Management System) es un panel de control donde puedes gestionar el contenido de tu sitio web sin saber programar. Escribes, subes imágenes y publicas, igual que en redes sociales.</p>
+        <p style="margin-bottom: 1.25rem;">A diferencia de WordPress, el nuestro está hecho 100% a medida con Flask: sin plugins innecesarios, sin vulnerabilidades de terceros, exactamente con las funciones que tú necesitas.</p>
+        <p>Es ideal para negocios que publican contenido frecuente: noticias, artículos, recetas, tutoriales, catálogos, eventos o cualquier tipo de publicación dinámica.</p>
+      </div>
+      <div style="flex: 1; min-width: 260px;">
+        <div class="card" style="padding: 1.5rem;">
+          <h4 style="color: var(--green); margin-bottom: 1rem; font-size: 13px;">Tu panel de administración</h4>
+          {% for item in [
+            ('✍️', 'Crear y editar artículos con editor visual'),
+            ('🖼️', 'Subir y gestionar imágenes'),
+            ('📂', 'Organizar por categorías y etiquetas'),
+            ('👁️', 'Previsualizar antes de publicar'),
+            ('📅', 'Programar publicaciones'),
+            ('👥', 'Múltiples autores con permisos'),
+          ] %}
+          <div style="display: flex; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; color: var(--text-secondary);">
+            <span>{{ item[0] }}</span> {{ item[1] }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Para quién es?</div>
+    <h2 class="section-title">Este servicio es ideal si…</h2>
+    <div class="grid-3">
+      {% for caso in [
+        ('Publicas contenido seguido', 'Noticias, artículos, recetas, tutoriales — necesitas actualizar tu sitio sin llamar a un desarrollador.'),
+        ('Tienes equipo de redacción', 'Varios autores publicando con diferentes permisos y roles.'),
+        ('Tienes un catálogo de productos', 'Agregar, editar o quitar productos sin depender de nadie.'),
+        ('Manejas eventos o agenda', 'Publicar eventos, fechas y actualizaciones de forma autónoma.'),
+        ('Quieres posicionamiento SEO', 'El contenido frecuente es la mejor estrategia para aparecer en Google.'),
+        ('Ya tienes WordPress y lo odias', 'Lento, lleno de plugins, hackeado. Te hacemos uno limpio y tuyo.'),
+      ] %}
+      <div class="card">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-bottom: 0.85rem;"></div>
+        <h4 style="margin-bottom: 0.35rem; font-size: 14px;">{{ caso[0] }}</h4>
+        <p style="font-size: 13px;">{{ caso[1] }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Qué incluye?</div>
+    <h2 class="section-title">Sitio público + panel de gestión</h2>
+    <div class="grid-2">
+      {% for categoria, color, items in [
+        ('Sitio público', 'var(--green)', ['Diseño responsivo a medida', 'Página principal con últimas publicaciones', 'Páginas de categorías y etiquetas', 'Búsqueda interna', 'SEO optimizado por artículo']),
+        ('Panel de administración', 'var(--violet-light)', ['Login seguro con JWT', 'Editor de artículos con imágenes', 'Gestión de categorías', 'Programación de publicaciones', 'Múltiples roles (admin, editor, autor)']),
+        ('Técnico', 'var(--amber)', ['Backend Python + Flask', 'Base de datos MySQL', 'Subida de imágenes al servidor', 'URLs amigables (slugs)', 'Sitemap XML automático']),
+        ('Entrega', 'var(--green)', ['Código fuente completo', 'Manual de usuario del panel', 'Capacitación de 1 hora incluida', '30 días de soporte']),
+      ] %}
+      <div class="card">
+        <h4 style="color: {{ color }}; font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
+        {% for item in items %}
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 0.5px solid var(--border);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
+          <p style="font-size: 13px;">{{ item }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Precios</div>
+    <h2 class="section-title">Según tus necesidades</h2>
+    <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
+      {% for nombre, precio, plazo, features, destacado in [
+        ('Blog Simple', '8,000', '6–8 días', ['Artículos y categorías', 'Panel de 1 autor', 'Editor básico', 'SEO por artículo', '30 días soporte'], False),
+        ('CMS Profesional', '13,000', '8–10 días', ['Todo lo anterior', 'Múltiples autores y roles', 'Galería de imágenes', 'Programación de posts', 'Estadísticas de visitas', '30 días soporte'], True),
+        ('CMS a medida', 'Cotizar', '10–15 días', ['Todo lo anterior', 'Tipos de contenido personalizados', 'Catálogo de productos', 'Formularios dinámicos', 'Integraciones externas'], False),
+      ] %}
+      <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
+        {% if destacado %}<div class="pricing-badge">Más elegido</div>{% endif %}
+        <div class="pricing-name">{{ nombre }}</div>
+        <div class="pricing-price">{% if precio != 'Cotizar' %}${% endif %}{{ precio }} {% if precio != 'Cotizar' %}<span>MXN</span>{% endif %}</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Entrega en {{ plazo }}</p>
+        <div class="pricing-divider"></div>
+        {% for f in features %}
+        <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</div>
+        {% endfor %}
+        <div style="margin-top: 1.5rem;">
+          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">Quiero este →</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align: center; border-bottom: none;">
+  <div class="container">
+    <h2 style="margin-bottom: 0.75rem;">¿Quieres publicar sin depender de nadie?</h2>
+    <p style="margin-bottom: 2rem;">Cuéntanos qué tipo de contenido manejas. Te respondemos en menos de 24 horas con una propuesta.</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Cotizar mi CMS →</a>
+  </div>
+</section>
+
+{% endblock %}

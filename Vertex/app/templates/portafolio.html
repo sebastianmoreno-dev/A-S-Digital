@@ -32,32 +32,36 @@
 
       {% set proyectos = [
         {
-          'nombre': 'EstateArch',
-          'desc': 'Plataforma web estructurada para el sector inmobiliario. Arquitectura diseñada para gestionar propiedades, inventarios y roles de usuario de forma eficiente y escalable.',
-          'tags': ['Python', 'Flask', 'JavaScript', 'MySQL'],
+          'nombre': 'R.A.S.A – Sistema Gestor de Hospital',
+          'desc': 'Plataforma para la gestión hospitalaria y administración de farmacias, automatizando agendas médicas y la validación de recetas. Nota: Este sistema es estrictamente un proyecto escolar académico entregable; no se encuentra alojado en un servidor propio ni es administrado en producción.',
+          'tags': ['Python', 'Flask', 'SQL', 'HTML5'],
           'tipo': 'fullstack',
-          'color': '#7c3aed'
+          'color': '#4ade80',
+          'repo': 'https://github.com/AlgorithmQuantum/Proyecto-Sistema-Gestor-De-Hospital'
         },
         {
-          'nombre': 'Sistema de Gestión Médica (R.A.S.A)',
-          'desc': 'Desarrollo para administración de roles de pacientes y médicos, integrando lógica backend y esquemas SQL. Nota: Este sistema es estrictamente un proyecto escolar académico entregable; no se encuentra alojado en un servidor propio, ni es administrado o mantenido en la actualidad.',
-          'tags': ['SQL', 'Flask', 'HTML', 'CSS'],
-          'tipo': 'fullstack',
-          'color': '#4ade80'
-        },
-        {
-          'nombre': 'Auth API RESTful',
-          'desc': 'API de autenticación y autorización segura con JSON Web Tokens (JWT). Gestión eficiente de endpoints, registro, inicio de sesión y control de accesos.',
-          'tags': ['Python', 'Flask', 'JWT', 'SQL'],
-          'tipo': 'backend',
-          'color': '#a78bfa'
-        },
-        {
-          'nombre': 'Interfaz Interactiva',
-          'desc': 'Desarrollo de vistas y componentes interactivos de alta velocidad utilizando programación funcional sin depender de frameworks pesados.',
-          'tags': ['HTML', 'CSS', 'JavaScript puro'],
+          'nombre': 'EstateArch – Web Inmobiliaria',
+          'desc': 'Landing page y plataforma diseñada para el sector inmobiliario. Enfocada en ofrecer una experiencia de usuario fluida, navegación responsiva y presentación visual atractiva para B2C.',
+          'tags': ['HTML5', 'CSS Grid', 'Flexbox', 'JavaScript'],
           'tipo': 'frontend',
-          'color': '#60a5fa'
+          'color': '#7c3aed',
+          'repo': 'https://github.com/sebastianmoreno-dev/Proyecto-Web'
+        },
+        {
+          'nombre': 'Analizador de Seguridad HTTP',
+          'desc': 'Herramienta de diagnóstico diseñada para evaluar la configuración de seguridad en servidores web. Analiza los encabezados de respuesta para identificar vulnerabilidades y automatizar auditorías técnicas.',
+          'tags': ['Python', 'Seguridad', 'Protocolos HTTP'],
+          'tipo': 'backend',
+          'color': '#a78bfa',
+          'repo': 'https://github.com/AlgorithmQuantum/analizador-de-encabezados-de-seguridad'
+        },
+        {
+          'nombre': 'Suite de Componentes UI',
+          'desc': 'Biblioteca especializada en el desarrollo de componentes de interfaz de usuario optimizados. Integra estilos modulares, layouts complejos y buenas prácticas de maquetación listas para implementación.',
+          'tags': ['HTML5', 'CSS3 Avanzado', 'Animaciones'],
+          'tipo': 'frontend',
+          'color': '#60a5fa',
+          'repo': 'https://github.com/AlgorithmQuantum/Practicas-css'
         }
       ] %}
 
@@ -83,9 +87,17 @@
             <span class="tech-tag">{{ tag }}</span>
             {% endfor %}
           </div>
-          <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost" style="padding: 6px 14px; font-size: 12px;">
-            Consultar →
-          </a>
+          
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            {% if p.repo %}
+            <a href="{{ p.repo }}" target="_blank" class="btn btn-ghost" style="padding: 6px 14px; font-size: 12px; border: 1px solid var(--border-color);">
+              Ver Código ↗
+            </a>
+            {% endif %}
+            <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost" style="padding: 6px 14px; font-size: 12px;">
+              Consultar →
+            </a>
+          </div>
         </div>
       </div>
       {% endfor %}

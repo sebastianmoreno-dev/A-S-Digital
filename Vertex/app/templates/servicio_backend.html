@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}Desarrollo Backend — AS Vertex{% endblock %}
+{% block meta_desc %}APIs REST, bases de datos y lógica de negocio con Python y Flask. Backend robusto, seguro y escalable para tu aplicación web.{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <a href="{{ url_for('main.servicios') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-secondary)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Todos los servicios
+    </a>
+    <div class="badge badge-amber" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Desarrollo Backend</div>
+    <h1>El motor que hace<br><span class="text-gradient">funcionar todo</span></h1>
+    <p style="margin-top: 1rem; font-size: 16px; max-width: 520px;">
+      Construimos la lógica, la base de datos y la API que hacen que tu aplicación web funcione de verdad, de forma segura y lista para crecer.
+    </p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Cotizar backend →</a>
+      <span class="badge badge-amber" style="padding: 10px 16px;">Desde $6,000 MXN</span>
+      <span class="badge badge-green" style="padding: 10px 16px;">Entrega 4–6 días</span>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 260px;">
+        <div class="section-eyebrow">¿Qué es?</div>
+        <h2 class="section-title">Lo que el usuario no ve pero sí necesita</h2>
+        <p style="margin-bottom: 1.25rem;">El backend es el servidor, la base de datos y toda la lógica que procesa la información de tu aplicación. Cuando alguien se registra, hace un pedido o sube un archivo — todo eso lo maneja el backend.</p>
+        <p style="margin-bottom: 1.25rem;">Lo construimos con Python y Flask: un stack probado en producción, seguro, eficiente y fácil de mantener.</p>
+        <p>Entregamos una API REST documentada que puedes conectar a cualquier frontend, app móvil o integración de terceros.</p>
+      </div>
+      <div style="flex: 1; min-width: 260px;">
+        <div class="code-block">
+          <div class="code-dots"><div class="code-dot dot-red"></div><div class="code-dot dot-amber"></div><div class="code-dot dot-green"></div></div>
+          <div><span class="cm"># API REST con Flask</span></div>
+          <div>&nbsp;</div>
+          <div><span class="kw">@app</span><span class="wh">.route(</span><span class="str">'/api/usuarios'</span><span class="wh">, methods=[</span><span class="str">'POST'</span><span class="wh">])</span></div>
+          <div><span class="kw">@jwt_required</span><span class="wh">()</span></div>
+          <div><span class="kw">def</span> <span class="fn">crear_usuario</span><span class="wh">():</span></div>
+          <div>&nbsp;&nbsp;<span class="wh">data = request.</span><span class="fn">get_json</span><span class="wh">()</span></div>
+          <div>&nbsp;&nbsp;<span class="wh">usuario = </span><span class="fn">Usuario</span><span class="wh">(**data)</span></div>
+          <div>&nbsp;&nbsp;<span class="wh">db.session.</span><span class="fn">add</span><span class="wh">(usuario)</span></div>
+          <div>&nbsp;&nbsp;<span class="wh">db.session.</span><span class="fn">commit</span><span class="wh">()</span></div>
+          <div>&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">jsonify</span><span class="wh">(usuario.</span><span class="fn">to_dict</span><span class="wh">()),</span> <span class="str">201</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Para quién es?</div>
+    <h2 class="section-title">Este servicio es ideal si…</h2>
+    <div class="grid-3">
+      {% for caso in [
+        ('Necesitas manejar usuarios', 'Registro, login, perfiles, roles y permisos.'),
+        ('Tienes datos dinámicos', 'Pedidos, inventarios, reservaciones, formularios con base de datos.'),
+        ('Quieres una API', 'Para conectar tu web con una app móvil o servicios externos.'),
+        ('Necesitas autenticación segura', 'Login con JWT, tokens de refresco, recuperación de contraseña.'),
+        ('Ya tienes diseño propio', 'Solo necesitas el servidor que responda tus peticiones.'),
+        ('Requieres lógica compleja', 'Cálculos, flujos de trabajo, integraciones con pagos o envíos.'),
+      ] %}
+      <div class="card">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--amber); margin-bottom: 0.85rem;"></div>
+        <h4 style="margin-bottom: 0.35rem; font-size: 14px;">{{ caso[0] }}</h4>
+        <p style="font-size: 13px;">{{ caso[1] }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Qué incluye?</div>
+    <h2 class="section-title">Un backend completo y documentado</h2>
+    <div class="grid-2">
+      {% for categoria, items in [
+        ('API y lógica', ['Endpoints REST documentados (Postman/Swagger)', 'Autenticación JWT con roles y permisos', 'Validación de datos en servidor', 'Manejo de errores estandarizado']),
+        ('Base de datos', ['Diseño del esquema según tu lógica de negocio', 'Modelos con SQLAlchemy', 'Migraciones de base de datos', 'MySQL en producción, SQLite en desarrollo']),
+        ('Seguridad', ['Variables de entorno para credenciales', 'Protección CORS configurada', 'Rate limiting básico', 'Inputs sanitizados contra SQL injection']),
+        ('Entrega', ['Código fuente completo y comentado', 'README con instrucciones de instalación', 'Colección de Postman para probar endpoints', '30 días de soporte post-entrega']),
+      ] %}
+      <div class="card">
+        <h4 style="color: var(--amber); font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
+        {% for item in items %}
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 0.5px solid var(--border);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
+          <p style="font-size: 13px;">{{ item }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Stack</div>
+    <h2 class="section-title">Tecnologías que usamos</h2>
+    <div class="tech-tags" style="margin-top: 0;">
+      {% for t in ['Python 3.11+', 'Flask 3', 'SQLAlchemy', 'MySQL', 'JWT', 'Flask-Mail', 'python-dotenv', 'Postman', 'Node.js (scripts)', 'REST API'] %}
+      <span class="tech-tag">{{ t }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Precios</div>
+    <h2 class="section-title">Según la complejidad</h2>
+    <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
+      {% for nombre, precio, plazo, features, destacado in [
+        ('API Simple', '6,000', '4–5 días', ['Hasta 10 endpoints', 'Autenticación JWT', 'MySQL + SQLAlchemy', 'Sin panel admin', '30 días soporte'], False),
+        ('API Completa', '10,000', '5–7 días', ['Endpoints ilimitados', 'Sistema de roles', 'Panel admin básico', 'Integración de correo', 'Documentación Postman', '30 días soporte'], True),
+        ('A medida', 'Cotizar', '7–14 días', ['Todo lo anterior', 'Lógica de negocio compleja', 'Integraciones de terceros (pagos, envíos)', 'Capacidad de escalar', 'SLA acordado'], False),
+      ] %}
+      <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
+        {% if destacado %}<div class="pricing-badge">Más elegido</div>{% endif %}
+        <div class="pricing-name">{{ nombre }}</div>
+        <div class="pricing-price">{% if precio != 'Cotizar' %}${% endif %}{{ precio }} {% if precio != 'Cotizar' %}<span>MXN</span>{% endif %}</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Entrega en {{ plazo }}</p>
+        <div class="pricing-divider"></div>
+        {% for f in features %}
+        <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</div>
+        {% endfor %}
+        <div style="margin-top: 1.5rem;">
+          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">Quiero este →</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align: center; border-bottom: none;">
+  <div class="container">
+    <h2 style="margin-bottom: 0.75rem;">¿Tu aplicación necesita un backend sólido?</h2>
+    <p style="margin-bottom: 2rem;">Cuéntanos qué necesitas procesar y almacenar. Te respondemos en menos de 24 horas.</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Cotizar mi backend →</a>
+  </div>
+</section>
+
+{% endblock %}
