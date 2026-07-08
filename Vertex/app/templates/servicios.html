@@ -49,7 +49,7 @@
           'tagline': 'Interfaz visual moderna y responsiva',
           'desc':    'Construimos la parte visual de tu sitio: lo que el usuario ve e interactúa. Perfecto si ya tienes backend o solo necesitas renovar la imagen.',
           'para':    'Empresas con backend existente, rediseños, proyectos con equipo técnico propio.',
-          'desde':   '6,000',
+          'desde':   '4,500',
           'plazo':   '3–5 días',
           'icono':   'icon-violet',
           'badge':   'badge-violet',
@@ -62,7 +62,7 @@
           'tagline': 'La lógica y base de datos de tu aplicación',
           'desc':    'Creamos la API, base de datos y toda la lógica de servidor de tu aplicación con Python y Flask. Ideal si ya tienes diseño o quieres solo el motor.',
           'para':    'Apps que manejan usuarios, pedidos, inventarios o cualquier dato dinámico.',
-          'desde':   '7,000',
+          'desde':   '6,000',
           'plazo':   '4–6 días',
           'icono':   'icon-amber',
           'badge':   'badge-amber',
@@ -75,7 +75,7 @@
           'tagline': 'Frontend + Backend + Deploy. Todo incluido.',
           'desc':    'El paquete completo: diseño, código, base de datos, hosting y publicación. Tú solo nos das la idea y nosotros entregamos el sitio funcionando.',
           'para':    'Negocios que parten de cero y quieren un sitio listo para generar clientes.',
-          'desde':   'Cotizacion',
+          'desde':   None,
           'plazo':   '7–12 días',
           'icono':   'icon-violet',
           'badge':   'badge-violet',
@@ -88,7 +88,7 @@
           'tagline': 'Publica contenido tú mismo, sin saber código',
           'desc':    'Un sitio con panel de administración donde tú (o tu equipo) puedes crear, editar y publicar artículos, noticias o productos sin tocar código.',
           'para':    'Negocios con contenido frecuente: noticias, recetas, tutoriales, catálogos.',
-          'desde':   '9,000',
+          'desde':   '8,000',
           'plazo':   '6–10 días',
           'icono':   'icon-green',
           'badge':   'badge-green',
@@ -118,8 +118,13 @@
 
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 1rem; border-top: 0.5px solid var(--border);">
           <div>
+            {% if s.desde %}
             <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px;">Desde</div>
             <div style="font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: -0.5px;">${{ s.desde }} <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
+            {% else %}
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px;">Precio</div>
+            <div style="font-size: 16px; font-weight: 700; color: var(--violet-light); letter-spacing: -0.3px;">Por cotización</div>
+            {% endif %}
           </div>
           <div style="text-align: right;">
             <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px;">Entrega</div>

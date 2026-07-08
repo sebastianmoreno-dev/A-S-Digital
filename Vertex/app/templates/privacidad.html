@@ -16,7 +16,6 @@
   <div class="container">
     <div style="max-width: 760px; display: flex; flex-direction: column; gap: 2.5rem;">
 
-      <!-- Nota legal -->
       <div class="card" style="border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.05);">
         <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
           El presente Aviso de Privacidad se emite en cumplimiento de lo dispuesto por los artículos
@@ -27,7 +26,6 @@
         </p>
       </div>
 
-      <!-- 1. Identidad del responsable -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">1. Identidad y domicilio del Responsable</h2>
         <p style="margin-bottom: 0.75rem;">
@@ -37,11 +35,10 @@
         </p>
         <p>
           Para cualquier asunto relacionado con el presente Aviso de Privacidad puede contactarnos en:
-          <a href="mailto:privacidad@asvertex.mx" style="color: var(--green);">privacidad@asvertex.mx</a>
+          <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a>
         </p>
       </div>
 
-      <!-- 2. Datos que recabamos -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">2. Datos personales que recabamos</h2>
         <p style="margin-bottom: 1rem;">Recabamos las siguientes categorías de datos personales:</p>
@@ -76,7 +73,6 @@
         </div>
       </div>
 
-      <!-- 3. Finalidades -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">3. Finalidades del tratamiento</h2>
 
@@ -107,7 +103,6 @@
         {% endfor %}
       </div>
 
-      <!-- 4. Derechos ARCO -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">4. Derechos ARCO</h2>
         <p style="margin-bottom: 1.25rem;">
@@ -133,7 +128,7 @@
 
         <div class="card" style="margin-top: 1rem; padding: 1.25rem;">
           <h4 style="font-size: 14px; margin-bottom: 0.6rem;">¿Cómo ejercer sus derechos ARCO?</h4>
-          <p style="font-size: 13px; margin-bottom: 0.5rem;">Envíe su solicitud a <a href="mailto:privacidad@asvertex.mx" style="color: var(--green);">privacidad@asvertex.mx</a> con:</p>
+          <p style="font-size: 13px; margin-bottom: 0.5rem;">Envíe su solicitud a <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a> con:</p>
           {% for req in ['Nombre completo y correo electrónico con el que nos contactó.', 'Descripción clara del derecho que desea ejercer.', 'Cualquier documento que facilite la localización de sus datos.'] %}
           <div style="font-size: 13px; color: var(--text-secondary); padding: 4px 0; display: flex; gap: 8px;">
             <span style="color: var(--green);">›</span> {{ req }}
@@ -143,7 +138,6 @@
         </div>
       </div>
 
-      <!-- 5. Transferencias -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">5. Transferencias de datos personales</h2>
         <p style="margin-bottom: 1rem;">
@@ -166,7 +160,6 @@
         </p>
       </div>
 
-      <!-- 6. Cookies -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">6. Uso de cookies y tecnologías de rastreo</h2>
         <p style="margin-bottom: 1rem;">
@@ -189,7 +182,6 @@
         </p>
       </div>
 
-      <!-- 7. Cambios -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">7. Modificaciones al Aviso de Privacidad</h2>
         <p>
@@ -201,7 +193,6 @@
         </p>
       </div>
 
-      <!-- 8. INAI -->
       <div>
         <h2 style="font-size: 20px; margin-bottom: 1rem;">8. Autoridad competente</h2>
         <p>
@@ -213,10 +204,9 @@
         </p>
       </div>
 
-      <!-- Volver -->
       <div style="padding-top: 1rem; border-top: 0.5px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap;">
         <a href="{{ url_for('main.index') }}" class="btn btn-ghost">← Volver al inicio</a>
-        <a href="{{ url_for('legal.terminos') }}" class="btn btn-ghost">Términos y Condiciones →</a>
+        <a href="{{ url_for('main.terminos') }}" class="btn btn-ghost">Términos y Condiciones →</a>
       </div>
 
     </div>
