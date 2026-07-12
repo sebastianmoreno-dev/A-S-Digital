@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, redirect, request, session, url_for
 
 main_bp = Blueprint('main', __name__)
 
@@ -55,6 +55,14 @@ def privacidad():
 @main_bp.route('/terminos')
 def terminos():
     return render_template('terminos.html')
+
+# ── Cambio de idioma ─────────────────────────────────────────────
+
+@main_bp.route('/idioma/<lang>')
+def cambiar_idioma(lang):
+    if lang in ('es', 'en'):
+        session['lang'] = lang
+    return redirect(request.referrer or url_for('main.index'))
 
 # ── 404 personalizado ────────────────────────────────────────────
 

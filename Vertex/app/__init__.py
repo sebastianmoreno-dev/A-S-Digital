@@ -37,8 +37,18 @@ def create_app():
     app.register_blueprint(main_bp)
     app.register_blueprint(contact_bp)
 
+    # ── Traducciones ───────────────────────────────────────────────
+    from app.translations import t
+
+    @app.context_processor
+    def inject_translator():
+        return dict(t=t)
+    
     # ── Crear tablas si no existen ─────────────────────────────────
     with app.app_context():
         db.create_all()
 
     return app
+
+
+

@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Landing Page — AS Vertex{% endblock %}
-{% block meta_desc %}Diseñamos landing pages que convierten visitas en clientes. Optimizadas para campañas, lanzamientos y captación de leads.{% endblock %}
+{% block meta_desc %}Una sola página que convierte visitas en clientes. Para dentistas, restaurantes, coaches, campañas y cualquier negocio que quiera más contactos.{% endblock %}
 
 {% block content %}
 
-<!-- HERO DEL SERVICIO -->
 <div class="page-header">
   <div class="container">
     <a href="{{ url_for('main.servicios') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--text-secondary)'">
@@ -12,14 +11,14 @@
       Todos los servicios
     </a>
     <div class="badge badge-green" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Landing Page</div>
-    <h1>Una página que<br><span class="text-gradient">convierte de verdad</span></h1>
-    <p style="margin-top: 1rem; font-size: 16px; max-width: 520px;">
-      Diseñada con un solo objetivo: que el visitante haga lo que tú quieres — llamar, comprar, registrarse o dejarte sus datos.
+    <h1>Una página que<br><span class="text-gradient">convierte visitas en clientes</span></h1>
+    <p style="margin-top: 1rem; font-size: 16px; max-width: 540px;">
+      Imagina un vendedor disponible 24/7 que solo hace una cosa: convencer a quien llega de que te llame, te escriba o te compre. Eso es una landing page.
     </p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Cotizar mi landing →</a>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Quiero mi landing page →</a>
       <span class="badge badge-green" style="padding: 10px 16px;">Desde $3,500 MXN</span>
-      <span class="badge badge-violet" style="padding: 10px 16px;">Entrega 2–4 días</span>
+      <span class="badge badge-violet" style="padding: 10px 16px;">Lista en 2–4 días</span>
     </div>
   </div>
 </div>
@@ -30,25 +29,39 @@
     <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
       <div style="flex: 1; min-width: 260px;">
         <div class="section-eyebrow">¿Qué es?</div>
-        <h2 class="section-title">Una página, un objetivo</h2>
-        <p style="margin-bottom: 1.25rem;">Una landing page es una página web diseñada para un solo propósito. No hay menús que distraigan, no hay links que lleven a otros lados — solo un mensaje claro y una acción que el visitante debe tomar.</p>
-        <p style="margin-bottom: 1.25rem;">Funciona perfectamente con anuncios de Facebook, Google Ads, campañas de email o como destino de cualquier promoción.</p>
-        <p>A diferencia de un sitio web completo, la landing se construye rápido, se lanza rápido y empieza a dar resultados desde el primer día.</p>
+        <h2 class="section-title">Una página. Un objetivo. Sin distracciones.</h2>
+        <p style="margin-bottom: 1.25rem;">
+          Una landing page <strong style="color: var(--text-primary);">no es un sitio web normal</strong>. No tiene menú con mil opciones, no tiene sección "Sobre nosotros" ni blog. Tiene una sola cosa: tu propuesta y un botón para que el visitante actúe.
+        </p>
+        <p style="margin-bottom: 1.25rem;">
+          Es perfecta cuando corres anuncios en Facebook o Instagram, cuando tienes una promoción de temporada, o cuando simplemente quieres que la gente te contacte sin que se pierda navegando.
+        </p>
+        <p>
+          La diferencia con un sitio web completo es simple: la landing tiene <strong style="color: var(--text-primary);">un solo objetivo</strong>, se hace más rápido y cuesta menos. Si quieres mostrar todo tu negocio — servicios, historia, equipo, blog — eso es un <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="color: var(--violet-light);">Sitio Web Completo</a>.
+        </p>
       </div>
       <div style="flex: 1; min-width: 260px;">
-        <div class="code-block">
-          <div class="code-dots"><div class="code-dot dot-red"></div><div class="code-dot dot-amber"></div><div class="code-dot dot-green"></div></div>
-          <div><span class="cm"># Estructura de tu landing</span></div>
-          <div>&nbsp;</div>
-          <div><span class="kw">secciones</span> <span class="wh">= [</span></div>
-          <div>&nbsp;&nbsp;<span class="str">'Hero con propuesta de valor'</span><span class="wh">,</span></div>
-          <div>&nbsp;&nbsp;<span class="str">'Beneficios / características'</span><span class="wh">,</span></div>
-          <div>&nbsp;&nbsp;<span class="str">'Prueba social / testimonios'</span><span class="wh">,</span></div>
-          <div>&nbsp;&nbsp;<span class="str">'Preguntas frecuentes'</span><span class="wh">,</span></div>
-          <div>&nbsp;&nbsp;<span class="str">'CTA final (formulario / botón)'</span><span class="wh">,</span></div>
-          <div><span class="wh">]</span></div>
-          <div>&nbsp;</div>
-          <div><span class="kw">resultado</span> <span class="wh">=</span> <span class="str">'más conversiones'</span></div>
+        <div class="card" style="padding: 1.5rem;">
+          <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 1rem;">¿Landing Page o Sitio Completo?</p>
+          <div style="display: flex; flex-direction: column; gap: 0;">
+            {% for pregunta, lp, sc in [
+              ('¿Cuántas páginas?', 'Una sola', 'Varias (inicio, servicios, blog…)'),
+              ('¿Para qué?', 'Una campaña o acción específica', 'Toda tu presencia digital'),
+              ('¿Tiempo de entrega?', '2 a 4 días', '7 a 12 días'),
+              ('¿Costo?', 'Desde $3,500', 'Por cotización'),
+            ] %}
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 12px;">
+              <span style="color: var(--text-muted);">{{ pregunta }}</span>
+              <span style="color: var(--green); font-weight: 600;">{{ lp }}</span>
+              <span style="color: var(--text-secondary);">{{ sc }}</span>
+            </div>
+            {% endfor %}
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 0.75rem;">
+            <span></span>
+            <span style="font-size: 11px; color: var(--green); font-weight: 700;">← Estás aquí</span>
+            <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="font-size: 11px; color: var(--text-secondary);">Ver sitio completo →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -59,22 +72,26 @@
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">¿Para quién es?</div>
-    <h2 class="section-title">Este servicio es ideal si…</h2>
+    <h2 class="section-title">¿Te identificas con alguno de estos casos?</h2>
     <div class="grid-3">
-      {% for caso in [
-        ('Lanzas un producto o servicio nuevo', 'Quieres que la gente lo conozca y tome acción antes de que lo olviden.'),
-        ('Corres anuncios pagados', 'Google Ads o Facebook necesitan una página destino optimizada, no tu sitio general.'),
-        ('Ofreces un servicio profesional', 'Psicólogos, coaches, dentistas, abogados — todos necesitan una página que genere citas.'),
-        ('Tienes una promoción temporal', 'Black Friday, descuentos de temporada, evento especial.'),
-        ('Quieres captar leads o emails', 'Construye tu lista de clientes potenciales con un formulario bien diseñado.'),
-        ('Tu sitio actual no convierte', 'Ya tienes visitas pero nadie te contacta — una landing dedicada resuelve eso.'),
+      {% for negocio, situacion in [
+        ('Dentista, médico o terapeuta', 'Quiero que mis pacientes puedan agendar cita desde internet, sin tener que llamar.'),
+        ('Restaurante o food service', 'Quiero mostrar mi menú y que la gente pida a domicilio o reserve mesa.'),
+        ('Coach, instructor o consultor', 'Ofrezco un servicio y quiero que la gente me deje sus datos para contactarlos.'),
+        ('Negocio con campaña activa', 'Estoy pagando anuncios en Facebook/Google y necesito una página que convierta ese tráfico.'),
+        ('Estética, spa o salón', 'Quiero que mis clientes vean mis servicios, precios y me contacten por WhatsApp.'),
+        ('Emprendedor con un producto', 'Acabo de lanzar algo y quiero que la gente lo conozca y lo compre o aparte.'),
       ] %}
       <div class="card">
-        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-bottom: 0.85rem;"></div>
-        <h4 style="margin-bottom: 0.35rem; font-size: 14px;">{{ caso[0] }}</h4>
-        <p style="font-size: 13px;">{{ caso[1] }}</p>
+        <h4 style="margin-bottom: 0.4rem; font-size: 14px; color: var(--green);">{{ negocio }}</h4>
+        <p style="font-size: 13px;">{{ situacion }}</p>
       </div>
       {% endfor %}
+    </div>
+    <div class="card" style="margin-top: 1rem; padding: 1.1rem; border-color: var(--green-border); background: var(--green-dim);">
+      <p style="font-size: 13px; color: var(--text-secondary);">
+        <strong style="color: var(--green);">¿Tu caso no está aquí?</strong> No importa — si tienes algo que promocionar y quieres que la gente actúe, una landing page funciona. <a href="{{ url_for('main.contacto') }}" style="color: var(--green); text-decoration: underline;">Cuéntanos tu caso.</a>
+      </p>
     </div>
   </div>
 </section>
@@ -83,16 +100,16 @@
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">¿Qué incluye?</div>
-    <h2 class="section-title">Todo lo que necesitas para lanzar</h2>
+    <h2 class="section-title">Todo lo que necesitas para empezar a recibir clientes</h2>
     <div class="grid-2">
-      {% for categoria, items in [
-        ('Diseño y estructura', ['Diseño visual a medida con tu paleta y logo', 'Estructura optimizada para conversión (CRO)', 'Versión móvil y desktop perfecta', 'Animaciones y micro-interacciones sutiles']),
-        ('Técnico', ['HTML5, CSS3 y JavaScript puro', 'Velocidad de carga optimizada', 'Formulario de contacto funcional con Flask', 'Dominio y hosting configurados']),
-        ('SEO y rendimiento', ['Meta tags optimizados para buscadores', 'Open Graph para redes sociales', 'Imágenes comprimidas y optimizadas', 'HTTPS incluido']),
-        ('Entrega', ['Código fuente 100% tuyo', '1 ronda de ajustes incluida', '15 días de soporte post-entrega', 'Instrucciones de uso en video o documento']),
+      {% for categoria, color, items in [
+        ('Diseño a tu imagen', 'var(--green)', ['Diseño visual con tus colores, logo y estilo', 'Se ve perfecto en celular, tablet y computadora', 'Fotos e imágenes optimizadas para cargar rápido', 'Tipografía y botones que guían al visitante']),
+        ('Que la gente te contacte', 'var(--green)', ['Formulario de contacto que llega a tu correo', 'Botón directo a tu WhatsApp', 'Llamada a la acción clara en cada sección', 'Integración con redes sociales si la tienes']),
+        ('Que Google te encuentre', 'var(--violet-light)', ['Configuración básica para aparecer en búsquedas', 'Título y descripción optimizados para Google', 'Velocidad de carga optimizada (factor clave en SEO)', 'Certificado de seguridad HTTPS incluido']),
+        ('Entrega y soporte', 'var(--violet-light)', ['El código es 100% tuyo desde el día uno', 'Una ronda de ajustes incluida antes de publicar', '15 días de soporte técnico después de lanzar', 'Te explicamos cómo funciona todo']),
       ] %}
       <div class="card">
-        <h4 style="color: var(--green); font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
+        <h4 style="color: {{ color }}; font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
         {% for item in items %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 0.5px solid var(--border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -109,28 +126,25 @@
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">Precios</div>
-    <h2 class="section-title">Elige tu paquete</h2>
+    <h2 class="section-title">Elige según lo que necesitas</h2>
     <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
-      {% for nombre, precio, plazo, features, destacado in [
-        ('Básica', '3,500', '2–3 días', ['1 página + sección de contacto', 'Diseño responsivo', 'Formulario funcional', 'Hosting 1 mes incluido', 'SEO básico'], False),
-        ('Profesional', '5,500', '3–4 días', ['Todo lo del plan Básico', 'Secciones ilimitadas', 'Animaciones personalizadas', 'Google Analytics integrado', 'A/B testing inicial', '30 días de soporte'], True),
-        ('Con backend', '8,000', '4–6 días', ['Todo lo del plan Pro', 'Base de datos de leads', 'Panel para ver contactos', 'Integración con WhatsApp', 'Reportes de conversión'], False),
+      {% for nombre, precio, plazo, desc, features, destacado in [
+        ('Básica', '3,500', '2–3 días', 'Para negocios que quieren empezar rápido y sin complicaciones.', ['Diseño de una página completa', 'Responsive en celular y PC', 'Formulario de contacto al correo', 'Botón de WhatsApp integrado', 'SEO básico y HTTPS'], False),
+        ('Profesional', '9,500', '3–4 días', 'Para negocios que invierten en anuncios y quieren maximizar resultados.', ['Todo lo del plan Básico', 'Secciones adicionales de contenido', 'Animaciones y efectos visuales', 'Google Analytics integrado', 'Pixel de Meta (Facebook/Instagram)', '30 días de soporte'], True),
+        ('Con Panel', '14,000', '4–6 días', 'Para negocios que quieren ver y gestionar sus leads desde un panel.', ['Todo lo del plan Profesional', 'Panel privado para ver tus contactos', 'Base de datos de prospectos', 'Exportar contactos a Excel', 'Estadísticas de visitas y conversión'], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
-        {% if destacado %}<div class="pricing-badge">Más elegido</div>{% endif %}
+        {% if destacado %}<div class="pricing-badge">Más pedido</div>{% endif %}
         <div class="pricing-name">{{ nombre }}</div>
         <div class="pricing-price">${{ precio }} <span>MXN</span></div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Entrega en {{ plazo }}</p>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Lista en {{ plazo }}</p>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px; line-height: 1.6;">{{ desc }}</p>
         <div class="pricing-divider"></div>
         {% for f in features %}
-        <div class="pricing-feature">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}
-        </div>
+        <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</div>
         {% endfor %}
         <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">
-            Quiero este →
-          </a>
+          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">Quiero este →</a>
         </div>
       </div>
       {% endfor %}
@@ -138,12 +152,15 @@
   </div>
 </section>
 
-<!-- CTA FINAL -->
+<!-- CTA -->
 <section class="section" style="text-align: center; border-bottom: none;">
   <div class="container">
-    <h2 style="margin-bottom: 0.75rem;">¿Listo para tener tu landing?</h2>
-    <p style="margin-bottom: 2rem;">Cuéntanos tu proyecto. En menos de 24 horas tienes una propuesta en tu correo.</p>
-    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Cotizar mi landing page →</a>
+    <h2 style="margin-bottom: 0.75rem;">¿Listo para recibir más clientes?</h2>
+    <p style="margin-bottom: 2rem;">Cuéntanos de tu negocio. En menos de 24 horas te enviamos una propuesta con el diseño y el plan que mejor te funciona.</p>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Quiero mi landing page →</a>
+      <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="btn btn-ghost">¿Necesito algo más completo?</a>
+    </div>
   </div>
 </section>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ session.get('lang', 'es') }}"></html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,20 +44,26 @@
       </a>
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="{{ url_for('main.servicios') }}"  {% if request.endpoint == 'main.servicios'  %}class="active"{% endif %}>Servicios</a></li>
-        <li><a href="{{ url_for('main.portafolio') }}" {% if request.endpoint == 'main.portafolio' %}class="active"{% endif %}>Portafolio</a></li>
-        <li><a href="{{ url_for('main.nosotros') }}"   {% if request.endpoint == 'main.nosotros'   %}class="active"{% endif %}>Nosotros</a></li>
-        <li><a href="{{ url_for('main.proceso') }}"    {% if request.endpoint == 'main.proceso'    %}class="active"{% endif %}>Proceso</a></li>
-        <li><a href="{{ url_for('main.contacto') }}"   {% if request.endpoint == 'main.contacto'   %}class="active"{% endif %}>Contacto</a></li>
+        <li><a href="{{ url_for('main.servicios') }}"  {% if request.endpoint == 'main.servicios'  %}class="active"{% endif %}>{{ t('nav.servicios') }}</a></li>
+        <li><a href="{{ url_for('main.portafolio') }}" {% if request.endpoint == 'main.portafolio' %}class="active"{% endif %}>{{ t('nav.portafolio') }}</a></li>
+        <li><a href="{{ url_for('main.nosotros') }}"   {% if request.endpoint == 'main.nosotros'   %}class="active"{% endif %}>{{ t('nav.nosotros') }}</a></li>
+        <li><a href="{{ url_for('main.proceso') }}"    {% if request.endpoint == 'main.proceso'    %}class="active"{% endif %}>{{ t('nav.proceso') }}</a></li>
+        <li><a href="{{ url_for('main.contacto') }}"   {% if request.endpoint == 'main.contacto'   %}class="active"{% endif %}>{{ t('nav.contacto') }}</a></li>
       </ul>
 
       <div style="display: flex; gap: 8px; align-items: center; margin-right: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 13px;">
-        <a href="#" style="color: #ffffff; font-weight: 700; text-decoration: none;">ES</a>
+        <a href="{{ url_for('main.cambiar_idioma', lang='es') }}"
+        style="color: {{ '#ffffff' if session.get('lang','es') == 'es' else '#888' }}; font-weight: {{ '700' if session.get('lang','es') == 'es' else '400' }}; text-decoration: none; transition: color 0.3s ease;"
+        onmouseover="this.style.color='#10B981'"
+        onmouseout="this.style.color='{{ '#ffffff' if session.get('lang','es') == 'es' else '#888' }}'">ES</a>
         <span style="color: #444;">/</span>
-        <a href="#" style="color: #888; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#10B981'" onmouseout="this.style.color='#888'">EN</a>
+        <a href="{{ url_for('main.cambiar_idioma', lang='en') }}"
+        style="color: {{ '#ffffff' if session.get('lang','es') == 'en' else '#888' }}; font-weight: {{ '700' if session.get('lang','es') == 'en' else '400' }}; text-decoration: none; transition: color 0.3s ease;"
+        onmouseover="this.style.color='#10B981'"
+        onmouseout="this.style.color='{{ '#ffffff' if session.get('lang','es') == 'en' else '#888' }}'">EN</a>
       </div>
 
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary nav-cta">Cotiza tu proyecto</a>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary nav-cta">{{ t('nav.cta') }}</a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -113,32 +119,32 @@
                 -webkit-text-fill-color: transparent;
             ">AS Vertex</span>
           </div>
-          <p style="font-size: 12px; line-height: 1.7; max-width: 180px;">Desarrollo web profesional con Python, Flask, HTML, CSS y JavaScript.</p>
+          <p style="font-size: 12px; line-height: 1.7; max-width: 180px;">{{ t('footer.desc') }}</p>
         </div>
 
         <div>
-          <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">Servicios</h5>
+          <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">{{ t('footer.servicios_title') }}</h5>
           <nav style="display: flex; flex-direction: column; gap: 8px;">
-            <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Landing Page</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='frontend') }}"     style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Diseño Frontend</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='backend') }}"      style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Desarrollo Backend</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}"    style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Sitio Completo</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='blog-cms') }}"     style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Blog / CMS</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.landing') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='frontend') }}"     style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.frontend') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='backend') }}"      style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.backend') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}"    style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.fullstack') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='blog-cms') }}"     style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.blogcms') }}</a>
           </nav>
         </div>
 
         <div>
-          <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">Empresa</h5>
+          <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">{{ t('footer.empresa_title') }}</h5>
           <nav style="display: flex; flex-direction: column; gap: 8px;">
-            <a href="{{ url_for('main.nosotros') }}"   style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Nosotros</a>
-            <a href="{{ url_for('main.portafolio') }}" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Portafolio</a>
-            <a href="{{ url_for('main.proceso') }}"    style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Proceso</a>
-            <a href="{{ url_for('main.contacto') }}"   style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">Contacto</a>
+            <a href="{{ url_for('main.nosotros') }}"   style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.nosotros') }}</a>
+            <a href="{{ url_for('main.portafolio') }}" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.portafolio') }}</a>
+            <a href="{{ url_for('main.proceso') }}"    style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.proceso') }}</a>
+            <a href="{{ url_for('main.contacto') }}"   style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.contacto') }}</a>
           </nav>
         </div>
 
         <div>
-          <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">Contáctanos</h5>
+          <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">{{ t('footer.contacto_title') }}</h5>
           <nav style="display: flex; flex-direction: column; gap: 8px;">
             <a href="mailto:contacto.asvertex@gmail.com" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s; display: flex; align-items: center; gap: 6px;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -146,7 +152,7 @@
             </a>
             <a href="https://github.com/ASVertex" target="_blank" rel="noopener" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s; display: flex; align-items: center; gap: 6px;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-              GitHub
+              {{ t('footer.github') }}
             </a>
           </nav>
         </div>
@@ -154,10 +160,10 @@
       </div>
 
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem;">
-        <span style="font-size: 12px; color: var(--text-muted);">© 2026 AS Vertex · Todos los derechos reservados</span>
+        <span style="font-size: 12px; color: var(--text-muted);">{{ t('footer.copyright') }}</span>
         <nav style="display: flex; gap: 20px; flex-wrap: wrap;">
-          <a href="{{ url_for('main.privacidad') }}" style="font-size: 12px; color: var(--text-muted); transition: color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">Aviso de Privacidad</a>
-          <a href="{{ url_for('main.terminos') }}"   style="font-size: 12px; color: var(--text-muted); transition: color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">Términos y Condiciones</a>
+          <a href="{{ url_for('main.privacidad') }}" style="font-size: 12px; color: var(--text-muted); transition: color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">{{ t('footer.privacidad') }}</a>
+          <a href="{{ url_for('main.terminos') }}"   style="font-size: 12px; color: var(--text-muted); transition: color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">{{ t('footer.terminos') }}</a>
         </nav>
       </div>
 
