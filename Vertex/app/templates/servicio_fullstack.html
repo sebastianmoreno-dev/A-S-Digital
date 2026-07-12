@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Sitio Web Completo — AS Vertex{% endblock %}
-{% block meta_desc %}Desarrollo web full-stack con Python, Flask, HTML, CSS y JavaScript. Frontend + Backend + Deploy. Todo incluido, listo para generar clientes.{% endblock %}
+{% block meta_desc %}No tienes sitio o el que tienes ya no funciona. Te construimos todo desde cero: diseño, servidor, base de datos y publicación. Tú solo nos das la idea.{% endblock %}
 
 {% block content %}
 
@@ -11,37 +11,101 @@
       Todos los servicios
     </a>
     <div class="badge badge-violet" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Sitio Web Completo</div>
-    <h1>Tu negocio en línea,<br><span class="text-gradient">listo desde el día uno</span></h1>
-    <p style="margin-top: 1rem; font-size: 16px; max-width: 520px;">
-      El paquete completo: diseño, código, base de datos, hosting y publicación. Tú solo nos das la idea — nosotros entregamos el sitio funcionando.
+    <h1>Tu negocio en internet,<br><span class="text-gradient">listo desde el primer día</span></h1>
+    <p style="margin-top: 1rem; font-size: 16px; max-width: 540px;">
+      No tienes sitio web, o el que tienes ya no representa tu negocio. Nosotros nos encargamos de todo — el diseño, el servidor, el dominio y la publicación. Tú solo apruebas y lanzamos.
     </p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Cotizar sitio completo →</a>
-      <span class="badge badge-violet" style="padding: 10px 16px;">Desde $9,500 MXN</span>
-      <span class="badge badge-green" style="padding: 10px 16px;">Entrega 7–12 días</span>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Quiero mi sitio web →</a>
+      <span class="badge badge-violet" style="padding: 10px 16px;">Precio por cotización</span>
+      <span class="badge badge-green" style="padding: 10px 16px;">Listo en 7–12 días</span>
     </div>
   </div>
 </div>
 
+<!-- ¿QUÉ ES? -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">¿Qué es?</div>
-    <h2 class="section-title">El paquete más popular — y con razón</h2>
-    <div class="grid-3">
-      {% for parte, desc, icono in [
-        ('Frontend', 'Diseño visual responsivo que se ve perfecto en celular, tablet y desktop.', 'icon-violet'),
-        ('Backend', 'Servidor Flask, base de datos MySQL y API REST lista para escalar.', 'icon-green'),
-        ('Deploy', 'Publicación en servidor, configuración de dominio y HTTPS incluidos.', 'icon-amber'),
-      ] %}
-      <div class="card" style="text-align: center;">
-        <div class="card-icon {{ icono }}" style="margin: 0 auto 1rem;">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            {% if icono == 'icon-violet' %}<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-            {% elif icono == 'icon-green' %}<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/>
-            {% else %}<circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/>{% endif %}
-          </svg>
+    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 260px;">
+        <div class="section-eyebrow">¿Qué es?</div>
+        <h2 class="section-title">Todo lo que necesitas para existir en internet — en un solo proyecto</h2>
+        <p style="margin-bottom: 1.25rem;">
+          Un sitio web completo no es solo una página bonita. Es el diseño que tus clientes ven, el servidor que lo mantiene en línea, la base de datos que guarda la información y el dominio que lo identifica. Todo eso junto.
+        </p>
+        <p style="margin-bottom: 1.25rem;">
+          Con este servicio tú no tienes que coordinar a diferentes personas para cada parte — nosotros hacemos todo y te entregamos el sitio funcionando, publicado y listo para recibir clientes.
+        </p>
+        <p>
+          Es el servicio ideal si partes de cero o si quieres rehacer completamente tu presencia digital.
+        </p>
+      </div>
+      <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 10px;">
+        {% for parte, desc, color in [
+          ('Diseño visual', 'Lo que tus clientes ven: colores, tipografía, secciones, imágenes. Adaptado a todos los dispositivos.', 'var(--violet-light)'),
+          ('Servidor y base de datos', 'Lo que mantiene tu sitio en línea y guarda toda la información de forma segura.', 'var(--green)'),
+          ('Dominio y publicación', 'Tu dirección en internet (www.tunegocio.mx), configurada y publicada por nosotros.', 'var(--amber)'),
+        ] %}
+        <div class="card" style="padding: 1.1rem; display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: {{ color }}; margin-top: 5px; flex-shrink: 0;"></div>
+          <div>
+            <h4 style="font-size: 14px; color: {{ color }}; margin-bottom: 3px;">{{ parte }}</h4>
+            <p style="font-size: 13px;">{{ desc }}</p>
+          </div>
         </div>
-        <h4 style="margin-bottom: 0.4rem;">{{ parte }}</h4>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAS CON LANDING PAGE -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Sitio completo o landing page?</div>
+    <h2 class="section-title">La diferencia es más simple de lo que parece</h2>
+    <div class="grid-2" style="gap: 16px;">
+      <div class="card" style="border-color: var(--green-border);">
+        <h4 style="color: var(--green); margin-bottom: 1rem;">Landing Page — si tienes algo específico que promocionar</h4>
+        {% for item in ['Una sola página con un objetivo', 'Para campañas, anuncios o promociones', 'Lista en 2–4 días, desde $3,500 MXN', 'El visitante hace UNA acción (llamar, comprar, registrarse)'] %}
+        <div style="display: flex; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; color: var(--text-secondary);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
+          {{ item }}
+        </div>
+        {% endfor %}
+        <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" class="btn btn-ghost" style="margin-top: 1rem; width: 100%; justify-content: center; font-size: 13px;">Ver Landing Page →</a>
+      </div>
+      <div class="card" style="border-color: var(--violet-border); box-shadow: var(--shadow-glow-v);">
+        <h4 style="color: var(--violet-light); margin-bottom: 1rem;">Sitio Completo — si quieres mostrar todo tu negocio</h4>
+        {% for item in ['Varias páginas: inicio, servicios, nosotros, contacto…', 'Tu presencia digital completa y permanente', 'Listo en 7–12 días, precio por cotización', 'El visitante explora, conoce tu negocio y decide'] %}
+        <div style="display: flex; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; color: var(--text-secondary);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--violet-light)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
+          {{ item }}
+        </div>
+        {% endfor %}
+        <div class="btn btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center; font-size: 13px; text-align: center; border-radius: var(--radius-pill); padding: 9px 0;">← Estás viendo este</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN ES -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">¿Para quién es?</div>
+    <h2 class="section-title">Este servicio es para ti si…</h2>
+    <div class="grid-3">
+      {% for caso, desc in [
+        ('No tienes sitio web todavía', 'Tu negocio existe pero en internet no apareces. Cualquier cliente que te busque en Google no te va a encontrar.'),
+        ('Tu sitio actual ya no te representa', 'Tienes algo publicado pero quedó viejo, lento o simplemente no te gusta. Queremos borrón y cuenta nueva.'),
+        ('Eres el único que lleva el negocio', 'No tienes equipo técnico ni quieres coordinarlo. Quieres contratar a alguien de confianza que lo haga todo.'),
+        ('Necesitas que haga cosas reales', 'No quieres una tarjeta de presentación digital. Quieres formularios, catálogos, citas, pedidos — algo que realmente trabaje por ti.'),
+        ('Quieres crecer después', 'Hoy necesitas lo esencial y en 6 meses quizás quieres agregar más funciones. Lo construimos pensando en eso.'),
+        ('Quieres calidad sin pagar como agencia grande', 'Las agencias establecidas cobran 5 veces más por lo mismo. Nosotros somos dos personas enfocadas y sin intermediarios.'),
+      ] %}
+      <div class="card">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--violet-light); margin-bottom: 0.85rem;"></div>
+        <h4 style="margin-bottom: 0.35rem; font-size: 14px;">{{ caso }}</h4>
         <p style="font-size: 13px;">{{ desc }}</p>
       </div>
       {% endfor %}
@@ -49,39 +113,17 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="section-eyebrow">¿Para quién es?</div>
-    <h2 class="section-title">Este servicio es ideal si…</h2>
-    <div class="grid-3">
-      {% for caso in [
-        ('Partes de cero', 'No tienes sitio web o el actual está desactualizado y quieres uno nuevo desde cero.'),
-        ('No tienes equipo técnico', 'Eres el dueño del negocio y quieres delegar todo el desarrollo a alguien de confianza.'),
-        ('Quieres resultados rápidos', 'En menos de 2 semanas tienes tu sitio en vivo generando contactos.'),
-        ('Necesitas algo funcional', 'Formularios, registro de usuarios, catálogo dinámico — no solo una tarjeta de presentación.'),
-        ('Quieres escalar después', 'Empiezas con lo esencial y agregas funciones conforme crece tu negocio.'),
-        ('Buscas calidad y precio justo', 'Agencia grande cobra 5x más por lo mismo. Nosotros somos el punto medio ideal.'),
-      ] %}
-      <div class="card">
-        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--violet-light); margin-bottom: 0.85rem;"></div>
-        <h4 style="margin-bottom: 0.35rem; font-size: 14px;">{{ caso[0] }}</h4>
-        <p style="font-size: 13px;">{{ caso[1] }}</p>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
+<!-- QUÉ INCLUYE -->
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">¿Qué incluye?</div>
-    <h2 class="section-title">Absolutamente todo</h2>
+    <h2 class="section-title">De la idea al sitio publicado — sin que tengas que hacer nada técnico</h2>
     <div class="grid-2">
       {% for categoria, color, items in [
-        ('Frontend completo', 'var(--violet-light)', ['Diseño responsivo a medida', 'HTML5 + CSS3 + JavaScript', 'Animaciones y micro-interacciones', 'SEO on-page optimizado']),
-        ('Backend con Flask', 'var(--green)', ['API REST con Python y Flask', 'Base de datos MySQL', 'Autenticación JWT', 'Panel de administración básico']),
-        ('Deploy y publicación', 'var(--amber)', ['Configuración de servidor', 'Dominio + HTTPS (SSL)', 'Variables de entorno seguras', 'Backups automáticos']),
-        ('Soporte y entrega', 'var(--violet-light)', ['Código fuente 100% tuyo', '2 rondas de revisiones', '30 días de soporte post-entrega', 'Documentación y video tutorial']),
+        ('Diseño que representa tu negocio', 'var(--violet-light)', ['Diseño visual a medida con tus colores y logo', 'Se ve perfecto en celular, tablet y computadora', 'Animaciones sutiles que hacen que se sienta premium', 'Optimizado para que cargue rápido']),
+        ('Servidor y base de datos', 'var(--green)', ['Servidor con Python y Flask — rápido y seguro', 'Base de datos para guardar información', 'Si necesitas login de usuarios, lo incluimos', 'Panel de administración básico']),
+        ('Publicación y dominio', 'var(--amber)', ['Configuramos tu dominio (www.tunegocio.mx)', 'Certificado de seguridad HTTPS incluido', 'Ponemos todo en línea — tú no tocas nada técnico', 'Respaldos automáticos configurados']),
+        ('Entrega y garantía', 'var(--violet-light)', ['El código es 100% tuyo para siempre', 'Dos rondas de ajustes antes de publicar', '30 días de soporte después del lanzamiento', 'Te explicamos cómo funciona todo']),
       ] %}
       <div class="card">
         <h4 style="color: {{ color }}; font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
@@ -97,21 +139,26 @@
   </div>
 </section>
 
+<!-- PRECIOS -->
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">Precios</div>
-    <h2 class="section-title">Según el tamaño de tu proyecto</h2>
-    <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
-      {% for nombre, precio, plazo, features, destacado in [
-        ('Sitio Vitrina', '9,500', '7–9 días', ['Hasta 6 páginas', 'Formulario de contacto', 'Blog simple', 'Panel admin básico', '30 días soporte'], False),
-        ('Sitio Negocio', '15,000', '10–12 días', ['Páginas ilimitadas', 'Sistema de usuarios', 'Catálogo dinámico', 'Integración WhatsApp', 'Dashboard de métricas', '30 días soporte'], True),
-        ('A medida', 'Cotizar', '12–20 días', ['Todo lo anterior', 'E-commerce / pagos', 'Integraciones externas', 'Múltiples roles de usuario', 'SLA dedicado'], False),
+    <h2 class="section-title">Cada proyecto es diferente — pero aquí va una idea</h2>
+    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 2rem; max-width: 560px;">
+      El precio depende de cuántas páginas necesitas, si quieres login de usuarios, catálogo dinámico u otras funciones. Cotizamos sin costo y sin compromiso.
+    </p>
+    <div class="grid-3" style="align-items: start;">
+      {% for nombre, precio, plazo, desc, features, destacado in [
+        ('Sitio Vitrina', '9,500', '7–9 días', 'Para negocios que necesitan existir en internet y que la gente los encuentre.', ['Hasta 6 páginas (inicio, servicios, nosotros, contacto…)', 'Formulario de contacto al correo', 'Responsive en todos los dispositivos', 'SEO básico y HTTPS', '30 días soporte'], False),
+        ('Sitio Negocio', '15,000', '10–12 días', 'Para negocios que necesitan que el sitio haga cosas reales, no solo mostrar información.', ['Páginas ilimitadas', 'Sistema de usuarios y cuentas', 'Catálogo de productos o servicios dinámico', 'Integración con WhatsApp', 'Panel de administración básico', '30 días soporte'], True),
+        ('A medida', 'Cotizar', '12–20 días', 'Para proyectos complejos o con funciones especiales.', ['Todo lo anterior', 'E-commerce con pagos en línea', 'Integraciones con sistemas externos', 'Múltiples roles de usuario', 'SLA y soporte dedicado'], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
-        {% if destacado %}<div class="pricing-badge">Más elegido</div>{% endif %}
+        {% if destacado %}<div class="pricing-badge">Más pedido</div>{% endif %}
         <div class="pricing-name">{{ nombre }}</div>
         <div class="pricing-price">{% if precio != 'Cotizar' %}${% endif %}{{ precio }} {% if precio != 'Cotizar' %}<span>MXN</span>{% endif %}</div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Entrega en {{ plazo }}</p>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Listo en {{ plazo }}</p>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.6;">{{ desc }}</p>
         <div class="pricing-divider"></div>
         {% for f in features %}
         <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</div>
@@ -125,11 +172,15 @@
   </div>
 </section>
 
+<!-- CTA -->
 <section class="section" style="text-align: center; border-bottom: none;">
   <div class="container">
-    <h2 style="margin-bottom: 0.75rem;">¿Empezamos tu proyecto hoy?</h2>
-    <p style="margin-bottom: 2rem;">Cuéntanos tu idea. En menos de 24 horas tienes una propuesta detallada en tu correo, sin costo y sin compromiso.</p>
-    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Cotizar mi sitio completo →</a>
+    <h2 style="margin-bottom: 0.75rem;">¿Listo para existir en internet como mereces?</h2>
+    <p style="margin-bottom: 2rem;">Cuéntanos tu idea. En menos de 24 horas te enviamos una propuesta detallada sin costo y sin compromiso.</p>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Quiero mi sitio web →</a>
+      <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" class="btn btn-ghost">¿Solo necesito una página?</a>
+    </div>
   </div>
 </section>
 

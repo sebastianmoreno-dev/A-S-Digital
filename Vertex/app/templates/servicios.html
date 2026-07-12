@@ -1,184 +1,206 @@
 {% extends "base.html" %}
 {% block title %}Servicios — AS Vertex{% endblock %}
-{% block meta_desc %}Servicios de ingeniería y desarrollo web a la medida: Soluciones claras para impulsar tu negocio con arquitecturas robustas.{% endblock %}
+{% block meta_desc %}Desarrollo web profesional: Landing Pages, Sitios completos, Backend, Blog/CMS y Mantenimiento. Encuentra lo que tu negocio necesita.{% endblock %}
 
 {% block content %}
 
-<!-- ===== PAGE HEADER ===== -->
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-green"><span class="badge-dot"></span>Lo que ofrecemos</div>
-    <h1>Servicios y Soluciones</h1>
-    <p>Modelos de desarrollo web diseñados con un enfoque de ingeniería limpia para resolver las necesidades reales de tu negocio.</p>
+    <div class="badge badge-green"><span class="badge-dot"></span>¿Qué necesitas?</div>
+    <h1>Encuentra tu solución</h1>
+    <p>No necesitas saber de tecnología para elegir. Lee cada opción como si te preguntaras: <em style="color: var(--text-primary);">"¿Esto describe lo que yo quiero?"</em> — y haz clic en la que más te suene.</p>
   </div>
 </div>
 
-<!-- ===== MODELOS DE SERVICIO ===== -->
-<section class="section">
+<section class="section" style="border-bottom: none;">
   <div class="container">
-    <div class="section-eyebrow">Catálogo</div>
-    <h2 class="section-title">Elige la solución ideal</h2>
-    <p class="section-sub">Explora cada modelo para conocer sus alcances, inclusiones y planes de precios detallados.</p>
 
-    <!-- Cambiamos align-items a stretch para igualar alturas base y permitir que la tarjeta 5 destaque -->
-    <div class="grid-3" style="align-items: stretch; margin-top: 2rem; padding-top: 1.5rem; padding-bottom: 1.5rem; gap: 24px;">
+    <!-- Guía rápida -->
+    <div class="card" style="margin-bottom: 2.5rem; border-color: var(--green-border); background: var(--green-dim); padding: 1.25rem 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <h4 style="color: var(--green); font-size: 14px;">¿No sabes cuál elegir?</h4>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">
+        No hay problema — <a href="{{ url_for('main.contacto') }}" style="color: var(--green); text-decoration: underline;">escríbenos y te orientamos sin costo</a>. Cuéntanos qué quieres lograr con tu negocio y nosotros te decimos qué necesitas exactamente.
+      </p>
+    </div>
 
-      <!-- 1. Landing Page -->
-      <div class="card pricing-card" style="display: flex; flex-direction: column;">
-        <div class="pricing-name">Páginas de Lanzamiento (Landing Page)</div>
-        <div class="pricing-price"><span style="font-size: 14px; font-weight: 400; color: var(--text-muted); vertical-align: middle;">Desde </span>$3,500 <span>MXN</span></div>
-        <p style="font-size: 13px; margin-top: 0.5rem; min-height: 60px; line-height: 1.5;">Sitios web de una sola sección optimizados para promocionar un producto o campaña y capturar prospectos eficientemente.</p>
-        <div class="pricing-divider"></div>
-        <div style="flex-grow: 1;">
-          {% for feat in ['Optimización para alta conversión', 'Estructura mobile-first fluida', 'Formularios de captura integrados', 'Tiempos de entrega ágiles'] %}
-          <div class="pricing-feature">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            {{ feat }}
+    <!-- Grid de servicios -->
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+
+      <!-- FILA 1: Los dos más pedidos por negocios pequeños -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+
+        <!-- 1. Landing Page -->
+        <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" class="card" style="display: block; text-decoration: none; cursor: pointer; border-color: var(--green-border);">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;">
+            <div class="card-icon icon-green" style="margin: 0; flex-shrink: 0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 2px;">Landing Page</div>
+              <h3 style="font-size: 17px;">Tengo algo específico que promocionar</h3>
+            </div>
           </div>
-          {% endfor %}
-        </div>
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" class="btn btn-primary" style="width: 100%; justify-content: center;">Ver planes y detalles →</a>
-        </div>
+          <p style="font-size: 14px; margin-bottom: 1rem; line-height: 1.7;">
+            Una sola página diseñada para que la gente te llame, te escriba o compre. Sin distracciones. Sin menús innecesarios. Solo tu mensaje y un botón.
+          </p>
+          <div style="background: rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1rem;">
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">EJEMPLOS REALES:</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              {% for ej in ['Dentista con promoción', 'Estudio de yoga', 'Coach de negocios', 'Restaurante con delivery', 'Curso en línea', 'Campaña de temporada'] %}
+              <span style="font-size: 11px; background: var(--green-dim); color: var(--green); border: 0.5px solid var(--green-border); border-radius: var(--radius-pill); padding: 3px 10px;">{{ ej }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; border-top: 0.5px solid var(--border);">
+            <div>
+              <div style="font-size: 11px; color: var(--text-muted);">Desde</div>
+              <div style="font-size: 20px; font-weight: 700; color: var(--white);">$3,500 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--green);">
+              Ver detalles <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- 2. Sitio Web Completo -->
+        <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="card" style="display: block; text-decoration: none; cursor: pointer; border-color: rgba(124,58,237,0.45); box-shadow: 0 0 28px rgba(124,58,237,0.1); position: relative;">
+          <div style="position: absolute; top: -12px; left: 1.5rem; font-size: 11px; font-weight: 700; padding: 3px 14px; background: var(--violet); color: var(--white); border-radius: var(--radius-pill);">Más solicitado</div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;">
+            <div class="card-icon icon-violet" style="margin: 0; flex-shrink: 0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">Sitio Web Completo</div>
+              <h3 style="font-size: 17px;">Quiero mi negocio completo en internet</h3>
+            </div>
+          </div>
+          <p style="font-size: 14px; margin-bottom: 1rem; line-height: 1.7;">
+            Tu presencia digital completa: diseño, servidor, base de datos, dominio y publicación. Tú nos das la idea — nosotros entregamos todo funcionando.
+          </p>
+          <div style="background: rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1rem;">
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">EJEMPLOS REALES:</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              {% for ej in ['Empresa de servicios', 'Portafolio profesional', 'Negocio local con citas', 'Startup desde cero', 'Despacho o consultora', 'Tienda con catálogo'] %}
+              <span style="font-size: 11px; background: var(--violet-dim); color: var(--violet-light); border: 0.5px solid var(--violet-border); border-radius: var(--radius-pill); padding: 3px 10px;">{{ ej }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; border-top: 0.5px solid var(--border);">
+            <div>
+              <div style="font-size: 11px; color: var(--text-muted);">Precio</div>
+              <div style="font-size: 18px; font-weight: 700; color: var(--violet-light);">Por cotización</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--violet-light);">
+              Ver detalles <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+
       </div>
 
-      <!-- 2. Frontend -->
-      <div class="card pricing-card" style="display: flex; flex-direction: column;">
-        <div class="pricing-name">Interfaces y Diseño Visual (Frontend)</div>
-        <div class="pricing-price"><span style="font-size: 14px; font-weight: 400; color: var(--text-muted); vertical-align: middle;">Desde </span>$7,000 <span>MXN</span></div>
-        <p style="font-size: 13px; margin-top: 0.5rem; min-height: 60px; line-height: 1.5;">Creación o renovación de la cara visible de tu sistema web. Ideal para interfaces rápidas, modernas y adaptadas a celulares.</p>
-        <div class="pricing-divider"></div>
-        <div style="flex-grow: 1;">
-          {% for feat in ['Código limpio y semántico', 'Interactividad y animaciones fluidas', 'Optimización de rendimiento y carga', 'Adaptabilidad total de pantalla'] %}
-          <div class="pricing-feature">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            {{ feat }}
-          </div>
-          {% endfor %}
-        </div>
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.servicio_detalle', slug='frontend') }}" class="btn btn-primary" style="width: 100%; justify-content: center;">Ver planes y detalles →</a>
-        </div>
+      <!-- FILA 2: Servicios para negocios con necesidades más específicas -->
+      <div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+        <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);">Para necesidades más específicas</p>
       </div>
 
-      <!-- 3. Backend -->
-      <div class="card pricing-card" style="display: flex; flex-direction: column;">
-        <div class="pricing-name">Arquitectura y Bases de Datos (Backend)</div>
-        <div class="pricing-price"><span style="font-size: 14px; font-weight: 400; color: var(--text-muted); vertical-align: middle;">Desde </span>$9,000 <span>MXN</span></div>
-        <p style="font-size: 13px; margin-top: 0.5rem; min-height: 60px; line-height: 1.5;">Construcción de la ingeniería interna: bases de datos seguras, lógica de servidor, automatizaciones y conexiones API robustas.</p>
-        <div class="pricing-divider"></div>
-        <div style="flex-grow: 1;">
-          {% for feat in ['Desarrollo lógico con Python y Flask', 'Modelado relacional estructurado', 'Autenticación y seguridad de datos', 'Endpoints limpios y documentados'] %}
-          <div class="pricing-feature">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            {{ feat }}
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+
+        <!-- 3. Blog / CMS -->
+        <a href="{{ url_for('main.servicio_detalle', slug='blog-cms') }}" class="card" style="display: block; text-decoration: none; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;">
+            <div class="card-icon icon-green" style="margin: 0; flex-shrink: 0; width: 36px; height: 36px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 2px;">Blog / CMS</div>
+              <h3 style="font-size: 15px;">Quiero publicar contenido yo mismo</h3>
+            </div>
           </div>
-          {% endfor %}
-        </div>
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.servicio_detalle', slug='backend') }}" class="btn btn-primary" style="width: 100%; justify-content: center;">Ver planes y detalles →</a>
-        </div>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Sitio web con un panel tipo red social donde tú (sin saber programar) subes noticias, artículos, productos o eventos cuando quieras.</p>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
+            <div style="font-size: 18px; font-weight: 700; color: var(--white);">$12,000 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
+            <span style="font-size: 12px; color: var(--green);">Ver más →</span>
+          </div>
+        </a>
+
+        <!-- 4. Frontend -->
+        <a href="{{ url_for('main.servicio_detalle', slug='frontend') }}" class="card" style="display: block; text-decoration: none; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;">
+            <div class="card-icon icon-violet" style="margin: 0; flex-shrink: 0; width: 36px; height: 36px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">Diseño Frontend</div>
+              <h3 style="font-size: 15px;">Mi sitio ya existe pero se ve mal</h3>
+            </div>
+          </div>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Rediseñamos o construimos la parte visual de tu sitio o sistema. Ideal si ya tienes algo funcionando pero el diseño quedó viejo, lento o no se ve bien en celular.</p>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
+            <div style="font-size: 18px; font-weight: 700; color: var(--white);">$7,000 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
+            <span style="font-size: 12px; color: var(--violet-light);">Ver más →</span>
+          </div>
+        </a>
+
+        <!-- 5. Backend -->
+        <a href="{{ url_for('main.servicio_detalle', slug='backend') }}" class="card" style="display: block; text-decoration: none; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;">
+            <div class="card-icon icon-amber" style="margin: 0; flex-shrink: 0; width: 36px; height: 36px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--amber); margin-bottom: 2px;">Desarrollo Backend</div>
+              <h3 style="font-size: 15px;">Necesito que mi sitio haga cosas</h3>
+            </div>
+          </div>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Usuarios que se registran, pedidos que se guardan, datos que se procesan. Si tu sitio necesita "memoria" o lógica interna, esto es lo que necesitas.</p>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
+            <div style="font-size: 18px; font-weight: 700; color: var(--white);">$9,000 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
+            <span style="font-size: 12px; color: var(--amber);">Ver más →</span>
+          </div>
+        </a>
+
+        <!-- 6. Mantenimiento -->
+        <a href="{{ url_for('main.servicio_detalle', slug='mantenimiento') }}" class="card" style="display: block; text-decoration: none; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;">
+            <div class="card-icon icon-violet" style="margin: 0; flex-shrink: 0; width: 36px; height: 36px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">Mantenimiento</div>
+              <h3 style="font-size: 15px;">Ya tengo sitio, quiero que alguien lo cuide</h3>
+            </div>
+          </div>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Nos encargamos de que tu sitio esté siempre en línea, seguro y actualizado. Tú te enfocas en tu negocio, nosotros en la parte técnica.</p>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
+            <div style="font-size: 18px; font-weight: 700; color: var(--white);">$2,500 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN / mes</span></div>
+            <span style="font-size: 12px; color: var(--violet-light);">Ver más →</span>
+          </div>
+        </a>
+
       </div>
 
-      <!-- 4. Blog / CMS -->
-      <div class="card pricing-card" style="display: flex; flex-direction: column;">
-        <div class="pricing-name">Sitios Autoadministrables (Blog / CMS)</div>
-        <div class="pricing-price"><span style="font-size: 14px; font-weight: 400; color: var(--text-muted); vertical-align: middle;">Desde </span>$12,000 <span>MXN</span></div>
-        <p style="font-size: 13px; margin-top: 0.5rem; min-height: 60px; line-height: 1.5;">Plataformas web con un panel intuitivo para que puedas publicar y editar contenido tú mismo, sin necesidad de saber programar.</p>
-        <div class="pricing-divider"></div>
-        <div style="flex-grow: 1;">
-          {% for feat in ['Panel autogestionable a la medida', 'Publicación de contenido sin código', 'Optimización SEO estructural', 'Estructuras modulares escalables'] %}
-          <div class="pricing-feature">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            {{ feat }}
-          </div>
+      <!-- Ayuda para elegir -->
+      <div class="card" style="margin-top: 1rem; padding: 1.5rem; border-color: var(--border-med);">
+        <h3 style="font-size: 16px; margin-bottom: 1.25rem; text-align: center;">¿Aún no sabes cuál es el tuyo? Responde esto:</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+          {% for pregunta, respuesta, slug, color in [
+            ('"Quiero que la gente me encuentre cuando ponga mi servicio en Google"', '→ Landing Page o Sitio Completo', 'landing-page', 'var(--green)'),
+            ('"Quiero subir mis propios artículos, productos o noticias"', '→ Blog / CMS', 'blog-cms', 'var(--green)'),
+            ('"Mi sitio ya existe pero se ve feo o está roto"', '→ Diseño Frontend', 'frontend', 'var(--violet-light)'),
+            ('"Quiero que los usuarios puedan registrarse o hacer pedidos"', '→ Backend o Sitio Completo', 'fullstack', 'var(--violet-light)'),
+          ] %}
+          <a href="{{ url_for('main.servicio_detalle', slug=slug) }}" style="text-decoration: none; background: rgba(255,255,255,0.03); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 1rem; display: block; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--border-med)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 0.5rem; line-height: 1.6;">{{ pregunta }}</p>
+            <p style="font-size: 13px; font-weight: 700; color: {{ color }};">{{ respuesta }}</p>
+          </a>
           {% endfor %}
-        </div>
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.servicio_detalle', slug='blog-cms') }}" class="btn btn-primary" style="width: 100%; justify-content: center;">Ver planes y detalles →</a>
-        </div>
-      </div>
-
-      <!-- 5. Sitio Completo (Destacado y AMPLIADO visualmente) -->
-      <div class="card pricing-card featured" style="display: flex; flex-direction: column; transform: scale(1.06); position: relative; z-index: 10; border: 2px solid var(--green); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);">
-        <div class="pricing-badge">Completo</div>
-        <div class="pricing-name">Soluciones Integrales (Sitio Full Stack)</div>
-        <div class="pricing-price" style="font-size: 26px; padding: 6px 0; font-weight: 700;">Por Cotización</div>
-        <p style="font-size: 13px; margin-top: 0.5rem; min-height: 60px; line-height: 1.5;">Desarrollo integral de extremo a extremo diseñado exclusivamente a la medida para resolver los flujos complejos de tu empresa.</p>
-        <div class="pricing-divider"></div>
-        <div style="flex-grow: 1;">
-          {% for feat in ['Integración total Frontend y Backend', 'Arquitectura escalable a la medida', 'Despliegue y configuración de servidor', 'Garantía de soporte y mantenimiento'] %}
-          <div class="pricing-feature">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            {{ feat }}
-          </div>
-          {% endfor %}
-        </div>
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px 0; font-size: 15px;">Ver planes y detalles →</a>
-        </div>
-      </div>
-
-      <!-- 6. Mantenimiento -->
-      <div class="card pricing-card" style="display: flex; flex-direction: column;">
-        <div class="pricing-name">Administración y Soporte (Mantenimiento)</div>
-        <div class="pricing-price"><span style="font-size: 14px; font-weight: 400; color: var(--text-muted); vertical-align: middle;">Desde </span>$2,500 <span>MXN / mes</span></div>
-        <p style="font-size: 13px; margin-top: 0.5rem; min-height: 60px; line-height: 1.5;">Delega la gestión técnica. Mantenemos tus servidores seguros, la base de datos respaldada y el sistema funcionando al 100%.</p>
-        <div class="pricing-divider"></div>
-        <div style="flex-grow: 1;">
-          {% for feat in ['Monitoreo de seguridad y rendimiento', 'Respaldos de base de datos recurrentes', 'Actualizaciones de entorno y dependencias', 'Bolsa de horas para ajustes menores'] %}
-          <div class="pricing-feature">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            {{ feat }}
-          </div>
-          {% endfor %}
-        </div>
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.servicio_detalle', slug='mantenimiento') }}" class="btn btn-primary" style="width: 100%; justify-content: center;">Ver planes y detalles →</a>
         </div>
       </div>
 
     </div>
-  </div>
-</section>
-
-<!-- ===== STACK TECNOLÓGICO ===== -->
-<section class="section">
-  <div class="container">
-    <div class="section-eyebrow">Tecnologías</div>
-    <h2 class="section-title">Lo que usamos</h2>
-    <p class="section-sub">Herramientas probadas en entornos de producción, enfocadas en la eficiencia y escalabilidad.</p>
-
-    <div class="grid-3">
-      {% set techs = [
-        ('Python',      'Lenguaje principal del backend. Legible, potente y mantenible.',             'icon-green'),
-        ('Flask',       'Microframework web. Flexible, ligero y perfecto para APIs REST.',           'icon-green'),
-        ('JavaScript',  'Interactividad del frontend sin dependencias innecesarias.',                'icon-violet'),
-        ('HTML5',       'Estructura semántica, accesible y optimizada para SEO.',                    'icon-violet'),
-        ('CSS3',        'Estilos responsivos, animaciones fluidas y diseño a medida.',               'icon-violet'),
-        ('Node.js',     'Runtime JS para herramientas de build y scripts de automatización.',        'icon-amber'),
-        ('MySQL',       'Base de datos relacional robusta para proyectos con datos estructurados.',  'icon-amber'),
-        ('JWT',         'Autenticación stateless segura para APIs y SPAs.',                          'icon-amber'),
-      ] %}
-      {% for nombre, desc, icono in techs %}
-      <div class="card">
-        <div class="card-icon {{ icono }}">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-        </div>
-        <h4 style="margin-bottom: 0.35rem;">{{ nombre }}</h4>
-        <p style="font-size: 13px;">{{ desc }}</p>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ===== CTA ===== -->
-<section class="section" style="text-align:center; border-bottom:none;">
-  <div class="container">
-    <h2 style="margin-bottom:0.75rem;">¿No sabes qué modelo de desarrollo necesitas?</h2>
-    <p style="margin-bottom:2rem;">Cuéntanos tu idea o el problema de tu negocio y nosotros estructuramos la propuesta ideal sin compromiso.</p>
-    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Hablar con los desarrolladores →</a>
   </div>
 </section>
 
