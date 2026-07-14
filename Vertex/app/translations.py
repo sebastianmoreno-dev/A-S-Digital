@@ -6,6 +6,7 @@ TRANSLATIONS = {
         "nav.proceso": "Proceso",
         "nav.contacto": "Contacto",
         "nav.cta": "Cotiza tu proyecto",
+        "nav.menu_aria": "Abrir menú de navegación",
 
         "footer.desc": "Desarrollo web profesional con Python, Flask, HTML, CSS y JavaScript.",
         "footer.servicios_title": "Servicios",
@@ -28,6 +29,7 @@ TRANSLATIONS = {
         "nav.proceso": "Process",
         "nav.contacto": "Contact",
         "nav.cta": "Get a quote",
+        "nav.menu_aria": "Open navigation menu",
 
         "footer.desc": "Professional web development with Python, Flask, HTML, CSS and JavaScript.",
         "footer.servicios_title": "Services",

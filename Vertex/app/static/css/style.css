@@ -162,6 +162,10 @@ p  { color: var(--text-secondary); line-height: 1.75; }
   white-space: nowrap;
 }
 
+/* Selector de idioma ES / EN */
+.nav-lang { display: flex; align-items: center; gap: 8px; margin-right: 1.5rem; }
+.lang-sep { color: #444; }
+
 .nav-links { display: flex; gap: 2px; list-style: none; }
 .nav-links a {
   font-size: clamp(12px, 1.3vw, 13px); font-weight: 500;
@@ -189,47 +193,24 @@ p  { color: var(--text-secondary); line-height: 1.75; }
   transform: translateY(-1px);
 }
 
-/* Hamburger */
+/* Hamburger — oculto en desktop, 44x44 táctil en mobile (ver breakpoint 768px) */
 .nav-toggle {
   display: none; background: none; border: none;
-  cursor: pointer; padding: 6px; flex-shrink: 0;
+  cursor: pointer; flex-shrink: 0;
+  width: 44px; height: 44px; padding: 0;
+  flex-direction: column; align-items: center; justify-content: center;
+  border-radius: var(--radius-sm);
 }
 .nav-toggle span {
-  display: block; width: 22px; height: 1.5px;
-  background: var(--text-primary); margin: 5px 0;
+  display: block; width: 22px; height: 2px; border-radius: 2px;
+  background: var(--text-primary); margin: 4px 0;
   transition: transform 0.3s, opacity 0.3s;
   transform-origin: center;
 }
-.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+/* Separación entre centros de barras = 2px alto + 4px+4px margin = 10px */
+.nav-toggle.open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
 .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-/* Menú móvil desplegable */
-.nav-mobile-menu {
-  display: none;
-  position: absolute; top: 100%; left: 0; right: 0;
-  background: rgba(13,13,20,0.98);
-  backdrop-filter: blur(20px);
-  border-bottom: 0.5px solid var(--border);
-  padding: var(--space-md) var(--container-pad);
-  flex-direction: column; gap: 4px;
-  animation: slideDown 0.22s ease;
-}
-.nav-mobile-menu.open { display: flex; }
-.nav-mobile-menu a {
-  font-size: 15px; font-weight: 500; color: var(--text-secondary);
-  padding: 11px 12px; border-radius: var(--radius-md);
-  display: block; transition: color var(--transition), background var(--transition);
-}
-.nav-mobile-menu a:hover, .nav-mobile-menu a.active {
-  color: var(--white); background: rgba(255,255,255,0.07);
-}
-.nav-mobile-cta {
-  margin-top: var(--space-sm);
-  padding: 12px; text-align: center;
-  background: var(--violet); color: var(--white) !important;
-  border-radius: var(--radius-pill); font-weight: 600;
-}
+.nav-toggle.open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-8px); }
@@ -385,18 +366,24 @@ p  { color: var(--text-secondary); line-height: 1.75; }
 .stat-num   { font-size: clamp(22px, 3.5vw, 28px); font-weight: 700; color: var(--white); letter-spacing: -1px; }
 .stat-label { font-size: clamp(11px, 1.2vw, 12px); color: var(--text-muted); margin-top: 3px; font-weight: 500; }
 
-/* ---------- Grids responsivos ---------- */
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(10px, 2vw, 14px);
-}
+/* ---------- Grids responsivos (mobile-first) ----------
+   Base = 1 columna. Las columnas se AGREGAN hacia arriba con min-width,
+   nunca se quitan con max-width: así dos breakpoints no pueden pisarse
+   entre sí en el mismo viewport. Escalado en la sección BREAKPOINTS:
+     base    → 1 col
+     ≥640px  → grid-3 a 2 col
+     ≥769px  → grid-2 a 2 col  |  col-span-2 vuelve a ocupar 2
+     ≥1025px → grid-3 a 3 col
+------------------------------------------------------- */
+.grid-2,
 .grid-3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: clamp(10px, 2vw, 14px);
 }
-.col-span-2 { grid-column: span 2; }
+/* En un grid de 1 columna, `span 2` crearía una columna implícita
+   y desbordaría. Sólo vuelve a 2 cuando el grid tiene 2 columnas. */
+.col-span-2 { grid-column: span 1; }
 
 /* ---------- Process list ---------- */
 .process-item {
@@ -421,13 +408,24 @@ textarea,
 select {
   width: 100%;
   padding: clamp(9px, 1.5vw, 11px) clamp(12px, 2vw, 15px);
+  min-height: 44px;                    /* touch target */
   background: rgba(255,255,255,0.04);
   border: 0.5px solid var(--border-med);
   border-radius: var(--radius-md);
-  font-size: clamp(13px, 1.5vw, 14px); color: var(--text-primary);
+  /* 16px NO es estético: por debajo de 16px, Safari iOS hace zoom automático
+     al enfocar el campo y descuadra el layout. En desktop baja a 14px. */
+  font-size: 16px;
+  color: var(--text-primary);
   font-family: inherit; outline: none;
   transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
   -webkit-appearance: none;
+}
+@media (min-width: 769px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select { font-size: 14px; }
 }
 input:focus, textarea:focus, select:focus {
   border-color: var(--violet);
@@ -528,10 +526,6 @@ select option { background: var(--bg-card); }
 
 /* ── 480px: Mobile grande ── */
 @media (max-width: 480px) {
-  .grid-2,
-  .grid-3    { grid-template-columns: 1fr; }
-  .col-span-2 { grid-column: span 1; }
-
   .stats-strip { gap: 1.25rem; }
 
   .btn { padding: 10px 18px; font-size: 13px; }
@@ -549,23 +543,50 @@ select option { background: var(--bg-card); }
   .contact-layout { flex-direction: column !important; }
 }
 
-/* ── 640px: Mobile landscape / tablet pequeña ── */
-@media (min-width: 481px) and (max-width: 640px) {
+/* ── 640px+: Mobile landscape / tablet pequeña — grid-3 abre a 2 columnas ── */
+@media (min-width: 640px) {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
-  .col-span-2 { grid-column: span 2; }
 }
 
 /* ── 768px: Tablet portrait ── */
 @media (max-width: 768px) {
-  /* Navbar */
-  .nav-links { display: none; }
-  .nav-cta   { display: none; }
-  .nav-toggle { display: block; }
+  /* Navbar: el mismo <ul> se convierte en dropdown. .open lo revela.
+     Se ancla a .navbar (position:sticky = contenedor de posicionamiento). */
+  .nav-links {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 4px;
+    background: rgba(13,13,20,0.98);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 0.5px solid var(--border);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+    padding: var(--space-sm) var(--container-pad) var(--space-md);
+    animation: slideDown 0.22s ease;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a {
+    display: flex; align-items: center;
+    min-height: 44px;              /* touch target mínimo */
+    padding: 12px; font-size: 15px;
+    border-radius: var(--radius-md);
+  }
 
-  /* Grids */
-  .grid-2  { grid-template-columns: 1fr; }
-  .grid-3  { grid-template-columns: repeat(2, 1fr); }
-  .col-span-2 { grid-column: span 2; }
+  .nav-cta   { display: none; }
+  .nav-toggle { display: flex; }
+
+  /* Idioma: área táctil de 44x44. El "/" es decorativo y se oculta
+     para recuperar el ancho que necesitan los targets. */
+  .nav-lang { margin-right: 4px; gap: 0; }
+  .lang-sep { display: none; }
+  .lang-link { min-width: 44px; min-height: 44px; padding: 0; }
+
+  /* Touch targets. El padding de .btn es clamp(9px, 1.5vw, 11px): a 360px
+     el 1.5vw da 5.4px y colapsa al mínimo de 9px, así que el botón quedaba
+     en 34-43px de alto justo en el ancho donde más importa el dedo.
+     .filtro-btn hereda de .btn, así que queda cubierto. */
+  .btn { min-height: 44px; }
+  .back-link { min-height: 44px; padding: 6px 0; }
 
   /* Stack code block dentro de card wide */
   .stack-wide { flex-direction: column !important; }
@@ -595,11 +616,14 @@ select option { background: var(--bg-card); }
   .filtros-row::-webkit-scrollbar-thumb { background: var(--border-med); border-radius: 2px; }
 }
 
+/* ── 769px+: Tablet — grid-2 abre a 2 columnas y col-span-2 recupera su span ── */
+@media (min-width: 769px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .col-span-2 { grid-column: span 2; }
+}
+
 /* ── 1024px: Tablet landscape / laptop pequeña ── */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .grid-3 { grid-template-columns: repeat(2, 1fr); }
-  .col-span-2 { grid-column: span 2; }
-
   /* Nav: reducir gaps */
   .nav-links { gap: 0; }
   .nav-links a { padding: 6px 8px; font-size: 12px; }
@@ -609,10 +633,14 @@ select option { background: var(--bg-card); }
   .stack-wide { gap: 1.5rem !important; }
 }
 
+/* ── 1025px+: Laptop/desktop — grid-3 alcanza sus 3 columnas ── */
+@media (min-width: 1025px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
 /* ── 1280px+: Desktop grande ── */
 @media (min-width: 1280px) {
   .container { max-width: 1140px; }
-  .grid-3    { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ── 1440px+: Desktop muy grande ── */
@@ -626,6 +654,100 @@ select option { background: var(--bg-card); }
   .btn:hover,
   .nav-cta:hover,
   .tech-tag:hover { transform: none; }
+}
+
+/* ── Enlaces de footer / idioma (antes onmouseover/onmouseout inline —
+   movidos a CSS puro para poder usar un CSP sin 'unsafe-inline' en script-src) ── */
+.footer-link {
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+.footer-link:hover { color: var(--white); }
+
+.footer-link-muted {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.footer-link-muted:hover { color: var(--text-secondary); }
+
+.lang-link {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #888;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+}
+.lang-link.active { color: #ffffff; font-weight: 700; }
+.lang-link:hover { color: #10B981; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--white); }
+
+/* Tabla comparativa "Landing vs Sitio Completo" (servicio_landing_page).
+   Antes era grid-template-columns inline: 3 columnas fijas que ningún media
+   query podía sobreescribir. En móvil apila; recupera las 3 columnas ≥640px. */
+.compare-row,
+.compare-legend {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  font-size: 12px;
+}
+.compare-row {
+  padding: 10px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.compare-legend { margin-top: 0.75rem; }
+/* La celda vacía de la leyenda no debe dejar un hueco al apilarse */
+.compare-legend > :empty { display: none; }
+/* "Ver sitio completo →" es un enlace autónomo, no prosa: necesita área táctil */
+.compare-legend a { display: inline-flex; align-items: center; min-height: 44px; }
+
+@media (min-width: 640px) {
+  .compare-row,
+  .compare-legend {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .compare-row { padding: 8px 0; }
+  .compare-legend > :empty { display: block; }
+}
+
+.faq-card {
+  text-decoration: none;
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: block;
+  transition: border-color 0.2s;
+}
+.faq-card:hover { border-color: var(--border-med); }
+
+/* Honeypot antibot: fuera de pantalla (no display:none — algunos bots
+   lo detectan y lo saltan) y sin foco por teclado/lector de pantalla. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /* ── Reducir movimiento para accesibilidad ── */

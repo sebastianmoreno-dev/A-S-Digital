@@ -1,0 +1,34 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ titulo }} — Panel AS Vertex{% endblock %}
+{% block content %}
+<h1>{{ titulo }}</h1>
+<form method="POST" class="admin-form">
+  {{ form.hidden_tag() }}
+  <div class="form-group">
+    {{ form.clave.label }}
+    {{ form.clave() }}
+  </div>
+  <div class="form-group">
+    {{ form.nombre.label }}
+    {{ form.nombre() }}
+  </div>
+  <div class="form-group">
+    {{ form.descripcion.label }}
+    {{ form.descripcion() }}
+  </div>
+  <div class="form-group">
+    {{ form.precio_desde.label }}
+    {{ form.precio_desde() }}
+  </div>
+  <div class="form-group">
+    {{ form.orden.label }}
+    {{ form.orden() }}
+  </div>
+  <div class="form-group checkbox-row">
+    {{ form.activo() }}
+    {{ form.activo.label }}
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar</button>
+  <a href="{{ url_for('admin.servicios_list') }}" style="margin-left: 1rem; font-size: 13px; color: var(--text-secondary);">Cancelar</a>
+</form>
+{% endblock %}

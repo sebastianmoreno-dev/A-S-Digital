@@ -22,60 +22,50 @@
       <div style="flex: 2; min-width: 300px;">
 
         <form method="POST" action="{{ url_for('contact.enviar') }}" id="contactForm">
-          {{ form.hidden_tag() if form is defined }}
+          {{ form.hidden_tag() }}
 
-          <div class="grid-2" style="gap:1rem; margin-bottom:1rem;">
-            <div class="form-group" style="margin-bottom:0;">
-              <label for="nombre">Nombre completo *</label>
-              <input type="text" id="nombre" name="nombre" placeholder="Sebastián Moreno" required
-                     value="{{ request.form.get('nombre', '') }}" />
-            </div>
-            <div class="form-group" style="margin-bottom:0;">
-              <label for="empresa">Empresa / Negocio</label>
-              <input type="text" id="empresa" name="empresa" placeholder="Mi empresa SA"
-                     value="{{ request.form.get('empresa', '') }}" />
-            </div>
+          <!-- Honeypot: invisible para personas, tentador para bots -->
+          <div class="hp-field" aria-hidden="true">
+            {{ form.website.label }}
+            {{ form.website(tabindex="-1", autocomplete="off") }}
           </div>
 
           <div class="grid-2" style="gap:1rem; margin-bottom:1rem;">
             <div class="form-group" style="margin-bottom:0;">
-              <label for="email">Correo electrónico *</label>
-              <input type="email" id="email" name="email" placeholder="tu@correo.com" required
-                     value="{{ request.form.get('email', '') }}" />
+              {{ form.nombre.label(for="nombre") }} *
+              {{ form.nombre(id="nombre", placeholder="Sebastián Moreno") }}
             </div>
             <div class="form-group" style="margin-bottom:0;">
-              <label for="telefono">Teléfono (Opcional)</label>
-              <input type="tel" id="telefono" name="telefono" placeholder="+52 55 1234 5678"
-                     value="{{ request.form.get('telefono', '') }}" />
+              {{ form.empresa.label(for="empresa") }}
+              {{ form.empresa(id="empresa", placeholder="Mi empresa SA") }}
+            </div>
+          </div>
+
+          <div class="grid-2" style="gap:1rem; margin-bottom:1rem;">
+            <div class="form-group" style="margin-bottom:0;">
+              {{ form.email.label(for="email") }} *
+              {{ form.email(id="email", placeholder="tu@correo.com") }}
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              {{ form.telefono.label(for="telefono") }} (Opcional)
+              {{ form.telefono(id="telefono", placeholder="+52 55 1234 5678") }}
             </div>
           </div>
 
           <div class="form-group">
-            <label for="servicio">¿Qué necesitas? *</label>
-            <select id="servicio" name="servicio" required>
-              <option value="" disabled {% if not request.form.get('servicio') %}selected{% endif %}>Selecciona un servicio</option>
-              <option value="frontend"  {% if request.form.get('servicio') == 'frontend'  %}selected{% endif %}>Solo Frontend — desde $5,500 MXN</option>
-              <option value="backend"   {% if request.form.get('servicio') == 'backend'   %}selected{% endif %}>Solo Backend / API — desde $7,500 MXN</option>
-              <option value="fullstack" {% if request.form.get('servicio') == 'fullstack' %}selected{% endif %}>Sitio completo (Full Stack) — desde $14,000 MXN</option>
-              <option value="otro"      {% if request.form.get('servicio') == 'otro'      %}selected{% endif %}>Otro / No sé aún</option>
-            </select>
+            {{ form.servicio_id.label(for="servicio_id") }} *
+            {{ form.servicio_id(id="servicio_id") }}
           </div>
 
           <div class="form-group">
-            <label for="presupuesto">Presupuesto aproximado</label>
-            <select id="presupuesto" name="presupuesto">
-              <option value="" disabled selected>Selecciona un rango</option>
-              <option value="menos5k">Menos de $5,000 MXN</option>
-              <option value="5k-10k">$5,000 – $10,000 MXN</option>
-              <option value="10k-20k">$10,000 – $20,000 MXN</option>
-              <option value="mas20k">Más de $20,000 MXN</option>
-            </select>
+            {{ form.rango_presupuesto_id.label(for="rango_presupuesto_id") }}
+            {{ form.rango_presupuesto_id(id="rango_presupuesto_id") }}
           </div>
 
           <div class="form-group">
-            <label for="mensaje">Cuéntanos tu proyecto *</label>
-            <textarea id="mensaje" name="mensaje" rows="5" required
-              placeholder="¿Qué hace tu negocio? ¿Qué quieres que haga tu sitio? ¿Tienes referencia de sitios que te gusten?">{{ request.form.get('mensaje', '') }}</textarea>
+            {{ form.descripcion_proyecto.label(for="descripcion_proyecto") }} *
+            {{ form.descripcion_proyecto(id="descripcion_proyecto", rows="5",
+                placeholder="¿Qué hace tu negocio? ¿Qué quieres que haga tu sitio? ¿Tienes referencia de sitios que te gusten?") }}
           </div>
 
           <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:15px; padding:13px;">

@@ -1,0 +1,43 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Leads — Panel AS Vertex{% endblock %}
+{% block content %}
+<h1>Leads</h1>
+
+<div class="admin-table-toolbar">
+  <div class="admin-filters">
+    <a href="{{ url_for('admin.leads_list') }}" class="{{ 'active' if not estado_filtro }}">Todos</a>
+    {% for estado in ['nuevo', 'en_seguimiento', 'cotizado', 'ganado', 'perdido', 'descartado'] %}
+    <a href="{{ url_for('admin.leads_list', estado=estado) }}" class="{{ 'active' if estado_filtro == estado }}">{{ estado.replace('_', ' ') }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Nombre</th><th>Email</th><th>Servicio</th><th>Estado</th><th>Fecha</th></tr>
+  </thead>
+  <tbody>
+    {% for lead in paginacion.items %}
+    <tr class="row-link" data-href="{{ url_for('admin.lead_detail', lead_id=lead.id) }}">
+      <td>{{ lead.nombre }}</td>
+      <td>{{ lead.email }}</td>
+      <td>{{ lead.servicio.nombre }}</td>
+      <td><span class="admin-badge estado-{{ lead.estado }}">{{ lead.estado.replace('_',' ') }}</span></td>
+      <td>{{ lead.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">No hay leads con este filtro.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div style="margin-top: 1rem; display: flex; gap: 0.75rem; font-size: 13px;">
+  {% if paginacion.has_prev %}
+  <a href="{{ url_for('admin.leads_list', estado=estado_filtro, page=paginacion.prev_num) }}">← Anterior</a>
+  {% endif %}
+  <span style="color: var(--text-muted);">Página {{ paginacion.page }} de {{ paginacion.pages or 1 }}</span>
+  {% if paginacion.has_next %}
+  <a href="{{ url_for('admin.leads_list', estado=estado_filtro, page=paginacion.next_num) }}">Siguiente →</a>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, abort, redirect, request, session, url_for
+from flask import Blueprint, abort, redirect, render_template, request, session, url_for
+
+from app.blueprints.contact.forms import crear_formulario_contacto
 
 main_bp = Blueprint('main', __name__)
 
@@ -26,7 +28,8 @@ def nosotros():
 
 @main_bp.route('/contacto')
 def contacto():
-    return render_template('contacto.html')
+    form = crear_formulario_contacto(con_timestamp=True)
+    return render_template('contacto.html', form=form)
 
 # ── Páginas de detalle de cada servicio ─────────────────────────
 

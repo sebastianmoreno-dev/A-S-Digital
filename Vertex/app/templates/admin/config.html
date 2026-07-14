@@ -1,0 +1,29 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Configuración — Panel AS Vertex{% endblock %}
+{% block content %}
+<h1>Configuración del sitio</h1>
+<p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem;">
+  Datos operativos (correo, teléfono, WhatsApp, redes sociales, horarios). Las credenciales
+  reales (SMTP, API keys) no se administran aquí — viven en variables de entorno del servidor.
+</p>
+
+<form method="POST" class="admin-form" style="max-width: 640px;">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+  {% set categoria_actual = namespace(valor=None) %}
+  {% for fila in filas %}
+    {% if fila.categoria != categoria_actual.valor %}
+      {% set categoria_actual.valor = fila.categoria %}
+      <h2>{{ fila.categoria or 'General' }}</h2>
+    {% endif %}
+    <div class="form-group">
+      <label for="valor_{{ fila.id }}">{{ fila.descripcion or fila.clave }}</label>
+      <input type="text" id="valor_{{ fila.id }}" name="valor_{{ fila.id }}" value="{{ fila.valor or '' }}" />
+    </div>
+  {% else %}
+    <p>No hay configuración registrada todavía. Corre <code>scripts/seed.py</code> para poblarla.</p>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+</form>
+{% endblock %}

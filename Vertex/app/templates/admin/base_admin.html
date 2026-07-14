@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{% block title %}Panel — AS Vertex{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+</head>
+<body class="admin-body">
+
+  {% if current_user.is_authenticated %}
+  <aside class="admin-sidebar">
+    <div class="brand">AS Vertex · Admin</div>
+    <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">Dashboard</a>
+    <a href="{{ url_for('admin.leads_list') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('admin.lead') }}">Leads</a>
+    <a href="{{ url_for('admin.servicios_list') }}" class="{{ 'active' if request.endpoint and 'servicio' in request.endpoint }}">Servicios</a>
+    <a href="{{ url_for('admin.rangos_list') }}" class="{{ 'active' if request.endpoint and 'rango' in request.endpoint }}">Presupuestos</a>
+    <a href="{{ url_for('admin.configuracion') }}" class="{{ 'active' if request.endpoint == 'admin.configuracion' }}">Configuración</a>
+    <form action="{{ url_for('admin.logout') }}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <button type="submit" class="logout">{{ current_user.email }} — Cerrar sesión</button>
+    </form>
+  </aside>
+  {% endif %}
+
+  <main class="admin-main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}" style="margin-bottom: 1rem;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

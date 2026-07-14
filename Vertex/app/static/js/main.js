@@ -3,12 +3,41 @@
 // ── Navbar mobile toggle ─────────────────────────────────────────
 const navToggle = document.getElementById('navToggle');
 const navLinks  = document.getElementById('navLinks');
+
 if (navToggle && navLinks) {
-  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  // La clase va en AMBOS: en el <ul> lo despliega, en el botón anima la X.
+  const setNav = (open) => {
+    navLinks.classList.toggle('open', open);
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  };
+  const isOpen = () => navLinks.classList.contains('open');
+
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();          // que no lo cierre el listener de "click afuera"
+    setNav(!isOpen());
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setNav(false));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (isOpen() && !navLinks.contains(e.target)) setNav(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen()) {
+      setNav(false);
+      navToggle.focus();
+    }
+  });
+
+  // Al pasar a desktop el <ul> vuelve a ser flex horizontal: limpiar el estado.
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && isOpen()) setNav(false);
+  });
 }
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => navLinks?.classList.remove('open'));
-});
 
 // ── Navbar scroll border ─────────────────────────────────────────
 window.addEventListener('scroll', () => {
@@ -62,6 +91,13 @@ document.querySelectorAll('.card').forEach(card => {
     const y = ((e.clientY - rect.top)  / rect.height) * 100;
     card.style.setProperty('--mouse-x', `${x}%`);
     card.style.setProperty('--mouse-y', `${y}%`);
+  });
+});
+
+// ── Filas de tabla clicables (panel admin) ────────────────────────
+document.querySelectorAll('tr.row-link[data-href]').forEach(row => {
+  row.addEventListener('click', () => {
+    window.location.href = row.dataset.href;
   });
 });
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ session.get('lang', 'es') }}"></html>
+<html lang="{{ session.get('lang', 'es') }}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +18,7 @@
   <header class="navbar">
     <div class="container">
       <a href="{{ url_for('main.index') }}" class="nav-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        
+
         <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="vertexGrad" x1="10%" y1="0%" x2="90%" y2="100%">
@@ -51,21 +51,18 @@
         <li><a href="{{ url_for('main.contacto') }}"   {% if request.endpoint == 'main.contacto'   %}class="active"{% endif %}>{{ t('nav.contacto') }}</a></li>
       </ul>
 
-      <div style="display: flex; gap: 8px; align-items: center; margin-right: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 13px;">
+      <div class="nav-lang">
         <a href="{{ url_for('main.cambiar_idioma', lang='es') }}"
-        style="color: {{ '#ffffff' if session.get('lang','es') == 'es' else '#888' }}; font-weight: {{ '700' if session.get('lang','es') == 'es' else '400' }}; text-decoration: none; transition: color 0.3s ease;"
-        onmouseover="this.style.color='#10B981'"
-        onmouseout="this.style.color='{{ '#ffffff' if session.get('lang','es') == 'es' else '#888' }}'">ES</a>
-        <span style="color: #444;">/</span>
+           class="lang-link {{ 'active' if session.get('lang','es') == 'es' else '' }}">ES</a>
+        <span class="lang-sep">/</span>
         <a href="{{ url_for('main.cambiar_idioma', lang='en') }}"
-        style="color: {{ '#ffffff' if session.get('lang','es') == 'en' else '#888' }}; font-weight: {{ '700' if session.get('lang','es') == 'en' else '400' }}; text-decoration: none; transition: color 0.3s ease;"
-        onmouseover="this.style.color='#10B981'"
-        onmouseout="this.style.color='{{ '#ffffff' if session.get('lang','es') == 'en' else '#888' }}'">EN</a>
+           class="lang-link {{ 'active' if session.get('lang','es') == 'en' else '' }}">EN</a>
       </div>
 
       <a href="{{ url_for('main.contacto') }}" class="btn btn-primary nav-cta">{{ t('nav.cta') }}</a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <button class="nav-toggle" id="navToggle" type="button"
+              aria-label="{{ t('nav.menu_aria') }}" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -125,32 +122,32 @@
         <div>
           <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">{{ t('footer.servicios_title') }}</h5>
           <nav style="display: flex; flex-direction: column; gap: 8px;">
-            <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.landing') }}</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='frontend') }}"     style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.frontend') }}</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='backend') }}"      style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.backend') }}</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}"    style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.fullstack') }}</a>
-            <a href="{{ url_for('main.servicio_detalle', slug='blog-cms') }}"     style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('footer.servicio.blogcms') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='landing-page') }}" class="footer-link">{{ t('footer.servicio.landing') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='frontend') }}" class="footer-link">{{ t('footer.servicio.frontend') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='backend') }}" class="footer-link">{{ t('footer.servicio.backend') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="footer-link">{{ t('footer.servicio.fullstack') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='blog-cms') }}" class="footer-link">{{ t('footer.servicio.blogcms') }}</a>
           </nav>
         </div>
 
         <div>
           <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">{{ t('footer.empresa_title') }}</h5>
           <nav style="display: flex; flex-direction: column; gap: 8px;">
-            <a href="{{ url_for('main.nosotros') }}"   style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.nosotros') }}</a>
-            <a href="{{ url_for('main.portafolio') }}" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.portafolio') }}</a>
-            <a href="{{ url_for('main.proceso') }}"    style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.proceso') }}</a>
-            <a href="{{ url_for('main.contacto') }}"   style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">{{ t('nav.contacto') }}</a>
+            <a href="{{ url_for('main.nosotros') }}" class="footer-link">{{ t('nav.nosotros') }}</a>
+            <a href="{{ url_for('main.portafolio') }}" class="footer-link">{{ t('nav.portafolio') }}</a>
+            <a href="{{ url_for('main.proceso') }}" class="footer-link">{{ t('nav.proceso') }}</a>
+            <a href="{{ url_for('main.contacto') }}" class="footer-link">{{ t('nav.contacto') }}</a>
           </nav>
         </div>
 
         <div>
           <h5 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.85rem;">{{ t('footer.contacto_title') }}</h5>
           <nav style="display: flex; flex-direction: column; gap: 8px;">
-            <a href="mailto:contacto.asvertex@gmail.com" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s; display: flex; align-items: center; gap: 6px;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">
+            <a href="mailto:contacto.asvertex@gmail.com" class="footer-link" style="display: flex; align-items: center; gap: 6px;">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               contacto.asvertex@gmail.com
             </a>
-            <a href="https://github.com/ASVertex" target="_blank" rel="noopener" style="font-size: 13px; color: var(--text-secondary); transition: color 0.2s; display: flex; align-items: center; gap: 6px;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.48)'">
+            <a href="https://github.com/ASVertex" target="_blank" rel="noopener" class="footer-link" style="display: flex; align-items: center; gap: 6px;">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
               {{ t('footer.github') }}
             </a>
@@ -162,8 +159,8 @@
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem;">
         <span style="font-size: 12px; color: var(--text-muted);">{{ t('footer.copyright') }}</span>
         <nav style="display: flex; gap: 20px; flex-wrap: wrap;">
-          <a href="{{ url_for('main.privacidad') }}" style="font-size: 12px; color: var(--text-muted); transition: color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">{{ t('footer.privacidad') }}</a>
-          <a href="{{ url_for('main.terminos') }}"   style="font-size: 12px; color: var(--text-muted); transition: color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">{{ t('footer.terminos') }}</a>
+          <a href="{{ url_for('main.privacidad') }}" class="footer-link-muted">{{ t('footer.privacidad') }}</a>
+          <a href="{{ url_for('main.terminos') }}" class="footer-link-muted">{{ t('footer.terminos') }}</a>
         </nav>
       </div>
 

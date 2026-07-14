@@ -1,0 +1,169 @@
+/* =============================================
+   AS Vertex — admin.css (panel interno)
+   Reutiliza las variables de :root definidas en style.css
+============================================= */
+
+body.admin-body {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.admin-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-sidebar .brand {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.admin-sidebar a {
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background: var(--bg-card-hover);
+  color: var(--white);
+}
+
+.admin-sidebar form {
+  margin-top: auto;
+}
+
+.admin-sidebar button.logout {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+}
+
+.admin-sidebar button.logout:hover { color: var(--text-secondary); }
+
+.admin-main {
+  flex: 1;
+  padding: 2rem clamp(1rem, 4vw, 3rem);
+  max-width: 1200px;
+}
+
+.admin-main h1 { font-size: 24px; margin-bottom: 1.5rem; color: var(--white); }
+.admin-main h2 { font-size: 18px; margin-bottom: 1rem; color: var(--white); }
+
+.admin-stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.admin-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  min-width: 140px;
+}
+.admin-stat .num { font-size: 26px; font-weight: 700; color: var(--white); }
+.admin-stat .label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.03em; }
+
+table.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-size: 14px;
+}
+
+table.admin-table th, table.admin-table td {
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+table.admin-table th {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+table.admin-table tr:last-child td { border-bottom: none; }
+table.admin-table tr:hover td { background: var(--bg-card-hover); }
+table.admin-table tr.row-link { cursor: pointer; }
+
+.admin-form { max-width: 560px; }
+.admin-form .form-group { margin-bottom: 1rem; }
+.admin-form label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 0.3rem; }
+.admin-form input[type="text"],
+.admin-form input[type="email"],
+.admin-form input[type="password"],
+.admin-form input[type="number"],
+.admin-form input[type="date"],
+.admin-form select,
+.admin-form textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-code);
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+}
+.admin-form textarea { resize: vertical; min-height: 90px; }
+.admin-form .checkbox-row { display: flex; align-items: center; gap: 0.5rem; }
+.admin-form .checkbox-row input { width: auto; }
+
+.admin-badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: var(--violet-dim);
+  color: var(--violet-light);
+  border: 1px solid var(--violet-border);
+}
+.admin-badge.estado-nuevo { background: var(--green-dim); color: var(--green); border-color: var(--green-border); }
+.admin-badge.estado-descartado,
+.admin-badge.estado-perdido { background: rgba(255,255,255,0.06); color: var(--text-muted); border-color: var(--border); }
+
+.admin-login-wrap {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-login-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.admin-table-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem; }
+.admin-filters a { font-size: 13px; color: var(--text-secondary); margin-right: 0.75rem; }
+.admin-filters a.active { color: var(--white); font-weight: 600; }
