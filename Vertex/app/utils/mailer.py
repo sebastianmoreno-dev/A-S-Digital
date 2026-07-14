@@ -1,62 +1,47 @@
-from flask_mail import Message
-from app import mail
-import os
+"""Construcción del contenido de los correos del formulario de contacto.
+
+Solo arma asunto/cuerpo a partir de un Contacto — el envío real y el
+registro en `correos_enviados` viven en app.services.email_service.
+"""
+from app.models.contacto import Contacto
 
 
-def enviar_notificacion(lead):
-    """
-    Envía dos correos:
-      1. Notificación al admin con los datos del lead.
-      2. Confirmación automática al cliente.
-    """
-    admin_email = os.getenv('ADMIN_EMAIL', 'hola@pixelforgestudio.mx')
+def construir_correo_admin(contacto: Contacto, admin_email: str) -> tuple[str, str, str]:
+    presupuesto = contacto.rango_presupuesto.etiqueta if contacto.rango_presupuesto else '—'
+    cuerpo = f"""
+Nuevo mensaje de contacto — AS Vertex
 
-    # ── 1. Correo al admin ────────────────────────────────────────
-    cuerpo_admin = f"""
-Nuevo mensaje desde PixelForge Studio
+Nombre:      {contacto.nombre}
+Empresa:     {contacto.empresa or '—'}
+Email:       {contacto.email}
+Teléfono:    {contacto.telefono or '—'}
+Servicio:    {contacto.servicio.nombre}
+Presupuesto: {presupuesto}
 
-Nombre:      {lead.nombre}
-Empresa:     {lead.empresa or '—'}
-Email:       {lead.email}
-Teléfono:    {lead.telefono or '—'}
-Servicio:    {lead.servicio}
-Presupuesto: {lead.presupuesto or '—'}
+Descripción del proyecto:
+{contacto.descripcion_proyecto}
 
-Mensaje:
-{lead.mensaje}
-
-Recibido: {lead.creado_en.strftime('%d/%m/%Y %H:%M')} UTC
-Lead ID:  #{lead.id}
+Recibido: {contacto.creado_en.strftime('%d/%m/%Y %H:%M')} UTC
+IP: {contacto.ip}
+Contacto ID: #{contacto.id}
 """.strip()
+    asunto = f'[AS Vertex] Nuevo lead: {contacto.nombre} — {contacto.servicio.nombre}'
+    return admin_email, asunto, cuerpo
 
-    msg_admin = Message(
-        subject    = f'[PixelForge] Nuevo lead: {lead.nombre} — {lead.servicio}',
-        recipients = [admin_email],
-        body       = cuerpo_admin,
-    )
-    mail.send(msg_admin)
 
-    # ── 2. Confirmación al cliente ────────────────────────────────
-    cuerpo_cliente = f"""
-Hola {lead.nombre},
+def construir_correo_cliente(contacto: Contacto) -> tuple[str, str, str]:
+    presupuesto = contacto.rango_presupuesto.etiqueta if contacto.rango_presupuesto else 'Por definir'
+    cuerpo = f"""
+Hola {contacto.nombre},
 
-Gracias por contactarnos. Recibimos tu mensaje y te responderemos
+Gracias por contactarnos. Recibimos tu solicitud y te responderemos
 en menos de 24 horas hábiles.
 
 Resumen de tu solicitud:
-  Servicio:    {lead.servicio}
-  Presupuesto: {lead.presupuesto or 'Por definir'}
+  Servicio:    {contacto.servicio.nombre}
+  Presupuesto: {presupuesto}
 
-Si tienes algo más que agregar, responde este correo o escríbenos
-por WhatsApp: https://wa.me/521234567890
-
-— El equipo de PixelForge Studio
-  hola@pixelforgestudio.mx
+— El equipo de AS Vertex
 """.strip()
-
-    msg_cliente = Message(
-        subject    = 'Recibimos tu mensaje — PixelForge Studio',
-        recipients = [lead.email],
-        body       = cuerpo_cliente,
-    )
-    mail.send(msg_cliente)
+    asunto = 'Recibimos tu mensaje — AS Vertex'
+    return contacto.email, asunto, cuerpo

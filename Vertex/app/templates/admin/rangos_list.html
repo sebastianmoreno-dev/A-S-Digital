@@ -1,0 +1,29 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Presupuestos — Panel AS Vertex{% endblock %}
+{% block content %}
+<div class="admin-table-toolbar">
+  <h1 style="margin-bottom:0;">Rangos de presupuesto</h1>
+  <a href="{{ url_for('admin.rango_nuevo') }}" class="btn btn-primary">+ Nuevo rango</a>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Clave</th><th>Etiqueta</th><th>Mín</th><th>Máx</th><th>Activo</th><th>Orden</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for rango in rangos %}
+    <tr>
+      <td>{{ rango.clave }}</td>
+      <td>{{ rango.etiqueta }}</td>
+      <td>{{ '$%.2f'|format(rango.monto_min) if rango.monto_min is not none else '—' }}</td>
+      <td>{{ '$%.2f'|format(rango.monto_max) if rango.monto_max is not none else '—' }}</td>
+      <td>{{ 'Sí' if rango.activo else 'No' }}</td>
+      <td>{{ rango.orden }}</td>
+      <td><a href="{{ url_for('admin.rango_editar', rango_id=rango.id) }}">Editar</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7">No hay rangos registrados todavía.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Dashboard — Panel AS Vertex{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="admin-stats">
+  {% for estado, total in conteos.items() %}
+  <div class="admin-stat">
+    <div class="num">{{ total }}</div>
+    <div class="label">{{ estado.replace('_', ' ') }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Últimos leads</h2>
+<table class="admin-table" style="margin-bottom: 2rem;">
+  <thead>
+    <tr><th>Nombre</th><th>Email</th><th>Servicio</th><th>Estado</th><th>Fecha</th></tr>
+  </thead>
+  <tbody>
+    {% for lead in ultimos_leads %}
+    <tr class="row-link" data-href="{{ url_for('admin.lead_detail', lead_id=lead.id) }}">
+      <td>{{ lead.nombre }}</td>
+      <td>{{ lead.email }}</td>
+      <td>{{ lead.servicio.nombre }}</td>
+      <td><span class="admin-badge estado-{{ lead.estado }}">{{ lead.estado.replace('_',' ') }}</span></td>
+      <td>{{ lead.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">Todavía no hay leads.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Eventos recientes</h2>
+<table class="admin-table">
+  <thead>
+    <tr><th>Tipo</th><th>Nivel</th><th>Descripción</th><th>IP</th><th>Fecha</th></tr>
+  </thead>
+  <tbody>
+    {% for evento in eventos_recientes %}
+    <tr>
+      <td>{{ evento.tipo_evento }}</td>
+      <td>{{ evento.nivel }}</td>
+      <td>{{ evento.descripcion }}</td>
+      <td>{{ evento.ip }}</td>
+      <td>{{ evento.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">Sin eventos todavía.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

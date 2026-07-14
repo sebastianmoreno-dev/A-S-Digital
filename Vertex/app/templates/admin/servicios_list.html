@@ -1,0 +1,28 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Servicios — Panel AS Vertex{% endblock %}
+{% block content %}
+<div class="admin-table-toolbar">
+  <h1 style="margin-bottom:0;">Servicios</h1>
+  <a href="{{ url_for('admin.servicio_nuevo') }}" class="btn btn-primary">+ Nuevo servicio</a>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Clave</th><th>Nombre</th><th>Precio desde</th><th>Activo</th><th>Orden</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for servicio in servicios %}
+    <tr>
+      <td>{{ servicio.clave }}</td>
+      <td>{{ servicio.nombre }}</td>
+      <td>{{ '$%.2f'|format(servicio.precio_desde) if servicio.precio_desde is not none else '—' }}</td>
+      <td>{{ 'Sí' if servicio.activo else 'No' }}</td>
+      <td>{{ servicio.orden }}</td>
+      <td><a href="{{ url_for('admin.servicio_editar', servicio_id=servicio.id) }}">Editar</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">No hay servicios registrados todavía.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
