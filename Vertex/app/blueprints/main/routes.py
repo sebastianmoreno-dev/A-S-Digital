@@ -29,7 +29,13 @@ def nosotros():
 @main_bp.route('/contacto')
 def contacto():
     form = crear_formulario_contacto(con_timestamp=True)
-    return render_template('contacto.html', form=form)
+    # Si el catálogo de servicios está vacío (BD sin sembrar), el <select>
+    # obligatorio quedaría sin opciones y el form sería inservible: en ese
+    # caso mostramos un mensaje con CTA de correo en vez del formulario.
+    catalogo_disponible = bool(form.servicio_id.choices)
+    return render_template(
+        'contacto.html', form=form, catalogo_disponible=catalogo_disponible
+    )
 
 # ── Páginas de detalle de cada servicio ─────────────────────────
 

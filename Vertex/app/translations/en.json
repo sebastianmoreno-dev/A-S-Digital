@@ -697,6 +697,8 @@
   "cont.header.h1": "Let's talk",
   "cont.header.p": "Tell us about your project. No generic forms — we want to understand what you really need.",
   "cont.opcional": "Optional",
+  "cont.off.h": "The form isn't available right now",
+  "cont.off.p": "We're fine-tuning our service catalog. In the meantime, email us directly and we'll reply within 24 hours.",
   "cont.ph_nombre": "John Smith",
   "cont.ph_empresa": "My Company LLC",
   "cont.ph_email": "you@email.com",

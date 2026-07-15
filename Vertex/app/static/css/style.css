@@ -286,6 +286,7 @@ p  { color: var(--text-secondary); line-height: 1.75; }
 .card::before {
   content: '';
   position: absolute; inset: 0;
+  border-radius: inherit; /* el glow respeta las esquinas aunque overflow sea visible */
   background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
     rgba(124,58,237,0.04), transparent 40%);
   pointer-events: none; opacity: 0; transition: opacity 0.4s;

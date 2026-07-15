@@ -23,6 +23,16 @@ class BaseConfig:
     # para generar <link rel="canonical">, og:url y las URLs absolutas de SEO.
     SITE_URL = os.getenv('SITE_URL', 'https://asvertex.store')
 
+    # Prefijo (secreto) del panel de administración. Se lee del entorno para
+    # que la ruta real no viva en git: define ADMIN_URL_PREFIX en tu .env con
+    # un valor difícil de adivinar (ej. '/gestion-a1b2c3'). Por defecto '/admin'.
+    ADMIN_URL_PREFIX = os.getenv('ADMIN_URL_PREFIX', '/admin')
+
+    # Puertas de entrada ADICIONALES (coma-separadas) que redirigen al prefijo
+    # canónico de arriba. Útil para dar a cada persona su propia URL de acceso.
+    # Ej: ADMIN_URL_ALIASES=/angel-panel,/otra-puerta
+    ADMIN_URL_ALIASES = os.getenv('ADMIN_URL_ALIASES', '')
+
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///pixelforge.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {'pool_pre_ping': True}

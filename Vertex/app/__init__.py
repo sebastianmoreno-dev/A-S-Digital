@@ -71,7 +71,50 @@ def _register_blueprints(app: Flask) -> None:
 
     app.register_blueprint(main_bp)
     app.register_blueprint(contact_bp)
-    app.register_blueprint(admin_bp)
+    # El prefijo del panel se toma de la config (ADMIN_URL_PREFIX) y sobrescribe
+    # el '/admin' por defecto del blueprint, permitiendo una URL secreta.
+    app.register_blueprint(admin_bp, url_prefix=app.config['ADMIN_URL_PREFIX'])
+    _init_admin_aliases(app)
+
+
+def _init_admin_aliases(app: Flask) -> None:
+    """Registra puertas de entrada alternativas al panel.
+
+    Cada alias en ADMIN_URL_ALIASES es una URL que redirige (302) a la ruta
+    equivalente bajo el prefijo canónico, conservando el subpath y el query
+    string. Así cada persona puede tener su propia URL de acceso aunque el
+    panel internamente use una sola ruta canónica.
+    """
+    from flask import redirect, request
+
+    canonical = app.config['ADMIN_URL_PREFIX'].rstrip('/')
+    raw = app.config.get('ADMIN_URL_ALIASES', '') or ''
+    aliases = []
+    for a in raw.split(','):
+        a = a.strip().rstrip('/')
+        if not a:
+            continue
+        if not a.startswith('/'):
+            a = '/' + a
+        if a != canonical:
+            aliases.append(a)
+
+    def _redirect_to_canonical(subpath: str = ''):
+        target = f'{canonical}/{subpath}'
+        if request.query_string:
+            target = f'{target}?{request.query_string.decode()}'
+        return redirect(target, code=302)
+
+    for i, alias in enumerate(aliases):
+        app.add_url_rule(
+            alias, endpoint=f'admin_alias_{i}_root',
+            view_func=_redirect_to_canonical, defaults={'subpath': ''},
+            strict_slashes=False,
+        )
+        app.add_url_rule(
+            f'{alias}/<path:subpath>', endpoint=f'admin_alias_{i}_sub',
+            view_func=_redirect_to_canonical,
+        )
 
 
 def _init_translations(app: Flask) -> None:

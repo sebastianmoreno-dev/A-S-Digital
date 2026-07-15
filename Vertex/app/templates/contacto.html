@@ -21,6 +21,20 @@
       <!-- FORMULARIO -->
       <div style="flex: 2; min-width: 300px;">
 
+        {% if not catalogo_disponible %}
+        <!-- Red de seguridad: catálogo vacío (BD sin sembrar) -->
+        <div class="card" style="border-color: var(--violet-border);">
+          <div class="card-icon icon-violet">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3 style="margin-bottom: 0.5rem;">{{ t('cont.off.h') }}</h3>
+          <p style="font-size: 14px; margin-bottom: 1.25rem;">{{ t('cont.off.p') }}</p>
+          <a href="mailto:contacto.asvertex@gmail.com" class="btn btn-primary" style="font-size: 14px; padding: 11px 20px;">
+            {{ t('cont.email.btn') }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </a>
+        </div>
+        {% else %}
         <form method="POST" action="{{ url_for('contact.enviar') }}" id="contactForm">
           {{ form.hidden_tag() }}
 
@@ -79,6 +93,7 @@
             {{ t('cont.privacidad') }}
           </p>
         </form>
+        {% endif %}
       </div>
 
       <!-- INFO LATERAL -->
