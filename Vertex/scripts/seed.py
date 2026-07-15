@@ -1,9 +1,26 @@
 """Seed inicial de la base de datos: roles, permisos, catálogo de
-servicios/presupuestos, configuración del sitio y el primer administrador.
+servicios/presupuestos, configuración del sitio y los administradores.
 
-Uso:
+Uso (un solo admin):
     ADMIN_SEED_EMAIL=tu@correo.com ADMIN_SEED_PASSWORD='una-clave-fuerte' \
     python scripts/seed.py
+
+Uso (varios admins — ej. Sebastián y Ángel):
+    Se leen entradas numeradas ADMIN_SEED_<N>_EMAIL / _PASSWORD / _NOMBRE
+    (N = 1, 2, 3, …). Normalmente van en el .env del servidor:
+
+        ADMIN_SEED_1_EMAIL=sebastian@asvertex.com
+        ADMIN_SEED_1_PASSWORD=clave-fuerte-de-sebastian
+        ADMIN_SEED_1_NOMBRE=Sebastián
+        ADMIN_SEED_2_EMAIL=angel@asvertex.com
+        ADMIN_SEED_2_PASSWORD=clave-fuerte-de-angel
+        ADMIN_SEED_2_NOMBRE=Ángel
+
+    La entrada sencilla ADMIN_SEED_EMAIL/_PASSWORD/_NOMBRE (sin número)
+    sigue funcionando y se siembra además de las numeradas.
+
+Las contraseñas nunca se guardan en git: viven solo en el .env del
+servidor y se convierten a hash argon2 al sembrar.
 
 Es idempotente: se puede correr varias veces sin duplicar datos.
 """
@@ -106,28 +123,73 @@ def seed_configuracion():
     db.session.commit()
 
 
-def seed_admin_inicial(rol: Rol):
-    email = os.getenv('ADMIN_SEED_EMAIL')
-    password = os.getenv('ADMIN_SEED_PASSWORD')
+def _leer_specs_admin():
+    """Reúne los admins a sembrar desde el entorno.
 
-    if not email or not password:
-        print('ADMIN_SEED_EMAIL / ADMIN_SEED_PASSWORD no definidos — se omite la creación del admin inicial.')
-        return
+    - Entrada sencilla (compat): ADMIN_SEED_EMAIL / _PASSWORD / _NOMBRE.
+    - Entradas numeradas: ADMIN_SEED_<N>_EMAIL / _PASSWORD / _NOMBRE para
+      N = 1, 2, 3, … (se corta en el primer N sin EMAIL definido).
 
-    if Administrador.query.filter_by(email=email.lower().strip()).first():
-        print(f'Ya existe un administrador con el correo {email}, no se crea de nuevo.')
-        return
+    Devuelve una lista de dicts {email, password, nombre}, sin duplicar
+    correos entre la entrada sencilla y las numeradas.
+    """
+    specs = []
+    vistos = set()
 
-    admin = Administrador(
-        nombre=os.getenv('ADMIN_SEED_NOMBRE', 'Administrador'),
-        email=email.lower().strip(),
-        password_hash=hash_password(password),
-        rol_id=rol.id,
-        activo=True,
+    def _agregar(email, password, nombre):
+        if not email or not password:
+            return
+        clave = email.lower().strip()
+        if clave in vistos:
+            return
+        vistos.add(clave)
+        specs.append(dict(email=clave, password=password, nombre=nombre or 'Administrador'))
+
+    # Entrada sencilla (retrocompatibilidad).
+    _agregar(
+        os.getenv('ADMIN_SEED_EMAIL'),
+        os.getenv('ADMIN_SEED_PASSWORD'),
+        os.getenv('ADMIN_SEED_NOMBRE'),
     )
-    db.session.add(admin)
-    db.session.commit()
-    print(f'Administrador inicial creado: {email}')
+
+    # Entradas numeradas: 1, 2, 3, … hasta el primer hueco.
+    n = 1
+    while True:
+        email = os.getenv(f'ADMIN_SEED_{n}_EMAIL')
+        if not email:
+            break
+        _agregar(
+            email,
+            os.getenv(f'ADMIN_SEED_{n}_PASSWORD'),
+            os.getenv(f'ADMIN_SEED_{n}_NOMBRE'),
+        )
+        n += 1
+
+    return specs
+
+
+def seed_admins(rol: Rol):
+    specs = _leer_specs_admin()
+
+    if not specs:
+        print('No hay ADMIN_SEED_* definidos — se omite la creación de administradores.')
+        return
+
+    for spec in specs:
+        if Administrador.query.filter_by(email=spec['email']).first():
+            print(f"Ya existe un administrador con el correo {spec['email']}, no se crea de nuevo.")
+            continue
+
+        admin = Administrador(
+            nombre=spec['nombre'],
+            email=spec['email'],
+            password_hash=hash_password(spec['password']),
+            rol_id=rol.id,
+            activo=True,
+        )
+        db.session.add(admin)
+        db.session.commit()
+        print(f"Administrador creado: {spec['email']}")
 
 
 def main():
@@ -138,7 +200,7 @@ def main():
         seed_servicios()
         seed_rangos()
         seed_configuracion()
-        seed_admin_inicial(rol_admin)
+        seed_admins(rol_admin)
     print('Seed completado.')
 
 
