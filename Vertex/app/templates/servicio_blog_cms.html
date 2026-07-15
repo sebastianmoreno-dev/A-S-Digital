@@ -1,6 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Sitio con Panel de Administración — AS Vertex{% endblock %}
-{% block meta_desc %}Publica noticias, artículos, productos o eventos desde tu celular o computadora, sin saber programar. Tu propio panel de control, hecho a tu medida.{% endblock %}
+{% block title %}{{ t('cms.title') }}{% endblock %}
+{% block meta_desc %}{{ t('cms.meta') }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Blog / CMS",
+  "serviceType": "CMS & Blog Development",
+  "url": "{{ canonical_url }}",
+  "description": {{ t('cms.meta')|tojson }},
+  "provider": { "@type": "ProfessionalService", "name": "AS Vertex", "url": "{{ SITE_URL }}" },
+  "areaServed": { "@type": "Country", "name": "México" }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -8,17 +23,17 @@
   <div class="container">
     <a href="{{ url_for('main.servicios') }}" class="back-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Todos los servicios
+      {{ t('common.back') }}
     </a>
-    <div class="badge badge-green" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Sitio Autoadministrable</div>
-    <h1>Actualiza tu sitio<br><span class="text-gradient">sin llamarle a nadie</span></h1>
+    <div class="badge badge-green" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>{{ t('cms.badge') }}</div>
+    <h1>{{ t('cms.h1a') }}<br><span class="text-gradient">{{ t('cms.h1b') }}</span></h1>
     <p style="margin-top: 1rem; font-size: 16px; max-width: 540px;">
-      Un sitio web con su propio panel de control. Tú entras, escribes lo que quieres publicar, subes una foto y le das publicar — así de simple. Sin saber programar. Sin depender de nadie.
+      {{ t('cms.hero.p') }}
     </p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Quiero mi panel →</a>
-      <span class="badge badge-green" style="padding: 10px 16px;">Desde $12,000 MXN</span>
-      <span class="badge badge-violet" style="padding: 10px 16px;">Listo en 6–10 días</span>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">{{ t('cms.hero.cta') }}</a>
+      <span class="badge badge-green" style="padding: 10px 16px;">{{ t('cms.hero.precio') }}</span>
+      <span class="badge badge-violet" style="padding: 10px 16px;">{{ t('cms.hero.plazo') }}</span>
     </div>
   </div>
 </div>
@@ -28,29 +43,29 @@
   <div class="container">
     <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
       <div style="flex: 1; min-width: 260px;">
-        <div class="section-eyebrow">¿Qué es?</div>
-        <h2 class="section-title">Como publicar en Instagram, pero en tu propio sitio</h2>
+        <div class="section-eyebrow">{{ t('common.que_es') }}</div>
+        <h2 class="section-title">{{ t('cms.que.title') }}</h2>
         <p style="margin-bottom: 1.25rem;">
-          Este servicio te da <strong style="color: var(--text-primary);">dos cosas a la vez</strong>: el sitio web que tus clientes ven, y un panel privado donde tú controlas el contenido — sin necesidad de llamarle a un desarrollador cada vez que quieres cambiar algo.
+          {{ t('cms.que.p1') | safe }}
         </p>
         <p style="margin-bottom: 1.25rem;">
-          Es como tener tu propio WordPress, pero construido exactamente para lo que tú necesitas, más rápido, más seguro y sin los plugins y problemas que WordPress trae.
+          {{ t('cms.que.p2') }}
         </p>
         <p>
-          Piénsalo como una red social privada para tu negocio: entras, publicas, y al instante tus clientes lo ven en tu sitio.
+          {{ t('cms.que.p3') }}
         </p>
       </div>
       <div style="flex: 1; min-width: 260px;">
         <div class="card" style="padding: 1.5rem;">
-          <h4 style="color: var(--green); margin-bottom: 1rem; font-size: 13px;">Desde tu panel puedes:</h4>
+          <h4 style="color: var(--green); margin-bottom: 1rem; font-size: 13px;">{{ t('cms.panel.h') }}</h4>
           {% for emoji, accion in [
-            ('✍️', 'Escribir y editar artículos o noticias'),
-            ('🖼️', 'Subir fotos y videos'),
-            ('📦', 'Agregar, editar o quitar productos'),
-            ('📅', 'Programar publicaciones para después'),
-            ('👁️', 'Ver cómo quedará antes de publicar'),
-            ('👥', 'Dar acceso a tu equipo con permisos'),
-            ('📊', 'Ver cuántas personas visitan tu sitio'),
+            ('✍️', t('cms.panel.a1')),
+            ('🖼️', t('cms.panel.a2')),
+            ('📦', t('cms.panel.a3')),
+            ('📅', t('cms.panel.a4')),
+            ('👁️', t('cms.panel.a5')),
+            ('👥', t('cms.panel.a6')),
+            ('📊', t('cms.panel.a7')),
           ] %}
           <div style="display: flex; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; color: var(--text-secondary);">
             <span style="font-size: 16px;">{{ emoji }}</span> {{ accion }}
@@ -65,16 +80,16 @@
 <!-- PARA QUIÉN ES -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">¿Para quién es?</div>
-    <h2 class="section-title">Lo necesitas si tu negocio…</h2>
+    <div class="section-eyebrow">{{ t('common.para_quien') }}</div>
+    <h2 class="section-title">{{ t('cms.quien.title') }}</h2>
     <div class="grid-3">
       {% for caso, desc in [
-        ('Publica contenido seguido', 'Tienes noticias, artículos, recetas, tutoriales, casos de éxito — y quieres publicarlos cuando quieras, no cuando te lo haga alguien más.'),
-        ('Tiene un catálogo que cambia', 'Tus productos, servicios o precios cambian con frecuencia. Necesitas actualizar tu sitio tú mismo, no pagar por cada cambio.'),
-        ('Tiene equipo de comunicación', 'Tu diseñadora, community manager o asistente pueden publicar en el sitio cada quien con sus propios permisos.'),
-        ('Quiere aparecer en Google', 'Publicar contenido regularmente es la estrategia más efectiva para mejorar tu posición en Google sin pagar anuncios.'),
-        ('Maneja eventos o agenda', 'Ferias, talleres, ofertas de temporada — los publicas tú mismo cuando quieras y los quitas cuando terminan.'),
-        ('Ya tiene WordPress y está harto', 'Lento, lleno de plugins que se rompen, hackeado. Te construimos algo limpio, tuyo y sin las complicaciones de WordPress.'),
+        (t('cms.quien.c1t'), t('cms.quien.c1d')),
+        (t('cms.quien.c2t'), t('cms.quien.c2d')),
+        (t('cms.quien.c3t'), t('cms.quien.c3d')),
+        (t('cms.quien.c4t'), t('cms.quien.c4d')),
+        (t('cms.quien.c5t'), t('cms.quien.c5d')),
+        (t('cms.quien.c6t'), t('cms.quien.c6d')),
       ] %}
       <div class="card">
         <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-bottom: 0.85rem;"></div>
@@ -89,14 +104,14 @@
 <!-- QUÉ INCLUYE -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">¿Qué incluye?</div>
-    <h2 class="section-title">Dos productos en uno</h2>
+    <div class="section-eyebrow">{{ t('common.que_incluye') }}</div>
+    <h2 class="section-title">{{ t('cms.inc.title') }}</h2>
     <div class="grid-2">
       {% for categoria, color, items in [
-        ('El sitio que tus clientes ven', 'var(--green)', ['Diseño profesional y responsivo a tu medida', 'Página principal con tus publicaciones más recientes', 'Búsqueda interna para encontrar contenido', 'Cada publicación optimizada para Google (SEO)']),
-        ('Tu panel de control privado', 'var(--green)', ['Acceso con usuario y contraseña seguros', 'Editor de texto con imágenes (no hay que saber HTML)', 'Organiza por categorías o temas', 'Programa publicaciones para publicar después']),
-        ('Lo técnico (invisible para ti)', 'var(--violet-light)', ['Servidor Python + Flask estable y seguro', 'Base de datos MySQL con respaldos automáticos', 'URLs amigables (/noticias/mi-articulo)', 'Mapa del sitio automático para Google']),
-        ('Entrega y capacitación', 'var(--violet-light)', ['Explicación de cómo usar el panel (video o sesión en vivo)', 'Manual escrito de referencia', 'El código fuente es 100% tuyo', '30 días de soporte']),
+        (t('cms.inc.cat1'), 'var(--green)', [t('cms.inc.c1i1'), t('cms.inc.c1i2'), t('cms.inc.c1i3'), t('cms.inc.c1i4')]),
+        (t('cms.inc.cat2'), 'var(--green)', [t('cms.inc.c2i1'), t('cms.inc.c2i2'), t('cms.inc.c2i3'), t('cms.inc.c2i4')]),
+        (t('cms.inc.cat3'), 'var(--violet-light)', [t('cms.inc.c3i1'), t('cms.inc.c3i2'), t('cms.inc.c3i3'), t('cms.inc.c3i4')]),
+        (t('cms.inc.cat4'), 'var(--violet-light)', [t('cms.inc.c4i1'), t('cms.inc.c4i2'), t('cms.inc.c4i3'), t('cms.inc.c4i4')]),
       ] %}
       <div class="card">
         <h4 style="color: {{ color }}; font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
@@ -115,26 +130,26 @@
 <!-- PRECIOS -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Precios</div>
-    <h2 class="section-title">Según qué tan seguido publicas y cuántos son</h2>
+    <div class="section-eyebrow">{{ t('common.precios') }}</div>
+    <h2 class="section-title">{{ t('cms.pre.title') }}</h2>
     <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
       {% for nombre, precio, plazo, desc, features, destacado in [
-        ('Básico', '12,000', '6–8 días', 'Para un solo administrador que publica artículos o noticias.', ['Sitio público con diseño a medida', 'Panel para 1 administrador', 'Artículos con fotos', 'Categorías y búsqueda', '30 días soporte'], False),
-        ('Profesional', '20,000', '8–10 días', 'Para equipos que publican seguido y necesitan más control.', ['Todo lo del plan Básico', 'Hasta 5 usuarios con roles diferentes', 'Galería de imágenes y videos', 'Programación de publicaciones', 'Estadísticas de visitas', '30 días soporte'], True),
-        ('A medida', 'Cotizar', '10–15 días', 'Para negocios con catálogos, tiendas o tipos de contenido especiales.', ['Todo lo anterior', 'Tipos de contenido personalizados', 'Catálogo de productos', 'Formularios y capturas de leads', 'Integraciones externas'], False),
+        (t('cms.plan1.nombre'), '12,000', t('cms.plan1.plazo'), t('cms.plan1.desc'), [t('cms.plan1.f1'), t('cms.plan1.f2'), t('cms.plan1.f3'), t('cms.plan1.f4'), t('cms.plan1.f5')], False),
+        (t('cms.plan2.nombre'), '20,000', t('cms.plan2.plazo'), t('cms.plan2.desc'), [t('cms.plan2.f1'), t('cms.plan2.f2'), t('cms.plan2.f3'), t('cms.plan2.f4'), t('cms.plan2.f5'), t('cms.plan2.f6')], True),
+        (t('cms.plan3.nombre'), none, t('cms.plan3.plazo'), t('cms.plan3.desc'), [t('cms.plan3.f1'), t('cms.plan3.f2'), t('cms.plan3.f3'), t('cms.plan3.f4'), t('cms.plan3.f5')], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
-        {% if destacado %}<div class="pricing-badge">Más pedido</div>{% endif %}
+        {% if destacado %}<div class="pricing-badge">{{ t('common.mas_pedido') }}</div>{% endif %}
         <div class="pricing-name">{{ nombre }}</div>
-        <div class="pricing-price">{% if precio != 'Cotizar' %}${% endif %}{{ precio }} {% if precio != 'Cotizar' %}<span>MXN</span>{% endif %}</div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Listo en {{ plazo }}</p>
+        <div class="pricing-price">{% if precio %}${{ precio }} <span>MXN</span>{% else %}{{ t('common.cotizar') }}{% endif %}</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">{{ plazo }}</p>
         <p style="font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.6;">{{ desc }}</p>
         <div class="pricing-divider"></div>
         {% for f in features %}
         <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</div>
         {% endfor %}
         <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">Quiero este →</a>
+          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">{{ t('common.quiero_este') }}</a>
         </div>
       </div>
       {% endfor %}
@@ -145,9 +160,9 @@
 <!-- CTA -->
 <section class="section" style="text-align: center; border-bottom: none;">
   <div class="container">
-    <h2 style="margin-bottom: 0.75rem;">¿Listo para publicar sin depender de nadie?</h2>
-    <p style="margin-bottom: 2rem;">Cuéntanos qué tipo de contenido manejas. En menos de 24 horas te decimos exactamente lo que necesitas.</p>
-    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Quiero mi panel de administración →</a>
+    <h2 style="margin-bottom: 0.75rem;">{{ t('cms.cta.h') }}</h2>
+    <p style="margin-bottom: 2rem;">{{ t('cms.cta.p') }}</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">{{ t('cms.cta.btn') }}</a>
   </div>
 </section>
 

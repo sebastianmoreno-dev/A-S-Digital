@@ -1,56 +1,47 @@
 {% extends "base.html" %}
-{% block title %}Términos y Condiciones — AS Vertex{% endblock %}
-{% block meta_desc %}Términos y Condiciones de contratación de servicios de AS Vertex, conforme al Código de Comercio y la legislación mexicana vigente.{% endblock %}
+{% block title %}{{ t('term.title') }}{% endblock %}
+{% block meta_desc %}{{ t('term.meta') }}{% endblock %}
 
 {% block content %}
 
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-violet"><span class="badge-dot"></span>Legal</div>
-    <h1>Términos y Condiciones</h1>
-    <p>Última actualización: {{ fecha_actualizacion if fecha_actualizacion else '1 de julio de 2025' }}</p>
+    <div class="badge badge-violet"><span class="badge-dot"></span>{{ t('legal.badge') }}</div>
+    <h1>{{ t('term.h1') }}</h1>
+    <p>{{ t('legal.updated') }} {{ fecha_actualizacion if fecha_actualizacion else t('legal.updated_date') }}</p>
   </div>
 </div>
 
-<section class="section" style="border-bottom: none;">
+<section class="section legal" style="border-bottom: none;">
   <div class="container">
     <div style="max-width: 760px; display: flex; flex-direction: column; gap: 2.5rem;">
 
       <div class="card" style="border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.05);">
-        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
-          Los presentes Términos y Condiciones constituyen un contrato vinculante entre
-          <strong style="color: var(--text-primary);">AS Vertex</strong> y el cliente, conforme a lo
-          dispuesto por el <strong style="color: var(--text-primary);">Código de Comercio</strong>,
-          el <strong style="color: var(--text-primary);">Código Civil Federal</strong>,
-          la <strong style="color: var(--text-primary);">Ley Federal de Protección al Consumidor (LFPC)</strong>
-          y la <strong style="color: var(--text-primary);">Ley de la Propiedad Industrial</strong>
-          de los Estados Unidos Mexicanos. Al contratar nuestros servicios, usted acepta íntegramente
-          las presentes condiciones.
-        </p>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">{{ t('term.intro') | safe }}</p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">1. Partes del contrato</h2>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s1.h') }}</h2>
         <div class="grid-2" style="gap: 10px;">
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.6rem;">Prestador de servicios</h4>
-            <p style="font-size: 13px;"><strong style="color: var(--text-primary);">AS Vertex</strong>, empresa de desarrollo web con domicilio en Ciudad de México, México. Correo: <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a></p>
+            <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.6rem;">{{ t('term.s1.prest.h') }}</h4>
+            <p style="font-size: 13px;">{{ t('term.s1.prest.p') | safe }} <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a></p>
           </div>
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 13px; color: var(--violet-light); margin-bottom: 0.6rem;">Cliente</h4>
-            <p style="font-size: 13px;">Persona física o moral que contrata los servicios de AS Vertex, ya sea de manera presencial, por correo electrónico, WhatsApp o cualquier medio electrónico.</p>
+            <h4 style="font-size: 13px; color: var(--violet-light); margin-bottom: 0.6rem;">{{ t('term.s1.cli.h') }}</h4>
+            <p style="font-size: 13px;">{{ t('term.s1.cli.p') }}</p>
           </div>
         </div>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">2. Descripción de servicios</h2>
-        <p style="margin-bottom: 1rem;">AS Vertex ofrece los siguientes servicios de desarrollo digital:</p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s2.h') }}</h2>
+        <p style="margin-bottom: 1rem;">{{ t('term.s2.intro') }}</p>
         {% for servicio, desc in [
-          ('Desarrollo Frontend', 'Diseño e implementación de interfaces de usuario con HTML5, CSS3 y JavaScript.'),
-          ('Desarrollo Backend', 'Construcción de APIs REST, bases de datos y lógica de servidor con Python y Flask.'),
-          ('Sitio Web Completo', 'Desarrollo integral que incluye frontend, backend, base de datos y publicación en servidor.'),
-          ('Mantenimiento', 'Soporte técnico, actualizaciones y corrección de errores posterior a la entrega.'),
+          (t('term.s2.srv1.n'), t('term.s2.srv1.d')),
+          (t('term.s2.srv2.n'), t('term.s2.srv2.d')),
+          (t('term.s2.srv3.n'), t('term.s2.srv3.d')),
+          (t('term.s2.srv4.n'), t('term.s2.srv4.d')),
         ] %}
         <div style="display: flex; gap: 12px; padding: 1rem 0; border-bottom: 0.5px solid var(--border);">
           <div style="min-width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-top: 6px; flex-shrink: 0;"></div>
@@ -63,12 +54,12 @@
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">3. Proceso de contratación</h2>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s3.h') }}</h2>
         {% for paso, desc in [
-          ('Solicitud de cotización', 'El cliente envía su solicitud a través del formulario de contacto o correo electrónico.'),
-          ('Propuesta formal', 'AS Vertex emite una propuesta técnica y económica con alcance, entregables, plazos y costo total en un plazo de 1 a 3 días hábiles.'),
-          ('Aceptación', 'El cliente acepta la propuesta de forma expresa mediante correo electrónico, mensaje o firma de contrato. Conforme al artículo 89 del Código de Comercio, la aceptación electrónica tiene plena validez jurídica.'),
-          ('Anticipo y arranque', 'El proyecto inicia una vez recibido el anticipo acordado (mínimo 50% del total). El saldo restante se cubre en la entrega.'),
+          (t('term.s3.p1.n'), t('term.s3.p1.d')),
+          (t('term.s3.p2.n'), t('term.s3.p2.d')),
+          (t('term.s3.p3.n'), t('term.s3.p3.d')),
+          (t('term.s3.p4.n'), t('term.s3.p4.d')),
         ] %}
         <div style="display: flex; gap: 16px; padding: 1.1rem 0; border-bottom: 0.5px solid var(--border);">
           <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); min-width: 22px; padding-top: 2px;">0{{ loop.index }}</div>
@@ -81,15 +72,8 @@
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">4. Precios, pagos y facturación</h2>
-        {% for item in [
-          'Todos los precios están expresados en Pesos Mexicanos (MXN) e incluyen IVA cuando aplique conforme a la Ley del Impuesto al Valor Agregado.',
-          'El anticipo mínimo para iniciar cualquier proyecto es del 50% del monto total acordado.',
-          'El saldo restante deberá cubrirse previo a la entrega definitiva o publicación del sitio en producción.',
-          'AS Vertex emitirá comprobante fiscal digital (CFDI) conforme al artículo 29 del Código Fiscal de la Federación cuando el cliente lo solicite.',
-          'Los métodos de pago aceptados son: transferencia bancaria (SPEI), depósito en cuenta y plataformas electrónicas de pago (PayPal, Clip u otras acordadas).',
-          'El incumplimiento de pago del saldo final dará derecho a AS Vertex de suspender la entrega o el acceso al sitio hasta la liquidación total.',
-        ] %}
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s4.h') }}</h2>
+        {% for item in [t('term.s4.i1'), t('term.s4.i2'), t('term.s4.i3'), t('term.s4.i4'), t('term.s4.i5'), t('term.s4.i6')] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
           <p style="font-size: 14px;">{{ item }}</p>
@@ -98,53 +82,36 @@
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">5. Entregas y plazos</h2>
-        <p style="margin-bottom: 1rem;">Los plazos de entrega son estimados y están sujetos a:</p>
-        {% for cond in [
-          'La entrega oportuna de materiales, accesos, textos e imágenes por parte del cliente.',
-          'La aprobación de las etapas de diseño en los tiempos acordados (máximo 3 días hábiles por revisión).',
-          'Cambios en el alcance original del proyecto solicitados por el cliente.',
-        ] %}
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s5.h') }}</h2>
+        <p style="margin-bottom: 1rem;">{{ t('term.s5.intro') }}</p>
+        {% for cond in [t('term.s5.i1'), t('term.s5.i2'), t('term.s5.i3')] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <span style="color: var(--amber); font-size: 11px; margin-top: 4px; flex-shrink: 0;">▸</span>
           <p style="font-size: 14px;">{{ cond }}</p>
         </div>
         {% endfor %}
-        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">
-          Los cambios de alcance que impliquen trabajo adicional serán cotizados y acordados por escrito antes de su ejecución.
-          AS Vertex no será responsable de retrasos causados por la falta de respuesta o materiales del cliente.
-        </p>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">{{ t('term.s5.nota') }}</p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">6. Propiedad intelectual</h2>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s6.h') }}</h2>
         <div class="grid-2" style="gap: 10px;">
           <div class="card" style="padding: 1.25rem; border-color: var(--green-border);">
-            <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.6rem;">Derechos del cliente</h4>
-            <p style="font-size: 13px;">Una vez liquidado el 100% del proyecto, el cliente adquiere los derechos patrimoniales del código fuente desarrollado específicamente para su proyecto, conforme a la <strong style="color: var(--text-primary);">Ley Federal del Derecho de Autor</strong>.</p>
+            <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.6rem;">{{ t('term.s6.cli.h') }}</h4>
+            <p style="font-size: 13px;">{{ t('term.s6.cli.p') | safe }}</p>
           </div>
           <div class="card" style="padding: 1.25rem; border-color: var(--violet-border);">
-            <h4 style="font-size: 13px; color: var(--violet-light); margin-bottom: 0.6rem;">Derechos de AS Vertex</h4>
-            <p style="font-size: 13px;">AS Vertex conserva el derecho a utilizar el proyecto como referencia en su portafolio, salvo acuerdo escrito en contrario. Las herramientas, librerías y frameworks utilizados conservan sus licencias originales.</p>
+            <h4 style="font-size: 13px; color: var(--violet-light); margin-bottom: 0.6rem;">{{ t('term.s6.av.h') }}</h4>
+            <p style="font-size: 13px;">{{ t('term.s6.av.p') }}</p>
           </div>
         </div>
-        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">
-          El cliente garantiza que los materiales (textos, imágenes, logos, marcas) que proporcione
-          son de su propiedad o cuenta con las licencias necesarias, liberando a AS Vertex de cualquier
-          responsabilidad por infracción de derechos de terceros.
-        </p>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">{{ t('term.s6.nota') }}</p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">7. Responsabilidades y limitaciones</h2>
-        <p style="margin-bottom: 1rem;">AS Vertex <strong style="color: var(--text-primary);">no será responsable</strong> por:</p>
-        {% for item in [
-          'Pérdidas de datos causadas por fallas del servicio de hospedaje de terceros.',
-          'Daños indirectos, lucro cesante o pérdidas de negocio derivadas del uso o imposibilidad de uso del sitio web.',
-          'Contenido publicado por el cliente en el sitio web entregado.',
-          'Infracciones a derechos de terceros derivadas de materiales proporcionados por el cliente.',
-          'Interrupciones de servicio causadas por el proveedor de hosting o registro de dominio.',
-        ] %}
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s7.h') }}</h2>
+        <p style="margin-bottom: 1rem;">{{ t('term.s7.intro') | safe }}</p>
+        {% for item in [t('term.s7.i1'), t('term.s7.i2'), t('term.s7.i3'), t('term.s7.i4'), t('term.s7.i5')] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
           <p style="font-size: 14px;">{{ item }}</p>
@@ -153,17 +120,16 @@
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">8. Cancelaciones y reembolsos</h2>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s8.h') }}</h2>
         <div class="card" style="padding: 1.5rem;">
           {% for caso, condicion in [
-            ('Cancelación antes del inicio', 'Reembolso total del anticipo, sin penalización.'),
-            ('Cancelación con trabajo iniciado', 'El anticipo se aplica al trabajo realizado. Si el avance excede el anticipo, el cliente deberá cubrir la diferencia.'),
-            ('Cancelación por incumplimiento de AS Vertex', 'Reembolso total del anticipo más el trabajo no entregado, dentro de los 10 días hábiles siguientes.'),
-            ('Proyecto entregado y aprobado', 'No procede reembolso una vez que el cliente aprueba la entrega final por escrito.'),
+            (t('term.s8.c1.n'), t('term.s8.c1.d')),
+            (t('term.s8.c2.n'), t('term.s8.c2.d')),
+            (t('term.s8.c3.n'), t('term.s8.c3.d')),
+            (t('term.s8.c4.n'), t('term.s8.c4.d')),
           ] %}
           <div style="display: flex; gap: 12px; padding: 0.85rem 0; border-bottom: 0.5px solid var(--border);">
-            <div style="min-width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex-shrink: 0;"
-                 style="background: var(--green-dim);"></div>
+            <div style="min-width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; background: var(--green-dim);"></div>
             <div>
               <p style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;">{{ caso }}</p>
               <p style="font-size: 13px;">{{ condicion }}</p>
@@ -174,41 +140,21 @@
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">9. Jurisdicción y ley aplicable</h2>
-        <p style="margin-bottom: 1rem;">
-          Los presentes Términos y Condiciones se rigen por las leyes de los
-          <strong style="color: var(--text-primary);">Estados Unidos Mexicanos</strong>.
-          Para cualquier controversia derivada de su interpretación o cumplimiento, las partes se
-          someten a la jurisdicción de los <strong style="color: var(--text-primary);">Tribunales competentes
-          de la Ciudad de México</strong>, renunciando expresamente a cualquier otro fuero que
-          pudiera corresponderles por razón de su domicilio presente o futuro.
-        </p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s9.h') }}</h2>
+        <p style="margin-bottom: 1rem;">{{ t('term.s9.p') | safe }}</p>
         <div class="card" style="padding: 1.25rem; border-color: var(--green-border); background: var(--green-dim);">
-          <p style="font-size: 13px; color: var(--text-secondary);">
-            <strong style="color: var(--green);">Resolución alternativa de conflictos:</strong>
-            Antes de acudir a instancias jurisdiccionales, las partes se comprometen a intentar
-            resolver cualquier diferencia mediante negociación directa en un plazo de 15 días hábiles,
-            o en su caso, a través de la
-            <strong style="color: var(--text-primary);">Procuraduría Federal del Consumidor (PROFECO)</strong>
-            conforme a la LFPC.
-          </p>
+          <p style="font-size: 13px; color: var(--text-secondary);">{{ t('term.s9.alt') | safe }}</p>
         </div>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">10. Modificaciones a los Términos</h2>
-        <p>
-          AS Vertex se reserva el derecho de modificar los presentes Términos y Condiciones en cualquier
-          momento. Los cambios entrarán en vigor desde su publicación en este sitio. La contratación
-          de servicios posterior a la publicación de modificaciones implica la aceptación de los nuevos términos.
-          Se recomienda revisar periódicamente esta página.
-        </p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('term.s10.h') }}</h2>
+        <p>{{ t('term.s10.p') }}</p>
       </div>
 
       <div style="padding-top: 1rem; border-top: 0.5px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap;">
-        <a href="{{ url_for('main.index') }}" class="btn btn-ghost">← Volver al inicio</a>
-        <a href="{{ url_for('main.privacidad') }}" class="btn btn-ghost">Aviso de Privacidad →</a>
-        <a href="#" class="btn btn-ghost">Política de Cookies →</a>
+        <a href="{{ url_for('main.index') }}" class="btn btn-ghost">{{ t('legal.volver') }}</a>
+        <a href="{{ url_for('main.privacidad') }}" class="btn btn-ghost">{{ t('legal.a_privacidad') }}</a>
       </div>
 
     </div>

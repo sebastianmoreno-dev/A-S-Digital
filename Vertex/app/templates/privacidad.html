@@ -1,54 +1,44 @@
 {% extends "base.html" %}
-{% block title %}Aviso de Privacidad — AS Vertex{% endblock %}
-{% block meta_desc %}Aviso de Privacidad Integral de AS Vertex, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.{% endblock %}
+{% block title %}{{ t('priv.title') }}{% endblock %}
+{% block meta_desc %}{{ t('priv.meta') }}{% endblock %}
 
 {% block content %}
 
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-violet"><span class="badge-dot"></span>Legal</div>
-    <h1>Aviso de Privacidad</h1>
-    <p>Última actualización: {{ fecha_actualizacion if fecha_actualizacion else '1 de julio de 2025' }}</p>
+    <div class="badge badge-violet"><span class="badge-dot"></span>{{ t('legal.badge') }}</div>
+    <h1>{{ t('priv.h1') }}</h1>
+    <p>{{ t('legal.updated') }} {{ fecha_actualizacion if fecha_actualizacion else t('legal.updated_date') }}</p>
   </div>
 </div>
 
-<section class="section" style="border-bottom: none;">
+<section class="section legal" style="border-bottom: none;">
   <div class="container">
     <div style="max-width: 760px; display: flex; flex-direction: column; gap: 2.5rem;">
 
       <div class="card" style="border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.05);">
-        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
-          El presente Aviso de Privacidad se emite en cumplimiento de lo dispuesto por los artículos
-          <strong style="color: var(--text-primary);">15, 16 y 17</strong> de la
-          <strong style="color: var(--text-primary);">Ley Federal de Protección de Datos Personales en Posesión de los Particulares</strong>
-          (LFPDPPP), publicada en el Diario Oficial de la Federación el 5 de julio de 2010, y su
-          Reglamento publicado el 21 de diciembre de 2011.
-        </p>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">{{ t('priv.intro') | safe }}</p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">1. Identidad y domicilio del Responsable</h2>
-        <p style="margin-bottom: 0.75rem;">
-          <strong style="color: var(--text-primary);">AS Vertex</strong> (en adelante, "el Responsable"), con domicilio en
-          Ciudad de México, México, es responsable del tratamiento de sus datos personales
-          conforme a lo establecido en la LFPDPPP.
-        </p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s1.h') }}</h2>
+        <p style="margin-bottom: 0.75rem;">{{ t('priv.s1.p1') | safe }}</p>
         <p>
-          Para cualquier asunto relacionado con el presente Aviso de Privacidad puede contactarnos en:
+          {{ t('priv.s1.p2') }}
           <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a>
         </p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">2. Datos personales que recabamos</h2>
-        <p style="margin-bottom: 1rem;">Recabamos las siguientes categorías de datos personales:</p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s2.h') }}</h2>
+        <p style="margin-bottom: 1rem;">{{ t('priv.s2.intro') }}</p>
 
         <div class="grid-2" style="gap: 10px; margin-bottom: 1rem;">
           {% for categoria, items in [
-            ('Datos de identificación', ['Nombre completo', 'Razón social o empresa']),
-            ('Datos de contacto', ['Correo electrónico', 'Número telefónico o WhatsApp']),
-            ('Datos comerciales', ['Tipo de servicio solicitado', 'Presupuesto estimado', 'Descripción del proyecto']),
-            ('Datos de navegación', ['Dirección IP', 'Tipo de navegador', 'Páginas visitadas', 'Tiempo de sesión']),
+            (t('priv.s2.cat1.h'), [t('priv.s2.cat1.i1'), t('priv.s2.cat1.i2')]),
+            (t('priv.s2.cat2.h'), [t('priv.s2.cat2.i1'), t('priv.s2.cat2.i2')]),
+            (t('priv.s2.cat3.h'), [t('priv.s2.cat3.i1'), t('priv.s2.cat3.i2'), t('priv.s2.cat3.i3')]),
+            (t('priv.s2.cat4.h'), [t('priv.s2.cat4.i1'), t('priv.s2.cat4.i2'), t('priv.s2.cat4.i3'), t('priv.s2.cat4.i4')]),
           ] %}
           <div class="card" style="padding: 1.25rem;">
             <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.6rem;">{{ categoria }}</h4>
@@ -64,38 +54,23 @@
         </div>
 
         <div class="card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.05); padding: 1.1rem;">
-          <p style="font-size: 13px; color: var(--text-secondary);">
-            <strong style="color: var(--amber);">Datos sensibles:</strong>
-            AS Vertex <strong style="color: var(--text-primary);">no recaba</strong> datos personales sensibles
-            (origen racial, estado de salud, creencias religiosas, datos biométricos, etc.) conforme al
-            artículo 9 de la LFPDPPP.
-          </p>
+          <p style="font-size: 13px; color: var(--text-secondary);">{{ t('priv.s2.sensibles') | safe }}</p>
         </div>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">3. Finalidades del tratamiento</h2>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s3.h') }}</h2>
 
-        <p style="margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">Finalidades primarias (necesarias para la relación jurídica):</p>
-        {% for fin in [
-          'Atender y dar seguimiento a solicitudes de cotización y/o contratación de servicios de desarrollo web.',
-          'Elaborar propuestas técnicas y comerciales personalizadas.',
-          'Celebrar y ejecutar contratos de prestación de servicios.',
-          'Facturación y gestión de pagos conforme a la legislación fiscal vigente.',
-          'Brindar soporte técnico postventa durante el periodo contratado.',
-        ] %}
+        <p style="margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">{{ t('priv.s3.prim_label') }}</p>
+        {% for fin in [t('priv.s3.p1'), t('priv.s3.p2'), t('priv.s3.p3'), t('priv.s3.p4'), t('priv.s3.p5')] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
           <p style="font-size: 14px;">{{ fin }}</p>
         </div>
         {% endfor %}
 
-        <p style="margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">Finalidades secundarias (puede oponerse a estas):</p>
-        {% for fin in [
-          'Envío de información sobre nuevos servicios, promociones o actualizaciones de AS Vertex.',
-          'Realización de encuestas de satisfacción y estudios de mercado.',
-          'Generación de estadísticas internas para mejorar nuestros servicios.',
-        ] %}
+        <p style="margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">{{ t('priv.s3.sec_label') }}</p>
+        {% for fin in [t('priv.s3.s1'), t('priv.s3.s2'), t('priv.s3.s3')] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--violet-light)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <p style="font-size: 14px;">{{ fin }}</p>
@@ -104,17 +79,14 @@
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">4. Derechos ARCO</h2>
-        <p style="margin-bottom: 1.25rem;">
-          Conforme a los artículos <strong style="color: var(--text-primary);">28 al 37</strong> de la LFPDPPP,
-          usted tiene derecho a:
-        </p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s4.h') }}</h2>
+        <p style="margin-bottom: 1.25rem;">{{ t('priv.s4.intro') | safe }}</p>
         <div class="grid-2" style="gap: 10px;">
           {% for letra, nombre, desc in [
-            ('A', 'Acceso', 'Conocer qué datos personales tenemos sobre usted y cómo los usamos.'),
-            ('R', 'Rectificación', 'Solicitar la corrección de sus datos cuando sean inexactos o incompletos.'),
-            ('C', 'Cancelación', 'Pedir la supresión de sus datos de nuestras bases cuando considere que no son necesarios.'),
-            ('O', 'Oposición', 'Oponerse al tratamiento de sus datos para finalidades secundarias.'),
+            ('A', t('priv.s4.arco1.n'), t('priv.s4.arco1.d')),
+            ('R', t('priv.s4.arco2.n'), t('priv.s4.arco2.d')),
+            ('C', t('priv.s4.arco3.n'), t('priv.s4.arco3.d')),
+            ('O', t('priv.s4.arco4.n'), t('priv.s4.arco4.d')),
           ] %}
           <div class="card" style="padding: 1.25rem;">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem;">
@@ -127,49 +99,36 @@
         </div>
 
         <div class="card" style="margin-top: 1rem; padding: 1.25rem;">
-          <h4 style="font-size: 14px; margin-bottom: 0.6rem;">¿Cómo ejercer sus derechos ARCO?</h4>
-          <p style="font-size: 13px; margin-bottom: 0.5rem;">Envíe su solicitud a <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a> con:</p>
-          {% for req in ['Nombre completo y correo electrónico con el que nos contactó.', 'Descripción clara del derecho que desea ejercer.', 'Cualquier documento que facilite la localización de sus datos.'] %}
+          <h4 style="font-size: 14px; margin-bottom: 0.6rem;">{{ t('priv.s4.como.h') }}</h4>
+          <p style="font-size: 13px; margin-bottom: 0.5rem;">{{ t('priv.s4.como.p') }} <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a> {{ t('priv.s4.como.p2') }}</p>
+          {% for req in [t('priv.s4.como.r1'), t('priv.s4.como.r2'), t('priv.s4.como.r3')] %}
           <div style="font-size: 13px; color: var(--text-secondary); padding: 4px 0; display: flex; gap: 8px;">
             <span style="color: var(--green);">›</span> {{ req }}
           </div>
           {% endfor %}
-          <p style="font-size: 12px; color: var(--text-muted); margin-top: 0.75rem;">Responderemos en un plazo máximo de <strong style="color: var(--text-secondary);">20 días hábiles</strong> conforme al artículo 32 de la LFPDPPP.</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 0.75rem;">{{ t('priv.s4.como.plazo') | safe }}</p>
         </div>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">5. Transferencias de datos personales</h2>
-        <p style="margin-bottom: 1rem;">
-          AS Vertex podrá transferir sus datos personales sin requerir su consentimiento en los
-          supuestos del artículo <strong style="color: var(--text-primary);">37 de la LFPDPPP</strong>, incluyendo:
-        </p>
-        {% for sup in [
-          'Cuando la transferencia sea efectuada a sociedades controladoras, subsidiarias o afiliadas bajo el control común del Responsable.',
-          'Cuando la transferencia sea necesaria por virtud de un contrato celebrado o por celebrar en interés del titular.',
-          'Cuando la transferencia sea necesaria o legalmente exigida para la salvaguarda de un interés público.',
-          'Cuando la transferencia sea precisa para el mantenimiento o cumplimiento de una relación jurídica entre el Responsable y el Titular.',
-        ] %}
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s5.h') }}</h2>
+        <p style="margin-bottom: 1rem;">{{ t('priv.s5.intro') | safe }}</p>
+        {% for sup in [t('priv.s5.i1'), t('priv.s5.i2'), t('priv.s5.i3'), t('priv.s5.i4')] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <span style="color: var(--violet-light); font-size: 11px; margin-top: 3px; flex-shrink: 0;">▸</span>
           <p style="font-size: 14px;">{{ sup }}</p>
         </div>
         {% endfor %}
-        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">
-          En ningún caso venderemos sus datos personales a terceros con fines comerciales.
-        </p>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">{{ t('priv.s5.nota') }}</p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">6. Uso de cookies y tecnologías de rastreo</h2>
-        <p style="margin-bottom: 1rem;">
-          Nuestro sitio web puede utilizar cookies y tecnologías similares para mejorar su experiencia.
-          Conforme al artículo <strong style="color: var(--text-primary);">16 fracción VII de la LFPDPPP</strong>:
-        </p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s6.h') }}</h2>
+        <p style="margin-bottom: 1rem;">{{ t('priv.s6.intro') | safe }}</p>
         <div class="grid-2" style="gap: 10px;">
           {% for tipo, desc, color in [
-            ('Cookies esenciales', 'Necesarias para el funcionamiento básico del sitio. No pueden desactivarse.', 'var(--green)'),
-            ('Cookies de análisis', 'Nos permiten entender cómo usan el sitio nuestros visitantes (páginas vistas, tiempo de sesión).', 'var(--violet-light)'),
+            (t('priv.s6.c1.h'), t('priv.s6.c1.d'), 'var(--green)'),
+            (t('priv.s6.c2.h'), t('priv.s6.c2.d'), 'var(--violet-light)'),
           ] %}
           <div class="card" style="padding: 1.25rem;">
             <h4 style="font-size: 13px; color: {{ color }}; margin-bottom: 0.5rem;">{{ tipo }}</h4>
@@ -177,36 +136,24 @@
           </div>
           {% endfor %}
         </div>
-        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">
-          Puede deshabilitar las cookies no esenciales desde la configuración de su navegador en cualquier momento.
-        </p>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">{{ t('priv.s6.nota') }}</p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">7. Modificaciones al Aviso de Privacidad</h2>
-        <p>
-          AS Vertex se reserva el derecho de modificar el presente Aviso de Privacidad en cualquier
-          momento conforme al artículo <strong style="color: var(--text-primary);">17 de la LFPDPPP</strong>.
-          Cualquier cambio será publicado en esta página con la fecha de actualización correspondiente.
-          El uso continuado de nuestros servicios después de la publicación de cambios constituirá su
-          aceptación de dichos cambios.
-        </p>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s7.h') }}</h2>
+        <p>{{ t('priv.s7.p') | safe }}</p>
       </div>
 
       <div>
-        <h2 style="font-size: 20px; margin-bottom: 1rem;">8. Autoridad competente</h2>
+        <h2 style="font-size: 20px; margin-bottom: 1rem;">{{ t('priv.s8.h') }}</h2>
         <p>
-          Si considera que su derecho a la protección de datos personales ha sido vulnerado, tiene
-          derecho a acudir ante el <strong style="color: var(--text-primary);">Instituto Nacional de Transparencia,
-          Acceso a la Información y Protección de Datos Personales (INAI)</strong>,
-          <a href="https://www.inai.org.mx" target="_blank" rel="noopener" style="color: var(--green);">www.inai.org.mx</a>,
-          en términos de lo previsto por el artículo 56 de la LFPDPPP.
+          {{ t('priv.s8.p') | safe }}
         </p>
       </div>
 
       <div style="padding-top: 1rem; border-top: 0.5px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap;">
-        <a href="{{ url_for('main.index') }}" class="btn btn-ghost">← Volver al inicio</a>
-        <a href="{{ url_for('main.terminos') }}" class="btn btn-ghost">Términos y Condiciones →</a>
+        <a href="{{ url_for('main.index') }}" class="btn btn-ghost">{{ t('legal.volver') }}</a>
+        <a href="{{ url_for('main.terminos') }}" class="btn btn-ghost">{{ t('legal.a_terminos') }}</a>
       </div>
 
     </div>

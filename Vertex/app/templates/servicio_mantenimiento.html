@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% block title %}{{ t('be.title') }}{% endblock %}
-{% block meta_desc %}{{ t('be.meta') }}{% endblock %}
+{% block title %}{{ t('mant.title') }}{% endblock %}
+{% block meta_desc %}{{ t('mant.meta') }}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block jsonld %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Desarrollo Backend",
-  "serviceType": "Backend Web Development",
+  "name": "Mantenimiento Web",
+  "serviceType": "Website Maintenance",
   "url": "{{ canonical_url }}",
-  "description": {{ t('be.meta')|tojson }},
+  "description": {{ t('mant.meta')|tojson }},
   "provider": { "@type": "ProfessionalService", "name": "AS Vertex", "url": "{{ SITE_URL }}" },
   "areaServed": { "@type": "Country", "name": "México" }
 }
@@ -25,15 +25,15 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
       {{ t('common.back') }}
     </a>
-    <div class="badge badge-amber" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>{{ t('be.badge') }}</div>
-    <h1>{{ t('be.h1a') }}<br><span class="text-gradient">{{ t('be.h1b') }}</span></h1>
+    <div class="badge badge-violet" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>{{ t('mant.badge') }}</div>
+    <h1>{{ t('mant.h1a') }}<br><span class="text-gradient">{{ t('mant.h1b') }}</span></h1>
     <p style="margin-top: 1rem; font-size: 16px; max-width: 540px;">
-      {{ t('be.hero.p') }}
+      {{ t('mant.hero.p') }}
     </p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">{{ t('be.hero.cta') }}</a>
-      <span class="badge badge-amber" style="padding: 10px 16px;">{{ t('be.hero.precio') }}</span>
-      <span class="badge badge-green" style="padding: 10px 16px;">{{ t('be.hero.plazo') }}</span>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">{{ t('mant.hero.cta') }}</a>
+      <span class="badge badge-violet" style="padding: 10px 16px;">{{ t('mant.hero.precio') }}</span>
+      <span class="badge badge-green" style="padding: 10px 16px;">{{ t('mant.hero.plazo') }}</span>
     </div>
   </div>
 </div>
@@ -44,30 +44,29 @@
     <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
       <div style="flex: 1; min-width: 260px;">
         <div class="section-eyebrow">{{ t('common.que_es') }}</div>
-        <h2 class="section-title">{{ t('be.que.title') }}</h2>
+        <h2 class="section-title">{{ t('mant.que.title') }}</h2>
         <p style="margin-bottom: 1.25rem;">
-          {{ t('be.que.p1') | safe }}
+          {{ t('mant.que.p1') | safe }}
         </p>
         <p style="margin-bottom: 1.25rem;">
-          {{ t('be.que.p2') | safe }}
+          {{ t('mant.que.p2') | safe }}
         </p>
         <p>
-          {{ t('be.que.p3a') }} <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="color: var(--amber);">{{ t('be.que.p3link') }}</a> {{ t('be.que.p3b') }}
+          {{ t('mant.que.p3a') }} <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="color: var(--violet-light);">{{ t('mant.que.p3link') }}</a> {{ t('mant.que.p3b') }}
         </p>
       </div>
       <div style="flex: 1; min-width: 260px;">
         <div class="code-block">
           <div class="code-dots"><div class="code-dot dot-red"></div><div class="code-dot dot-amber"></div><div class="code-dot dot-green"></div></div>
-          <div><span class="cm"># Lo que hace tu backend por ti</span></div>
+          <div><span class="cm"># Reporte mensual de tu sitio</span></div>
           <div>&nbsp;</div>
-          <div><span class="kw">cuando</span> <span class="wh">un usuario llena un formulario:</span></div>
-          <div>&nbsp;&nbsp;<span class="fn">guardar</span><span class="wh">(datos_en_base_de_datos)</span></div>
-          <div>&nbsp;&nbsp;<span class="fn">enviar</span><span class="wh">(correo_de_confirmacion)</span></div>
-          <div>&nbsp;&nbsp;<span class="fn">notificar</span><span class="wh">(al_admin_por_whatsapp)</span></div>
+          <div><span class="wh">estado ............ </span><span class="fn">en línea</span> <span class="wh">99.9%</span></div>
+          <div><span class="wh">respaldos ......... </span><span class="fn">al día</span></div>
+          <div><span class="wh">actualizaciones ... </span><span class="fn">aplicadas</span></div>
+          <div><span class="wh">seguridad ......... </span><span class="fn">sin alertas</span></div>
           <div>&nbsp;</div>
-          <div><span class="kw">cuando</span> <span class="wh">un usuario inicia sesion:</span></div>
-          <div>&nbsp;&nbsp;<span class="fn">verificar</span><span class="wh">(usuario_y_contraseña)</span></div>
-          <div>&nbsp;&nbsp;<span class="fn">mostrar</span><span class="wh">(solo_lo_que_le_corresponde)</span></div>
+          <div><span class="cm"># Tú te enfocas en tu negocio.</span></div>
+          <div><span class="cm"># Nosotros en la parte técnica.</span></div>
         </div>
       </div>
     </div>
@@ -78,18 +77,18 @@
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">{{ t('common.para_quien') }}</div>
-    <h2 class="section-title">{{ t('be.quien.title') }}</h2>
+    <h2 class="section-title">{{ t('mant.quien.title') }}</h2>
     <div class="grid-3">
       {% for necesidad, desc in [
-        (t('be.quien.c1t'), t('be.quien.c1d')),
-        (t('be.quien.c2t'), t('be.quien.c2d')),
-        (t('be.quien.c3t'), t('be.quien.c3d')),
-        (t('be.quien.c4t'), t('be.quien.c4d')),
-        (t('be.quien.c5t'), t('be.quien.c5d')),
-        (t('be.quien.c6t'), t('be.quien.c6d')),
+        (t('mant.quien.c1t'), t('mant.quien.c1d')),
+        (t('mant.quien.c2t'), t('mant.quien.c2d')),
+        (t('mant.quien.c3t'), t('mant.quien.c3d')),
+        (t('mant.quien.c4t'), t('mant.quien.c4d')),
+        (t('mant.quien.c5t'), t('mant.quien.c5d')),
+        (t('mant.quien.c6t'), t('mant.quien.c6d')),
       ] %}
       <div class="card">
-        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--amber); margin-bottom: 0.85rem;"></div>
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--violet-light); margin-bottom: 0.85rem;"></div>
         <h4 style="margin-bottom: 0.35rem; font-size: 14px;">{{ necesidad }}</h4>
         <p style="font-size: 13px;">{{ desc }}</p>
       </div>
@@ -102,13 +101,13 @@
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">{{ t('common.que_incluye') }}</div>
-    <h2 class="section-title">{{ t('be.inc.title') }}</h2>
+    <h2 class="section-title">{{ t('mant.inc.title') }}</h2>
     <div class="grid-2">
       {% for categoria, color, items in [
-        (t('be.inc.cat1'), 'var(--amber)', [t('be.inc.c1i1'), t('be.inc.c1i2'), t('be.inc.c1i3'), t('be.inc.c1i4')]),
-        (t('be.inc.cat2'), 'var(--amber)', [t('be.inc.c2i1'), t('be.inc.c2i2'), t('be.inc.c2i3'), t('be.inc.c2i4')]),
-        (t('be.inc.cat3'), 'var(--green)', [t('be.inc.c3i1'), t('be.inc.c3i2'), t('be.inc.c3i3'), t('be.inc.c3i4')]),
-        (t('be.inc.cat4'), 'var(--green)', [t('be.inc.c4i1'), t('be.inc.c4i2'), t('be.inc.c4i3'), t('be.inc.c4i4')]),
+        (t('mant.inc.cat1'), 'var(--violet-light)', [t('mant.inc.c1i1'), t('mant.inc.c1i2'), t('mant.inc.c1i3'), t('mant.inc.c1i4')]),
+        (t('mant.inc.cat2'), 'var(--violet-light)', [t('mant.inc.c2i1'), t('mant.inc.c2i2'), t('mant.inc.c2i3'), t('mant.inc.c2i4')]),
+        (t('mant.inc.cat3'), 'var(--green)', [t('mant.inc.c3i1'), t('mant.inc.c3i2'), t('mant.inc.c3i3'), t('mant.inc.c3i4')]),
+        (t('mant.inc.cat4'), 'var(--green)', [t('mant.inc.c4i1'), t('mant.inc.c4i2'), t('mant.inc.c4i3'), t('mant.inc.c4i4')]),
       ] %}
       <div class="card">
         <h4 style="color: {{ color }}; font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
@@ -128,17 +127,17 @@
 <section class="section">
   <div class="container">
     <div class="section-eyebrow">{{ t('common.precios') }}</div>
-    <h2 class="section-title">{{ t('be.pre.title') }}</h2>
+    <h2 class="section-title">{{ t('mant.pre.title') }}</h2>
     <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
       {% for nombre, precio, plazo, desc, features, destacado in [
-        (t('be.plan1.nombre'), '9,000', t('be.plan1.plazo'), t('be.plan1.desc'), [t('be.plan1.f1'), t('be.plan1.f2'), t('be.plan1.f3'), t('be.plan1.f4'), t('be.plan1.f5')], False),
-        (t('be.plan2.nombre'), '16,000', t('be.plan2.plazo'), t('be.plan2.desc'), [t('be.plan2.f1'), t('be.plan2.f2'), t('be.plan2.f3'), t('be.plan2.f4'), t('be.plan2.f5'), t('be.plan2.f6')], True),
-        (t('be.plan3.nombre'), none, t('be.plan3.plazo'), t('be.plan3.desc'), [t('be.plan3.f1'), t('be.plan3.f2'), t('be.plan3.f3'), t('be.plan3.f4'), t('be.plan3.f5')], False),
+        (t('mant.plan1.nombre'), '2,500', t('mant.plan1.plazo'), t('mant.plan1.desc'), [t('mant.plan1.f1'), t('mant.plan1.f2'), t('mant.plan1.f3'), t('mant.plan1.f4')], False),
+        (t('mant.plan2.nombre'), '4,500', t('mant.plan2.plazo'), t('mant.plan2.desc'), [t('mant.plan2.f1'), t('mant.plan2.f2'), t('mant.plan2.f3'), t('mant.plan2.f4'), t('mant.plan2.f5')], True),
+        (t('mant.plan3.nombre'), none, t('mant.plan3.plazo'), t('mant.plan3.desc'), [t('mant.plan3.f1'), t('mant.plan3.f2'), t('mant.plan3.f3'), t('mant.plan3.f4')], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
         {% if destacado %}<div class="pricing-badge">{{ t('common.mas_pedido') }}</div>{% endif %}
         <div class="pricing-name">{{ nombre }}</div>
-        <div class="pricing-price">{% if precio %}${{ precio }} <span>MXN</span>{% else %}{{ t('common.cotizar') }}{% endif %}</div>
+        <div class="pricing-price">{% if precio %}${{ precio }} <span>{{ t('mant.unidad') }}</span>{% else %}{{ t('common.cotizar') }}{% endif %}</div>
         <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">{{ plazo }}</p>
         <p style="font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.6;">{{ desc }}</p>
         <div class="pricing-divider"></div>
@@ -157,11 +156,11 @@
 <!-- CTA -->
 <section class="section" style="text-align: center; border-bottom: none;">
   <div class="container">
-    <h2 style="margin-bottom: 0.75rem;">{{ t('be.cta.h') }}</h2>
-    <p style="margin-bottom: 2rem;">{{ t('be.cta.p') }}</p>
+    <h2 style="margin-bottom: 0.75rem;">{{ t('mant.cta.h') }}</h2>
+    <p style="margin-bottom: 2rem;">{{ t('mant.cta.p') }}</p>
     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">{{ t('be.hero.cta') }}</a>
-      <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="btn btn-ghost">{{ t('be.cta.btn2') }}</a>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">{{ t('mant.hero.cta') }}</a>
+      <a href="{{ url_for('main.servicios') }}" class="btn btn-ghost">{{ t('mant.cta.btn2') }}</a>
     </div>
   </div>
 </section>

@@ -1,6 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Rediseño de Sitio Web — AS Vertex{% endblock %}
-{% block meta_desc %}Tu sitio existe pero se ve mal, está desactualizado o no funciona en celular. Lo rediseñamos completo sin tocar tu contenido ni tu servidor.{% endblock %}
+{% block title %}{{ t('fe.title') }}{% endblock %}
+{% block meta_desc %}{{ t('fe.meta') }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Diseño Frontend",
+  "serviceType": "Frontend Web Development",
+  "url": "{{ canonical_url }}",
+  "description": {{ t('fe.meta')|tojson }},
+  "provider": { "@type": "ProfessionalService", "name": "AS Vertex", "url": "{{ SITE_URL }}" },
+  "areaServed": { "@type": "Country", "name": "México" }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -8,17 +23,17 @@
   <div class="container">
     <a href="{{ url_for('main.servicios') }}" class="back-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Todos los servicios
+      {{ t('common.back') }}
     </a>
-    <div class="badge badge-violet" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Rediseño / Frontend</div>
-    <h1>Tu sitio ya existe.<br><span class="text-gradient">Hagámoslo digno de tu negocio.</span></h1>
+    <div class="badge badge-violet" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>{{ t('fe.badge') }}</div>
+    <h1>{{ t('fe.h1a') }}<br><span class="text-gradient">{{ t('fe.h1b') }}</span></h1>
     <p style="margin-top: 1rem; font-size: 16px; max-width: 540px;">
-      Rediseñamos la parte visual de tu sitio web actual — sin tirar lo que funciona, sin cambiar tu servidor. Solo hacemos que se vea profesional y funcione perfecto en todos los dispositivos.
+      {{ t('fe.hero.p') }}
     </p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Quiero rediseñar mi sitio →</a>
-      <span class="badge badge-violet" style="padding: 10px 16px;">Desde $7,000 MXN</span>
-      <span class="badge badge-green" style="padding: 10px 16px;">Listo en 3–5 días</span>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">{{ t('fe.hero.cta') }}</a>
+      <span class="badge badge-violet" style="padding: 10px 16px;">{{ t('fe.hero.precio') }}</span>
+      <span class="badge badge-green" style="padding: 10px 16px;">{{ t('fe.hero.plazo') }}</span>
     </div>
   </div>
 </div>
@@ -28,22 +43,22 @@
   <div class="container">
     <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
       <div style="flex: 1; min-width: 260px;">
-        <div class="section-eyebrow">¿Qué es?</div>
-        <h2 class="section-title">El "maquillaje" de tu sitio web — pero profesional</h2>
+        <div class="section-eyebrow">{{ t('common.que_es') }}</div>
+        <h2 class="section-title">{{ t('fe.que.title') }}</h2>
         <p style="margin-bottom: 1.25rem;">
-          El diseño frontend es la parte visual de tu sitio: los colores, la tipografía, cómo se acomodan las secciones, qué tan rápido carga y cómo se ve en el celular. Es lo que el visitante ve y siente al entrar.
+          {{ t('fe.que.p1') }}
         </p>
         <p style="margin-bottom: 1.25rem;">
-          Este servicio es para negocios que <strong style="color: var(--text-primary);">ya tienen un sitio funcionando</strong> pero el diseño quedó viejo, nunca se terminó bien, o simplemente no se ve profesional. Rediseñamos sin tocar el servidor ni la lógica interna — solo mejoramos lo que se ve.
+          {{ t('fe.que.p2') | safe }}
         </p>
         <p>
-          Si <strong style="color: var(--text-primary);">no tienes sitio web todavía</strong>, lo que necesitas es un <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="color: var(--violet-light);">Sitio Web Completo</a> — que incluye diseño y todo lo demás desde cero.
+          {{ t('fe.que.p3a') | safe }} <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="color: var(--violet-light);">{{ t('fe.que.p3link') }}</a> {{ t('fe.que.p3b') }}
         </p>
       </div>
       <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 10px;">
         <div class="card" style="padding: 1.25rem; border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.05);">
-          <h4 style="font-size: 13px; color: #f87171; margin-bottom: 0.75rem;">Síntomas de que necesitas rediseño:</h4>
-          {% for s in ['Tu sitio no se ve bien en el celular', 'Tarda más de 3 segundos en cargar', 'El diseño tiene más de 3 años', 'No tiene tu logo o colores actuales', 'Se ve diferente en distintos navegadores', 'Tu competencia tiene algo más moderno'] %}
+          <h4 style="font-size: 13px; color: #f87171; margin-bottom: 0.75rem;">{{ t('fe.sintomas.h') }}</h4>
+          {% for s in [t('fe.sintomas.s1'), t('fe.sintomas.s2'), t('fe.sintomas.s3'), t('fe.sintomas.s4'), t('fe.sintomas.s5'), t('fe.sintomas.s6')] %}
           <div style="display: flex; gap: 8px; align-items: center; padding: 5px 0; border-bottom: 0.5px solid rgba(239,68,68,0.15); font-size: 13px; color: var(--text-secondary);">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
             {{ s }}
@@ -51,8 +66,8 @@
           {% endfor %}
         </div>
         <div class="card" style="padding: 1.25rem; border-color: var(--green-border); background: var(--green-dim);">
-          <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.75rem;">Después del rediseño:</h4>
-          {% for s in ['Se ve perfecto en celular, tablet y PC', 'Carga en menos de 2 segundos', 'Diseño moderno alineado a tu marca', 'Genera más confianza en tus visitantes'] %}
+          <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.75rem;">{{ t('fe.despues.h') }}</h4>
+          {% for s in [t('fe.despues.s1'), t('fe.despues.s2'), t('fe.despues.s3'), t('fe.despues.s4')] %}
           <div style="display: flex; gap: 8px; align-items: center; padding: 5px 0; border-bottom: 0.5px solid var(--green-border); font-size: 13px; color: var(--text-secondary);">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
             {{ s }}
@@ -67,16 +82,16 @@
 <!-- PARA QUIÉN ES -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">¿Para quién es?</div>
-    <h2 class="section-title">¿Te suena alguno de estos casos?</h2>
+    <div class="section-eyebrow">{{ t('common.para_quien') }}</div>
+    <h2 class="section-title">{{ t('fe.quien.title') }}</h2>
     <div class="grid-3">
       {% for caso, desc in [
-        ('Tu sitio se hizo hace años', 'El diseño ya no representa cómo es tu negocio hoy. Quieres algo más actual sin volver a empezar desde cero.'),
-        ('No se ve bien en el celular', 'Más del 70% de tus visitantes entran desde el celular. Si no se ve bien ahí, estás perdiendo clientes.'),
-        ('Tu equipo técnico necesita apoyo', 'Tienes desarrolladores que manejan el servidor, pero necesitan un diseñador que haga la parte visual.'),
-        ('Cargaba lento y te afectó en Google', 'Google penaliza los sitios lentos. Optimizamos el diseño para que cargue rápido y mejore tu posición.'),
-        ('Tienes un sistema propio', 'Tu empresa tiene una aplicación o plataforma interna con una interfaz que necesita ser rediseñada.'),
-        ('Quieres una imagen más profesional', 'Tu negocio creció y el sitio actual ya no te representa. Necesitas algo a la altura.'),
+        (t('fe.quien.c1t'), t('fe.quien.c1d')),
+        (t('fe.quien.c2t'), t('fe.quien.c2d')),
+        (t('fe.quien.c3t'), t('fe.quien.c3d')),
+        (t('fe.quien.c4t'), t('fe.quien.c4d')),
+        (t('fe.quien.c5t'), t('fe.quien.c5d')),
+        (t('fe.quien.c6t'), t('fe.quien.c6d')),
       ] %}
       <div class="card">
         <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--violet-light); margin-bottom: 0.85rem;"></div>
@@ -91,14 +106,14 @@
 <!-- QUÉ INCLUYE -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">¿Qué incluye?</div>
-    <h2 class="section-title">Más que un cambio de colores</h2>
+    <div class="section-eyebrow">{{ t('common.que_incluye') }}</div>
+    <h2 class="section-title">{{ t('fe.inc.title') }}</h2>
     <div class="grid-2">
       {% for categoria, color, items in [
-        ('Diseño visual', 'var(--violet-light)', ['Diseño a medida con tu identidad de marca', 'Paleta de colores, tipografía y espaciado consistentes', 'Componentes reutilizables para cada sección', 'Versión clara u oscura según tu preferencia']),
-        ('Funciona en todos los dispositivos', 'var(--violet-light)', ['Diseño responsivo: celular, tablet y desktop', 'Probado en Chrome, Firefox, Safari y Edge', 'Texto legible y botones fáciles de tocar en móvil', 'Imágenes que se adaptan sin deformarse']),
-        ('Velocidad y rendimiento', 'var(--green)', ['Imágenes comprimidas sin perder calidad', 'Código limpio sin librerías innecesarias', 'Carga rápida desde el primer segundo', 'Optimizado para aparecer mejor en Google']),
-        ('Entrega', 'var(--green)', ['Compatible con tu servidor actual (Flask, Node, WordPress…)', 'Código fuente 100% tuyo y documentado', 'Una ronda de revisiones incluida', '15 días de soporte después de entregar']),
+        (t('fe.inc.cat1'), 'var(--violet-light)', [t('fe.inc.c1i1'), t('fe.inc.c1i2'), t('fe.inc.c1i3'), t('fe.inc.c1i4')]),
+        (t('fe.inc.cat2'), 'var(--violet-light)', [t('fe.inc.c2i1'), t('fe.inc.c2i2'), t('fe.inc.c2i3'), t('fe.inc.c2i4')]),
+        (t('fe.inc.cat3'), 'var(--green)', [t('fe.inc.c3i1'), t('fe.inc.c3i2'), t('fe.inc.c3i3'), t('fe.inc.c3i4')]),
+        (t('fe.inc.cat4'), 'var(--green)', [t('fe.inc.c4i1'), t('fe.inc.c4i2'), t('fe.inc.c4i3'), t('fe.inc.c4i4')]),
       ] %}
       <div class="card">
         <h4 style="color: {{ color }}; font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
@@ -117,26 +132,26 @@
 <!-- PRECIOS -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Precios</div>
-    <h2 class="section-title">Según el tamaño de tu sitio actual</h2>
+    <div class="section-eyebrow">{{ t('common.precios') }}</div>
+    <h2 class="section-title">{{ t('fe.pre.title') }}</h2>
     <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
       {% for nombre, precio, plazo, desc, features, destacado in [
-        ('Sitio Pequeño', '7,000', '3–4 días', 'Para sitios de hasta 5 páginas o secciones.', ['Rediseño completo hasta 5 páginas', 'Responsive en todos los dispositivos', 'Optimización de velocidad de carga', 'HTML + CSS + JavaScript moderno', '15 días de soporte'], False),
-        ('Sitio Mediano', '12,000', '4–5 días', 'Para sitios con más páginas, secciones complejas o animaciones.', ['Rediseño completo sin límite de páginas', 'Animaciones y transiciones personalizadas', 'Integración con tu backend actual', 'Optimización avanzada de rendimiento', 'Dark mode si se requiere', '30 días de soporte'], True),
-        ('Sistema o App', 'Cotizar', '5–8 días', 'Para aplicaciones internas, plataformas o sistemas complejos.', ['Todo lo del plan Mediano', 'Sistema de diseño con componentes', 'Documentación técnica del diseño', 'Capacitación a tu equipo', 'SLA acordado'], False),
+        (t('fe.plan1.nombre'), '7,000', t('fe.plan1.plazo'), t('fe.plan1.desc'), [t('fe.plan1.f1'), t('fe.plan1.f2'), t('fe.plan1.f3'), t('fe.plan1.f4'), t('fe.plan1.f5')], False),
+        (t('fe.plan2.nombre'), '12,000', t('fe.plan2.plazo'), t('fe.plan2.desc'), [t('fe.plan2.f1'), t('fe.plan2.f2'), t('fe.plan2.f3'), t('fe.plan2.f4'), t('fe.plan2.f5'), t('fe.plan2.f6')], True),
+        (t('fe.plan3.nombre'), none, t('fe.plan3.plazo'), t('fe.plan3.desc'), [t('fe.plan3.f1'), t('fe.plan3.f2'), t('fe.plan3.f3'), t('fe.plan3.f4'), t('fe.plan3.f5')], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
-        {% if destacado %}<div class="pricing-badge">Más pedido</div>{% endif %}
+        {% if destacado %}<div class="pricing-badge">{{ t('common.mas_pedido') }}</div>{% endif %}
         <div class="pricing-name">{{ nombre }}</div>
-        <div class="pricing-price">{% if precio != 'Cotizar' %}${% endif %}{{ precio }} {% if precio != 'Cotizar' %}<span>MXN</span>{% endif %}</div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Listo en {{ plazo }}</p>
+        <div class="pricing-price">{% if precio %}${{ precio }} <span>MXN</span>{% else %}{{ t('common.cotizar') }}{% endif %}</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">{{ plazo }}</p>
         <p style="font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.6;">{{ desc }}</p>
         <div class="pricing-divider"></div>
         {% for f in features %}
         <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</div>
         {% endfor %}
         <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">Quiero este →</a>
+          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">{{ t('common.quiero_este') }}</a>
         </div>
       </div>
       {% endfor %}
@@ -147,11 +162,11 @@
 <!-- CTA -->
 <section class="section" style="text-align: center; border-bottom: none;">
   <div class="container">
-    <h2 style="margin-bottom: 0.75rem;">¿Tu sitio merece una mejor imagen?</h2>
-    <p style="margin-bottom: 2rem;">Mándanos el link de tu sitio actual y te decimos qué le mejoraríamos. Sin costo, sin compromiso.</p>
+    <h2 style="margin-bottom: 0.75rem;">{{ t('fe.cta.h') }}</h2>
+    <p style="margin-bottom: 2rem;">{{ t('fe.cta.p') }}</p>
     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Quiero rediseñar mi sitio →</a>
-      <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="btn btn-ghost">¿No tengo sitio aún?</a>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">{{ t('fe.hero.cta') }}</a>
+      <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="btn btn-ghost">{{ t('fe.cta.btn2') }}</a>
     </div>
   </div>
 </section>

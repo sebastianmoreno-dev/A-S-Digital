@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Nosotros — AS Vertex{% endblock %}
-{% block meta_desc %}Conoce al equipo detrás de AS Vertex — ingenieros apasionados por el código limpio y la arquitectura de software escalable.{% endblock %}
+{% block title %}{{ t('nos.title') }}{% endblock %}
+{% block meta_desc %}{{ t('nos.meta') }}{% endblock %}
 
 {% block content %}
 
 <!-- ===== PAGE HEADER ===== -->
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-green"><span class="badge-dot"></span>El equipo</div>
-    <h1>Nosotros</h1>
-    <p>Somos desarrolladores de software enfocados en resolver problemas operativos mediante arquitectura técnica de primer nivel.</p>
+    <div class="badge badge-green"><span class="badge-dot"></span>{{ t('nos.header.badge') }}</div>
+    <h1>{{ t('nos.header.h1') }}</h1>
+    <p>{{ t('nos.header.p') }}</p>
   </div>
 </div>
 
@@ -19,16 +19,16 @@
     <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
 
       <div style="flex: 1; min-width: 260px;">
-        <div class="section-eyebrow">Misión</div>
-        <h2 class="section-title">¿Quiénes somos?</h2>
+        <div class="section-eyebrow">{{ t('nos.mision.eyebrow') }}</div>
+        <h2 class="section-title">{{ t('nos.mision.title') }}</h2>
         <p style="margin-bottom: 1.25rem;">
-          <strong>AS Vertex</strong> aplicamos nuestra rigurosa formación técnica para construir soluciones web que no solo se vean bien, sino que estén fundamentadas en una lógica de programación sólida.
+          {{ t('nos.mision.p1') | safe }}
         </p>
         <p style="margin-bottom: 1.25rem;">
-          Nos alejamos de las soluciones genéricas y las plantillas prefabricadas. Nos especializamos en levantar arquitecturas eficientes desde cero, entregando sistemas robustos, seguros y listos para escalar a medida que tu negocio crece.
+          {{ t('nos.mision.p2') }}
         </p>
         <p>
-          Utilizamos un stack tecnológico probado: Python, Flask, bases de datos SQL, y un frontend estructurado con HTML, CSS y JavaScript puro. Sin dependencias frágiles, solo código eficiente.
+          {{ t('nos.mision.p3') }}
         </p>
       </div>
 
@@ -63,18 +63,18 @@
 <!-- ===== VALORES ===== -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Valores</div>
-    <h2 class="section-title">Nuestra base técnica</h2>
-    <p class="section-sub">Principios de ingeniería aplicados a cada línea de código que escribimos.</p>
+    <div class="section-eyebrow">{{ t('nos.val.eyebrow') }}</div>
+    <h2 class="section-title">{{ t('nos.val.title') }}</h2>
+    <p class="section-sub">{{ t('nos.val.sub') }}</p>
 
     <div class="grid-3">
       {% set valores = [
-        ('Código estructurado',    'Escribimos código que puedes leer, entender y escalar. Aplicamos patrones de diseño claros y evitamos las "cajas negras".', 'icon-violet'),
-        ('Comunicación directa',   'Sin intermediarios ni ejecutivos de cuenta. Hablas directo con los ingenieros que están construyendo tu proyecto.', 'icon-green'),
-        ('Desempeño técnico',      'Optimizamos consultas a base de datos y flujos de usuario. Un sitio rápido es fundamental para retener usuarios.',        'icon-amber'),
-        ('Seguridad primero',      'Implementamos buenas prácticas desde la arquitectura: validación estricta, control de variables de entorno y JWT.',             'icon-violet'),
-        ('Control de código',      'Entregamos repositorios Git limpios, README detallado e instrucciones de despliegue para que mantengas el control total.',                        'icon-green'),
-        ('Base de datos sólida',   'Diseñamos esquemas relacionales (SQL) pensados para la integridad de los datos a largo plazo.',           'icon-amber'),
+        (t('nos.val.v1t'), t('nos.val.v1d'), 'icon-violet'),
+        (t('nos.val.v2t'), t('nos.val.v2d'), 'icon-green'),
+        (t('nos.val.v3t'), t('nos.val.v3d'), 'icon-amber'),
+        (t('nos.val.v4t'), t('nos.val.v4d'), 'icon-violet'),
+        (t('nos.val.v5t'), t('nos.val.v5d'), 'icon-green'),
+        (t('nos.val.v6t'), t('nos.val.v6d'), 'icon-amber'),
       ] %}
       {% for titulo, desc, icono in valores %}
       <div class="card">
@@ -95,15 +95,15 @@
     <div class="grid-3" style="text-align:center;">
       <div class="card">
         <div style="font-size:40px; font-weight:700; color:var(--green); letter-spacing:-1.5px;">100%</div>
-        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Código a medida</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">{{ t('nos.stats.s1') }}</div>
       </div>
       <div class="card">
     <div style="font-size:40px; font-weight:700; color:var(--violet-light); letter-spacing:-1.5px;">API</div>
-    <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Integraciones personalizadas</div>
+    <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">{{ t('nos.stats.s2') }}</div>
 </div>
       <div class="card">
         <div style="font-size:40px; font-weight:700; color:var(--amber); letter-spacing:-1.5px;">2–4</div>
-        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">Semanas de desarrollo</div>
+        <div style="font-size:14px; color:var(--text-secondary); margin-top:0.4rem;">{{ t('nos.stats.s3') }}</div>
       </div>
     </div>
   </div>
@@ -112,11 +112,11 @@
 <!-- ===== CTA ===== -->
 <section class="section" style="text-align:center; border-bottom:none;">
   <div class="container">
-    <h2 style="margin-bottom:0.75rem;">¿Buscas un equipo técnico sólido?</h2>
-    <p style="margin-bottom:2rem;">Hablemos sobre la arquitectura de tu próximo proyecto. Sin compromiso.</p>
+    <h2 style="margin-bottom:0.75rem;">{{ t('nos.cta.h') }}</h2>
+    <p style="margin-bottom:2rem;">{{ t('nos.cta.p') }}</p>
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Iniciar conversación →</a>
-      <a href="{{ url_for('main.portafolio') }}" class="btn btn-ghost">Ver proyectos técnicos</a>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">{{ t('nos.cta.btn1') }}</a>
+      <a href="{{ url_for('main.portafolio') }}" class="btn btn-ghost">{{ t('nos.cta.btn2') }}</a>
     </div>
   </div>
 </section>

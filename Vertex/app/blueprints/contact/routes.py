@@ -5,6 +5,7 @@ from app.extensions import limiter
 from app.middlewares.request_logger import log_evento
 from app.services import contact_service
 from app.services.contact_service import ContactoInvalido
+from app.translations import t
 from app.validators.contact_validators import is_honeypot_filled, is_submission_too_fast
 
 contact_bp = Blueprint('contact', __name__)
@@ -27,13 +28,15 @@ def enviar():
     if honeypot_disparado or envio_muy_rapido:
         motivo = 'honeypot' if honeypot_disparado else 'tiempo_minimo'
         log_evento('contacto_bot_detectado', nivel='warning', descripcion=f'Envío descartado ({motivo})')
-        flash('¡Mensaje enviado! Te respondemos en menos de 24 horas.', 'success')
+        flash(t('flash.enviado'), 'success')
         return redirect(url_for('main.contacto'))
 
     if not form.validate_on_submit():
         for errores_campo in form.errors.values():
             for error in errores_campo:
-                flash(error, 'error')
+                # str() resuelve los LazyT de los validadores; flash
+                # serializa a sesión y necesita un str plano.
+                flash(str(error), 'error')
         return redirect(url_for('main.contacto'))
 
     try:
@@ -52,8 +55,8 @@ def enviar():
         flash(str(error), 'error')
         return redirect(url_for('main.contacto'))
     except Exception:
-        flash('Hubo un problema guardando tu mensaje. Intenta de nuevo.', 'error')
+        flash(t('flash.error_guardar'), 'error')
         return redirect(url_for('main.contacto'))
 
-    flash('¡Mensaje enviado! Te respondemos en menos de 24 horas.', 'success')
+    flash(t('flash.enviado'), 'success')
     return redirect(url_for('main.contacto'))

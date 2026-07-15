@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Portafolio — AS Vertex{% endblock %}
-{% block meta_desc %}Proyectos de ingeniería web desarrollados por AS Vertex con arquitecturas robustas en Python, Flask, JavaScript y SQL.{% endblock %}
+{% block title %}{{ t('port.title') }}{% endblock %}
+{% block meta_desc %}{{ t('port.meta') }}{% endblock %}
 
 {% block content %}
 
 <!-- ===== PAGE HEADER ===== -->
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-violet"><span class="badge-dot"></span>Trabajo técnico</div>
-    <h1>Portafolio</h1>
-    <p>Proyectos desarrollados con un enfoque en la calidad del código, escalabilidad y bases de datos estructuradas.</p>
+    <div class="badge badge-violet"><span class="badge-dot"></span>{{ t('port.header.badge') }}</div>
+    <h1>{{ t('port.header.h1') }}</h1>
+    <p>{{ t('port.header.p') }}</p>
   </div>
 </div>
 
@@ -17,7 +17,7 @@
 <section class="section" style="padding-top: 2rem; padding-bottom: 0; border-bottom: none;">
   <div class="container">
     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-      <button class="btn btn-green filtro-btn active" data-filtro="todos">Todos</button>
+      <button class="btn btn-green filtro-btn active" data-filtro="todos">{{ t('port.filtro.todos') }}</button>
       <button class="btn btn-ghost filtro-btn" data-filtro="fullstack">Full-stack</button>
       <button class="btn btn-ghost filtro-btn" data-filtro="frontend">Frontend</button>
       <button class="btn btn-ghost filtro-btn" data-filtro="backend">Backend</button>
@@ -32,32 +32,32 @@
 
       {% set proyectos = [
         {
-          'nombre': 'R.A.S.A – Sistema Gestor de Hospital',
-          'desc': 'Plataforma para la gestión hospitalaria y administración de farmacias, automatizando agendas médicas y la validación de recetas. Nota: Este sistema es estrictamente un proyecto escolar académico entregable; no se encuentra alojado en un servidor propio ni es administrado en producción.',
+          'nombre': t('port.p1.nombre'),
+          'desc': t('port.p1.desc'),
           'tags': ['Python', 'Flask', 'SQL', 'HTML5'],
           'tipo': 'fullstack',
           'color': '#4ade80',
           'repo': 'https://github.com/AlgorithmQuantum/Proyecto-Sistema-Gestor-De-Hospital'
         },
         {
-          'nombre': 'EstateArch – Web Inmobiliaria',
-          'desc': 'Landing page y plataforma diseñada para el sector inmobiliario. Enfocada en ofrecer una experiencia de usuario fluida, navegación responsiva y presentación visual atractiva para B2C.',
+          'nombre': t('port.p2.nombre'),
+          'desc': t('port.p2.desc'),
           'tags': ['HTML5', 'CSS Grid', 'Flexbox', 'JavaScript'],
           'tipo': 'frontend',
           'color': '#7c3aed',
           'repo': 'https://github.com/sebastianmoreno-dev/Proyecto-Web'
         },
         {
-          'nombre': 'Analizador de Seguridad HTTP',
-          'desc': 'Herramienta de diagnóstico diseñada para evaluar la configuración de seguridad en servidores web. Analiza los encabezados de respuesta para identificar vulnerabilidades y automatizar auditorías técnicas.',
+          'nombre': t('port.p3.nombre'),
+          'desc': t('port.p3.desc'),
           'tags': ['Python', 'Seguridad', 'Protocolos HTTP'],
           'tipo': 'backend',
           'color': '#a78bfa',
           'repo': 'https://github.com/AlgorithmQuantum/analizador-de-encabezados-de-seguridad'
         },
         {
-          'nombre': 'Suite de Componentes UI',
-          'desc': 'Biblioteca especializada en el desarrollo de componentes de interfaz de usuario optimizados. Integra estilos modulares, layouts complejos y buenas prácticas de maquetación listas para implementación.',
+          'nombre': t('port.p4.nombre'),
+          'desc': t('port.p4.desc'),
           'tags': ['HTML5', 'CSS3 Avanzado', 'Animaciones'],
           'tipo': 'frontend',
           'color': '#60a5fa',
@@ -74,7 +74,7 @@
               <rect x="2" y="3" width="20" height="14" rx="2"/>
               <path d="M8 21h8M12 17v4"/>
             </svg>
-            <span style="font-size: 11px;">Vista de código y arquitectura</span>
+            <span style="font-size: 11px;">{{ t('port.img_placeholder') }}</span>
           </div>
         </div>
 
@@ -91,11 +91,11 @@
           <div style="display: flex; gap: 8px; margin-top: 10px;">
             {% if p.repo %}
             <a href="{{ p.repo }}" target="_blank" class="btn btn-ghost" style="padding: 6px 14px; font-size: 12px; border: 1px solid var(--border-color);">
-              Ver Código ↗
+              {{ t('port.ver_codigo') }}
             </a>
             {% endif %}
             <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost" style="padding: 6px 14px; font-size: 12px;">
-              Consultar →
+              {{ t('port.consultar') }}
             </a>
           </div>
         </div>
@@ -109,9 +109,9 @@
 <!-- ===== CTA ===== -->
 <section class="section" style="text-align:center; border-bottom:none;">
   <div class="container">
-    <h2 style="margin-bottom:0.75rem;">¿Tienes un proyecto técnico en mente?</h2>
-    <p style="margin-bottom:2rem;">Trabajamos en la construcción de arquitecturas sólidas. Cuéntanos qué necesitas desarrollar.</p>
-    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Iniciar proyecto →</a>
+    <h2 style="margin-bottom:0.75rem;">{{ t('port.cta.h') }}</h2>
+    <p style="margin-bottom:2rem;">{{ t('port.cta.p') }}</p>
+    <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">{{ t('port.cta.btn') }}</a>
   </div>
 </section>
 

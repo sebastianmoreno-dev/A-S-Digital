@@ -1,14 +1,36 @@
 {% extends "base.html" %}
-{% block title %}Servicios — AS Vertex{% endblock %}
-{% block meta_desc %}Desarrollo web profesional: Landing Pages, Sitios completos, Backend, Blog/CMS y Mantenimiento. Encuentra lo que tu negocio necesita.{% endblock %}
+{% block title %}{{ t('serv.title') }}{% endblock %}
+{% block meta_desc %}{{ t('serv.meta') }}{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for q, a in [
+      ('serv.faq.q1', 'serv.faq.a1'),
+      ('serv.faq.q2', 'serv.faq.a2'),
+      ('serv.faq.q3', 'serv.faq.a3'),
+      ('serv.faq.q4', 'serv.faq.a4')
+    ] %}
+    {
+      "@type": "Question",
+      "name": {{ t(q)|tojson }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ t(a)|tojson }} }
+    }{{ "," if not loop.last }}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-green"><span class="badge-dot"></span>¿Qué necesitas?</div>
-    <h1>Encuentra tu solución</h1>
-    <p>No necesitas saber de tecnología para elegir. Lee cada opción como si te preguntaras: <em style="color: var(--text-primary);">"¿Esto describe lo que yo quiero?"</em> — y haz clic en la que más te suene.</p>
+    <div class="badge badge-green"><span class="badge-dot"></span>{{ t('serv.header.badge') }}</div>
+    <h1>{{ t('serv.header.h1') }}</h1>
+    <p>{{ t('serv.header.p1') }} <em>{{ t('serv.header.em') }}</em> {{ t('serv.header.p2') }}</p>
   </div>
 </div>
 
@@ -19,10 +41,10 @@
     <div class="card" style="margin-bottom: 2.5rem; border-color: var(--green-border); background: var(--green-dim); padding: 1.25rem 1.5rem;">
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <h4 style="color: var(--green); font-size: 14px;">¿No sabes cuál elegir?</h4>
+        <h4 style="color: var(--green); font-size: 14px;">{{ t('serv.guia.h') }}</h4>
       </div>
       <p style="font-size: 13px; color: var(--text-secondary);">
-        No hay problema — <a href="{{ url_for('main.contacto') }}" style="color: var(--green); text-decoration: underline;">escríbenos y te orientamos sin costo</a>. Cuéntanos qué quieres lograr con tu negocio y nosotros te decimos qué necesitas exactamente.
+        {{ t('serv.guia.p1') }} <a href="{{ url_for('main.contacto') }}" style="color: var(--green); text-decoration: underline;">{{ t('serv.guia.link') }}</a>. {{ t('serv.guia.p2') }}
       </p>
     </div>
 
@@ -39,62 +61,62 @@
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             </div>
             <div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 2px;">Landing Page</div>
-              <h3 style="font-size: 17px;">Tengo algo específico que promocionar</h3>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 2px;">{{ t('serv.lp.kicker') }}</div>
+              <h3 style="font-size: 17px;">{{ t('serv.lp.h') }}</h3>
             </div>
           </div>
           <p style="font-size: 14px; margin-bottom: 1rem; line-height: 1.7;">
-            Una sola página diseñada para que la gente te llame, te escriba o compre. Sin distracciones. Sin menús innecesarios. Solo tu mensaje y un botón.
+            {{ t('serv.lp.p') }}
           </p>
           <div style="background: rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1rem;">
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">EJEMPLOS REALES:</p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">{{ t('serv.ejemplos_label') }}</p>
             <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-              {% for ej in ['Dentista con promoción', 'Estudio de yoga', 'Coach de negocios', 'Restaurante con delivery', 'Curso en línea', 'Campaña de temporada'] %}
+              {% for ej in [t('serv.lp.ej1'), t('serv.lp.ej2'), t('serv.lp.ej3'), t('serv.lp.ej4'), t('serv.lp.ej5'), t('serv.lp.ej6')] %}
               <span style="font-size: 11px; background: var(--green-dim); color: var(--green); border: 0.5px solid var(--green-border); border-radius: var(--radius-pill); padding: 3px 10px;">{{ ej }}</span>
               {% endfor %}
             </div>
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; border-top: 0.5px solid var(--border);">
             <div>
-              <div style="font-size: 11px; color: var(--text-muted);">Desde</div>
+              <div style="font-size: 11px; color: var(--text-muted);">{{ t('common.desde') }}</div>
               <div style="font-size: 20px; font-weight: 700; color: var(--white);">$3,500 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
             </div>
             <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--green);">
-              Ver detalles <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              {{ t('common.ver_detalles') }} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
         </a>
 
         <!-- 2. Sitio Web Completo -->
         <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="card" style="display: block; text-decoration: none; cursor: pointer; border-color: rgba(124,58,237,0.45); box-shadow: 0 0 28px rgba(124,58,237,0.1); position: relative;">
-          <div style="position: absolute; top: -12px; left: 1.5rem; font-size: 11px; font-weight: 700; padding: 3px 14px; background: var(--violet); color: var(--white); border-radius: var(--radius-pill);">Más solicitado</div>
+          <div style="position: absolute; top: -12px; left: 1.5rem; font-size: 11px; font-weight: 700; padding: 3px 14px; background: var(--violet); color: var(--white); border-radius: var(--radius-pill);">{{ t('serv.fs.destacado') }}</div>
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;">
             <div class="card-icon icon-violet" style="margin: 0; flex-shrink: 0;">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             </div>
             <div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">Sitio Web Completo</div>
-              <h3 style="font-size: 17px;">Quiero mi negocio completo en internet</h3>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">{{ t('serv.fs.kicker') }}</div>
+              <h3 style="font-size: 17px;">{{ t('serv.fs.h') }}</h3>
             </div>
           </div>
           <p style="font-size: 14px; margin-bottom: 1rem; line-height: 1.7;">
-            Tu presencia digital completa: diseño, servidor, base de datos, dominio y publicación. Tú nos das la idea — nosotros entregamos todo funcionando.
+            {{ t('serv.fs.p') }}
           </p>
           <div style="background: rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1rem;">
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">EJEMPLOS REALES:</p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">{{ t('serv.ejemplos_label') }}</p>
             <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-              {% for ej in ['Empresa de servicios', 'Portafolio profesional', 'Negocio local con citas', 'Startup desde cero', 'Despacho o consultora', 'Tienda con catálogo'] %}
+              {% for ej in [t('serv.fs.ej1'), t('serv.fs.ej2'), t('serv.fs.ej3'), t('serv.fs.ej4'), t('serv.fs.ej5'), t('serv.fs.ej6')] %}
               <span style="font-size: 11px; background: var(--violet-dim); color: var(--violet-light); border: 0.5px solid var(--violet-border); border-radius: var(--radius-pill); padding: 3px 10px;">{{ ej }}</span>
               {% endfor %}
             </div>
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; border-top: 0.5px solid var(--border);">
             <div>
-              <div style="font-size: 11px; color: var(--text-muted);">Precio</div>
-              <div style="font-size: 18px; font-weight: 700; color: var(--violet-light);">Por cotización</div>
+              <div style="font-size: 11px; color: var(--text-muted);">{{ t('serv.fs.precio_label') }}</div>
+              <div style="font-size: 18px; font-weight: 700; color: var(--violet-light);">{{ t('common.por_cotizacion') }}</div>
             </div>
             <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--violet-light);">
-              Ver detalles <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              {{ t('common.ver_detalles') }} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
         </a>
@@ -103,7 +125,7 @@
 
       <!-- FILA 2: Servicios para negocios con necesidades más específicas -->
       <div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-        <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);">Para necesidades más específicas</p>
+        <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);">{{ t('serv.fila2') }}</p>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
@@ -115,14 +137,14 @@
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             </div>
             <div>
-              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 2px;">Blog / CMS</div>
-              <h3 style="font-size: 15px;">Quiero publicar contenido yo mismo</h3>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 2px;">{{ t('serv.cms.kicker') }}</div>
+              <h3 style="font-size: 15px;">{{ t('serv.cms.h') }}</h3>
             </div>
           </div>
-          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Sitio web con un panel tipo red social donde tú (sin saber programar) subes noticias, artículos, productos o eventos cuando quieras.</p>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">{{ t('serv.cms.p') }}</p>
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
             <div style="font-size: 18px; font-weight: 700; color: var(--white);">$12,000 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
-            <span style="font-size: 12px; color: var(--green);">Ver más →</span>
+            <span style="font-size: 12px; color: var(--green);">{{ t('common.ver_mas') }}</span>
           </div>
         </a>
 
@@ -133,14 +155,14 @@
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             </div>
             <div>
-              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">Diseño Frontend</div>
-              <h3 style="font-size: 15px;">Mi sitio ya existe pero se ve mal</h3>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">{{ t('serv.fe.kicker') }}</div>
+              <h3 style="font-size: 15px;">{{ t('serv.fe.h') }}</h3>
             </div>
           </div>
-          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Rediseñamos o construimos la parte visual de tu sitio o sistema. Ideal si ya tienes algo funcionando pero el diseño quedó viejo, lento o no se ve bien en celular.</p>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">{{ t('serv.fe.p') }}</p>
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
             <div style="font-size: 18px; font-weight: 700; color: var(--white);">$7,000 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
-            <span style="font-size: 12px; color: var(--violet-light);">Ver más →</span>
+            <span style="font-size: 12px; color: var(--violet-light);">{{ t('common.ver_mas') }}</span>
           </div>
         </a>
 
@@ -151,14 +173,14 @@
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
             </div>
             <div>
-              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--amber); margin-bottom: 2px;">Desarrollo Backend</div>
-              <h3 style="font-size: 15px;">Necesito que mi sitio haga cosas</h3>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--amber); margin-bottom: 2px;">{{ t('serv.be.kicker') }}</div>
+              <h3 style="font-size: 15px;">{{ t('serv.be.h') }}</h3>
             </div>
           </div>
-          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Usuarios que se registran, pedidos que se guardan, datos que se procesan. Si tu sitio necesita "memoria" o lógica interna, esto es lo que necesitas.</p>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">{{ t('serv.be.p') }}</p>
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
             <div style="font-size: 18px; font-weight: 700; color: var(--white);">$9,000 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN</span></div>
-            <span style="font-size: 12px; color: var(--amber);">Ver más →</span>
+            <span style="font-size: 12px; color: var(--amber);">{{ t('common.ver_mas') }}</span>
           </div>
         </a>
 
@@ -169,14 +191,14 @@
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
             </div>
             <div>
-              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">Mantenimiento</div>
-              <h3 style="font-size: 15px;">Ya tengo sitio, quiero que alguien lo cuide</h3>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet-light); margin-bottom: 2px;">{{ t('serv.mant.kicker') }}</div>
+              <h3 style="font-size: 15px;">{{ t('serv.mant.h') }}</h3>
             </div>
           </div>
-          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">Nos encargamos de que tu sitio esté siempre en línea, seguro y actualizado. Tú te enfocas en tu negocio, nosotros en la parte técnica.</p>
+          <p style="font-size: 13px; margin-bottom: 1rem; line-height: 1.7;">{{ t('serv.mant.p') }}</p>
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 0.5px solid var(--border);">
-            <div style="font-size: 18px; font-weight: 700; color: var(--white);">$2,500 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">MXN / mes</span></div>
-            <span style="font-size: 12px; color: var(--violet-light);">Ver más →</span>
+            <div style="font-size: 18px; font-weight: 700; color: var(--white);">$2,500 <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">{{ t('serv.mant.unidad') }}</span></div>
+            <span style="font-size: 12px; color: var(--violet-light);">{{ t('common.ver_mas') }}</span>
           </div>
         </a>
 
@@ -184,13 +206,13 @@
 
       <!-- Ayuda para elegir -->
       <div class="card" style="margin-top: 1rem; padding: 1.5rem; border-color: var(--border-med);">
-        <h3 style="font-size: 16px; margin-bottom: 1.25rem; text-align: center;">¿Aún no sabes cuál es el tuyo? Responde esto:</h3>
+        <h3 style="font-size: 16px; margin-bottom: 1.25rem; text-align: center;">{{ t('serv.faq.h') }}</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
           {% for pregunta, respuesta, slug, color in [
-            ('"Quiero que la gente me encuentre cuando ponga mi servicio en Google"', '→ Landing Page o Sitio Completo', 'landing-page', 'var(--green)'),
-            ('"Quiero subir mis propios artículos, productos o noticias"', '→ Blog / CMS', 'blog-cms', 'var(--green)'),
-            ('"Mi sitio ya existe pero se ve feo o está roto"', '→ Diseño Frontend', 'frontend', 'var(--violet-light)'),
-            ('"Quiero que los usuarios puedan registrarse o hacer pedidos"', '→ Backend o Sitio Completo', 'fullstack', 'var(--violet-light)'),
+            (t('serv.faq.q1'), t('serv.faq.a1'), 'landing-page', 'var(--green)'),
+            (t('serv.faq.q2'), t('serv.faq.a2'), 'blog-cms', 'var(--green)'),
+            (t('serv.faq.q3'), t('serv.faq.a3'), 'frontend', 'var(--violet-light)'),
+            (t('serv.faq.q4'), t('serv.faq.a4'), 'fullstack', 'var(--violet-light)'),
           ] %}
           <a href="{{ url_for('main.servicio_detalle', slug=slug) }}" class="faq-card">
             <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 0.5rem; line-height: 1.6;">{{ pregunta }}</p>

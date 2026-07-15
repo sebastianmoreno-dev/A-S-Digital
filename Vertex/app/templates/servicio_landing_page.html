@@ -1,6 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Landing Page — AS Vertex{% endblock %}
-{% block meta_desc %}Una sola página que convierte visitas en clientes. Para dentistas, restaurantes, coaches, campañas y cualquier negocio que quiera más contactos.{% endblock %}
+{% block title %}{{ t('lp.title') }}{% endblock %}
+{% block meta_desc %}{{ t('lp.meta') }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Landing Page",
+  "serviceType": "Landing Page Development",
+  "url": "{{ canonical_url }}",
+  "description": {{ t('lp.meta')|tojson }},
+  "provider": { "@type": "ProfessionalService", "name": "AS Vertex", "url": "{{ SITE_URL }}" },
+  "areaServed": { "@type": "Country", "name": "México" }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -8,17 +23,17 @@
   <div class="container">
     <a href="{{ url_for('main.servicios') }}" class="back-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Todos los servicios
+      {{ t('common.back') }}
     </a>
-    <div class="badge badge-green" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>Landing Page</div>
-    <h1>Una página que<br><span class="text-gradient">convierte visitas en clientes</span></h1>
+    <div class="badge badge-green" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span>{{ t('lp.badge') }}</div>
+    <h1>{{ t('lp.h1a') }}<br><span class="text-gradient">{{ t('lp.h1b') }}</span></h1>
     <p style="margin-top: 1rem; font-size: 16px; max-width: 540px;">
-      Imagina un vendedor disponible 24/7 que solo hace una cosa: convencer a quien llega de que te llame, te escriba o te compre. Eso es una landing page.
+      {{ t('lp.hero.p') }}
     </p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">Quiero mi landing page →</a>
-      <span class="badge badge-green" style="padding: 10px 16px;">Desde $3,500 MXN</span>
-      <span class="badge badge-violet" style="padding: 10px 16px;">Lista en 2–4 días</span>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary">{{ t('lp.hero.cta') }}</a>
+      <span class="badge badge-green" style="padding: 10px 16px;">{{ t('lp.hero.precio') }}</span>
+      <span class="badge badge-violet" style="padding: 10px 16px;">{{ t('lp.hero.plazo') }}</span>
     </div>
   </div>
 </div>
@@ -28,27 +43,27 @@
   <div class="container">
     <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
       <div style="flex: 1; min-width: 260px;">
-        <div class="section-eyebrow">¿Qué es?</div>
-        <h2 class="section-title">Una página. Un objetivo. Sin distracciones.</h2>
+        <div class="section-eyebrow">{{ t('common.que_es') }}</div>
+        <h2 class="section-title">{{ t('lp.que.title') }}</h2>
         <p style="margin-bottom: 1.25rem;">
-          Una landing page <strong style="color: var(--text-primary);">no es un sitio web normal</strong>. No tiene menú con mil opciones, no tiene sección "Sobre nosotros" ni blog. Tiene una sola cosa: tu propuesta y un botón para que el visitante actúe.
+          {{ t('lp.que.p1') | safe }}
         </p>
         <p style="margin-bottom: 1.25rem;">
-          Es perfecta cuando corres anuncios en Facebook o Instagram, cuando tienes una promoción de temporada, o cuando simplemente quieres que la gente te contacte sin que se pierda navegando.
+          {{ t('lp.que.p2') }}
         </p>
         <p>
-          La diferencia con un sitio web completo es simple: la landing tiene <strong style="color: var(--text-primary);">un solo objetivo</strong>, se hace más rápido y cuesta menos. Si quieres mostrar todo tu negocio — servicios, historia, equipo, blog — eso es un <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="color: var(--violet-light);">Sitio Web Completo</a>.
+          {{ t('lp.que.p3a') | safe }} <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="color: var(--violet-light);">{{ t('lp.que.p3link') }}</a>.
         </p>
       </div>
       <div style="flex: 1; min-width: 260px;">
         <div class="card" style="padding: 1.5rem;">
-          <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 1rem;">¿Landing Page o Sitio Completo?</p>
+          <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 1rem;">{{ t('lp.comp.h') }}</p>
           <div style="display: flex; flex-direction: column; gap: 0;">
             {% for pregunta, lp, sc in [
-              ('¿Cuántas páginas?', 'Una sola', 'Varias (inicio, servicios, blog…)'),
-              ('¿Para qué?', 'Una campaña o acción específica', 'Toda tu presencia digital'),
-              ('¿Tiempo de entrega?', '2 a 4 días', '7 a 12 días'),
-              ('¿Costo?', 'Desde $3,500', 'Por cotización'),
+              (t('lp.comp.q1'), t('lp.comp.lp1'), t('lp.comp.sc1')),
+              (t('lp.comp.q2'), t('lp.comp.lp2'), t('lp.comp.sc2')),
+              (t('lp.comp.q3'), t('lp.comp.lp3'), t('lp.comp.sc3')),
+              (t('lp.comp.q4'), t('lp.comp.lp4'), t('lp.comp.sc4')),
             ] %}
             <div class="compare-row">
               <span style="color: var(--text-muted);">{{ pregunta }}</span>
@@ -59,8 +74,8 @@
           </div>
           <div class="compare-legend">
             <span></span>
-            <span style="font-size: 11px; color: var(--green); font-weight: 700;">← Estás aquí</span>
-            <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="font-size: 11px; color: var(--text-secondary);">Ver sitio completo →</a>
+            <span style="font-size: 11px; color: var(--green); font-weight: 700;">{{ t('lp.comp.aqui') }}</span>
+            <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" style="font-size: 11px; color: var(--text-secondary);">{{ t('lp.comp.versc') }}</a>
           </div>
         </div>
       </div>
@@ -71,16 +86,16 @@
 <!-- PARA QUIÉN ES -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">¿Para quién es?</div>
-    <h2 class="section-title">¿Te identificas con alguno de estos casos?</h2>
+    <div class="section-eyebrow">{{ t('common.para_quien') }}</div>
+    <h2 class="section-title">{{ t('lp.quien.title') }}</h2>
     <div class="grid-3">
       {% for negocio, situacion in [
-        ('Dentista, médico o terapeuta', 'Quiero que mis pacientes puedan agendar cita desde internet, sin tener que llamar.'),
-        ('Restaurante o food service', 'Quiero mostrar mi menú y que la gente pida a domicilio o reserve mesa.'),
-        ('Coach, instructor o consultor', 'Ofrezco un servicio y quiero que la gente me deje sus datos para contactarlos.'),
-        ('Negocio con campaña activa', 'Estoy pagando anuncios en Facebook/Google y necesito una página que convierta ese tráfico.'),
-        ('Estética, spa o salón', 'Quiero que mis clientes vean mis servicios, precios y me contacten por WhatsApp.'),
-        ('Emprendedor con un producto', 'Acabo de lanzar algo y quiero que la gente lo conozca y lo compre o aparte.'),
+        (t('lp.quien.c1t'), t('lp.quien.c1d')),
+        (t('lp.quien.c2t'), t('lp.quien.c2d')),
+        (t('lp.quien.c3t'), t('lp.quien.c3d')),
+        (t('lp.quien.c4t'), t('lp.quien.c4d')),
+        (t('lp.quien.c5t'), t('lp.quien.c5d')),
+        (t('lp.quien.c6t'), t('lp.quien.c6d')),
       ] %}
       <div class="card">
         <h4 style="margin-bottom: 0.4rem; font-size: 14px; color: var(--green);">{{ negocio }}</h4>
@@ -90,7 +105,7 @@
     </div>
     <div class="card" style="margin-top: 1rem; padding: 1.1rem; border-color: var(--green-border); background: var(--green-dim);">
       <p style="font-size: 13px; color: var(--text-secondary);">
-        <strong style="color: var(--green);">¿Tu caso no está aquí?</strong> No importa — si tienes algo que promocionar y quieres que la gente actúe, una landing page funciona. <a href="{{ url_for('main.contacto') }}" style="color: var(--green); text-decoration: underline;">Cuéntanos tu caso.</a>
+        <strong style="color: var(--green);">{{ t('lp.quien.extra_h') }}</strong> {{ t('lp.quien.extra_p') }} <a href="{{ url_for('main.contacto') }}" style="color: var(--green); text-decoration: underline;">{{ t('lp.quien.extra_link') }}</a>
       </p>
     </div>
   </div>
@@ -99,14 +114,14 @@
 <!-- QUÉ INCLUYE -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">¿Qué incluye?</div>
-    <h2 class="section-title">Todo lo que necesitas para empezar a recibir clientes</h2>
+    <div class="section-eyebrow">{{ t('common.que_incluye') }}</div>
+    <h2 class="section-title">{{ t('lp.inc.title') }}</h2>
     <div class="grid-2">
       {% for categoria, color, items in [
-        ('Diseño a tu imagen', 'var(--green)', ['Diseño visual con tus colores, logo y estilo', 'Se ve perfecto en celular, tablet y computadora', 'Fotos e imágenes optimizadas para cargar rápido', 'Tipografía y botones que guían al visitante']),
-        ('Que la gente te contacte', 'var(--green)', ['Formulario de contacto que llega a tu correo', 'Botón directo a tu WhatsApp', 'Llamada a la acción clara en cada sección', 'Integración con redes sociales si la tienes']),
-        ('Que Google te encuentre', 'var(--violet-light)', ['Configuración básica para aparecer en búsquedas', 'Título y descripción optimizados para Google', 'Velocidad de carga optimizada (factor clave en SEO)', 'Certificado de seguridad HTTPS incluido']),
-        ('Entrega y soporte', 'var(--violet-light)', ['El código es 100% tuyo desde el día uno', 'Una ronda de ajustes incluida antes de publicar', '15 días de soporte técnico después de lanzar', 'Te explicamos cómo funciona todo']),
+        (t('lp.inc.cat1'), 'var(--green)', [t('lp.inc.c1i1'), t('lp.inc.c1i2'), t('lp.inc.c1i3'), t('lp.inc.c1i4')]),
+        (t('lp.inc.cat2'), 'var(--green)', [t('lp.inc.c2i1'), t('lp.inc.c2i2'), t('lp.inc.c2i3'), t('lp.inc.c2i4')]),
+        (t('lp.inc.cat3'), 'var(--violet-light)', [t('lp.inc.c3i1'), t('lp.inc.c3i2'), t('lp.inc.c3i3'), t('lp.inc.c3i4')]),
+        (t('lp.inc.cat4'), 'var(--violet-light)', [t('lp.inc.c4i1'), t('lp.inc.c4i2'), t('lp.inc.c4i3'), t('lp.inc.c4i4')]),
       ] %}
       <div class="card">
         <h4 style="color: {{ color }}; font-size: 13px; margin-bottom: 1rem;">{{ categoria }}</h4>
@@ -125,26 +140,26 @@
 <!-- PRECIOS -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Precios</div>
-    <h2 class="section-title">Elige según lo que necesitas</h2>
+    <div class="section-eyebrow">{{ t('common.precios') }}</div>
+    <h2 class="section-title">{{ t('lp.pre.title') }}</h2>
     <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
       {% for nombre, precio, plazo, desc, features, destacado in [
-        ('Básica', '3,500', '2–3 días', 'Para negocios que quieren empezar rápido y sin complicaciones.', ['Diseño de una página completa', 'Responsive en celular y PC', 'Formulario de contacto al correo', 'Botón de WhatsApp integrado', 'SEO básico y HTTPS'], False),
-        ('Profesional', '9,500', '3–4 días', 'Para negocios que invierten en anuncios y quieren maximizar resultados.', ['Todo lo del plan Básico', 'Secciones adicionales de contenido', 'Animaciones y efectos visuales', 'Google Analytics integrado', 'Pixel de Meta (Facebook/Instagram)', '30 días de soporte'], True),
-        ('Con Panel', '14,000', '4–6 días', 'Para negocios que quieren ver y gestionar sus leads desde un panel.', ['Todo lo del plan Profesional', 'Panel privado para ver tus contactos', 'Base de datos de prospectos', 'Exportar contactos a Excel', 'Estadísticas de visitas y conversión'], False),
+        (t('lp.plan1.nombre'), '3,500', t('lp.plan1.plazo'), t('lp.plan1.desc'), [t('lp.plan1.f1'), t('lp.plan1.f2'), t('lp.plan1.f3'), t('lp.plan1.f4'), t('lp.plan1.f5')], False),
+        (t('lp.plan2.nombre'), '9,500', t('lp.plan2.plazo'), t('lp.plan2.desc'), [t('lp.plan2.f1'), t('lp.plan2.f2'), t('lp.plan2.f3'), t('lp.plan2.f4'), t('lp.plan2.f5'), t('lp.plan2.f6')], True),
+        (t('lp.plan3.nombre'), '14,000', t('lp.plan3.plazo'), t('lp.plan3.desc'), [t('lp.plan3.f1'), t('lp.plan3.f2'), t('lp.plan3.f3'), t('lp.plan3.f4'), t('lp.plan3.f5')], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
-        {% if destacado %}<div class="pricing-badge">Más pedido</div>{% endif %}
+        {% if destacado %}<div class="pricing-badge">{{ t('common.mas_pedido') }}</div>{% endif %}
         <div class="pricing-name">{{ nombre }}</div>
         <div class="pricing-price">${{ precio }} <span>MXN</span></div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Lista en {{ plazo }}</p>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">{{ plazo }}</p>
         <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px; line-height: 1.6;">{{ desc }}</p>
         <div class="pricing-divider"></div>
         {% for f in features %}
         <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</div>
         {% endfor %}
         <div style="margin-top: 1.5rem;">
-          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">Quiero este →</a>
+          <a href="{{ url_for('main.contacto') }}" class="btn {% if destacado %}btn-primary{% else %}btn-ghost{% endif %}" style="width: 100%; justify-content: center;">{{ t('common.quiero_este') }}</a>
         </div>
       </div>
       {% endfor %}
@@ -155,11 +170,11 @@
 <!-- CTA -->
 <section class="section" style="text-align: center; border-bottom: none;">
   <div class="container">
-    <h2 style="margin-bottom: 0.75rem;">¿Listo para recibir más clientes?</h2>
-    <p style="margin-bottom: 2rem;">Cuéntanos de tu negocio. En menos de 24 horas te enviamos una propuesta con el diseño y el plan que mejor te funciona.</p>
+    <h2 style="margin-bottom: 0.75rem;">{{ t('lp.cta.h') }}</h2>
+    <p style="margin-bottom: 2rem;">{{ t('lp.cta.p') }}</p>
     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Quiero mi landing page →</a>
-      <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="btn btn-ghost">¿Necesito algo más completo?</a>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">{{ t('lp.hero.cta') }}</a>
+      <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="btn btn-ghost">{{ t('lp.cta.btn2') }}</a>
     </div>
   </div>
 </section>

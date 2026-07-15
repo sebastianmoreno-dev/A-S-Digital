@@ -19,6 +19,10 @@ def _bool_env(name, default=False):
 class BaseConfig:
     SECRET_KEY = os.getenv('SECRET_KEY', 'cambia-esto-en-produccion')
 
+    # Dominio canónico del sitio (sin www, https, sin barra final). Se usa
+    # para generar <link rel="canonical">, og:url y las URLs absolutas de SEO.
+    SITE_URL = os.getenv('SITE_URL', 'https://asvertex.store')
+
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///pixelforge.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {'pool_pre_ping': True}

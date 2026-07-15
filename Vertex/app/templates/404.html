@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Página no encontrada — AS Vertex{% endblock %}
+{% block title %}{{ t('e404.title') }}{% endblock %}
 {% block content %}
 <section class="section" style="text-align: center; border-bottom: none; padding-top: 6rem;">
   <div class="container">
     <div style="font-size: clamp(80px, 15vw, 140px); font-weight: 800; color: var(--border-med); letter-spacing: -4px; line-height: 1; margin-bottom: 1.5rem;">404</div>
-    <h1 style="font-size: clamp(24px, 4vw, 36px); margin-bottom: 0.75rem;">Página no encontrada</h1>
-    <p style="margin-bottom: 2.5rem; max-width: 380px; margin-left: auto; margin-right: auto;">Esta página no existe o fue movida. Pero podemos llevarte a donde necesitas ir.</p>
+    <h1 style="font-size: clamp(24px, 4vw, 36px); margin-bottom: 0.75rem;">{{ t('e404.h1') }}</h1>
+    <p style="margin-bottom: 2.5rem; max-width: 380px; margin-left: auto; margin-right: auto;">{{ t('e404.p') }}</p>
     <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-      <a href="{{ url_for('main.index') }}" class="btn btn-primary">← Ir al inicio</a>
-      <a href="{{ url_for('main.servicios') }}" class="btn btn-ghost">Ver servicios</a>
-      <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost">Contacto</a>
+      <a href="{{ url_for('main.index') }}" class="btn btn-primary">{{ t('e404.inicio') }}</a>
+      <a href="{{ url_for('main.servicios') }}" class="btn btn-ghost">{{ t('e404.servicios') }}</a>
+      <a href="{{ url_for('main.contacto') }}" class="btn btn-ghost">{{ t('nav.contacto') }}</a>
     </div>
   </div>
 </section>

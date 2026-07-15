@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}AS Vertex — Desarrollo Web Profesional{% endblock %}
+{% block title %}{{ t('index.title') }}{% endblock %}
 
 {% block content %}
 
@@ -9,34 +9,33 @@
 
     <div class="badge badge-green" style="margin-bottom: 2rem;">
       <span class="badge-dot"></span>
-      Sistema online. Listo para construir.
+      {{ t('index.hero.badge') }}
     </div>
 
     <h1 style="margin-bottom: 1.25rem;">
-      Tu negocio merece un sitio<br>
-      <span class="text-gradient">que genere resultados</span>
+      {{ t('index.hero.h1a') }}<br>
+      <span class="text-gradient">{{ t('index.hero.h1b') }}</span>
     </h1>
 
     <p style="font-size: 16px; max-width: 480px; margin: 0 auto 2.75rem; line-height: 1.8;">
-      Construimos aplicaciones web rápidas, modernas y funcionales —
-      desde el diseño hasta el servidor. Con Python, Flask y JavaScript.
+      {{ t('index.hero.p') }}
     </p>
 
     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
       <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">
-        Cotiza tu proyecto
+        {{ t('index.hero.cta1') }}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
       <a href="{{ url_for('main.portafolio') }}" class="btn btn-ghost" style="font-size: 15px; padding: 13px 28px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-        Ver portafolio
+        {{ t('index.hero.cta2') }}
       </a>
     </div>
 
     <div class="stats-strip" style="justify-content: center;">
-      <div><div class="stat-num">+40</div><div class="stat-label">proyectos entregados</div></div>
-      <div><div class="stat-num">100%</div><div class="stat-label">clientes satisfechos</div></div>
-      <div><div class="stat-num">3–5</div><div class="stat-label">días de entrega promedio</div></div>
+      <div><div class="stat-num">+40</div><div class="stat-label">{{ t('index.stats.proyectos') }}</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">{{ t('index.stats.clientes') }}</div></div>
+      <div><div class="stat-num">3–5</div><div class="stat-label">{{ t('index.stats.entrega') }}</div></div>
     </div>
 
   </div>
@@ -45,9 +44,9 @@
 <!-- ===== COMPETENCIAS ===== -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Competencias principales</div>
-    <h2 class="section-title">Lo que construimos</h2>
-    <p class="section-sub">Arquitectura orientada a velocidad, calidad y escalabilidad real.</p>
+    <div class="section-eyebrow">{{ t('index.comp.eyebrow') }}</div>
+    <h2 class="section-title">{{ t('index.comp.title') }}</h2>
+    <p class="section-sub">{{ t('index.comp.sub') }}</p>
 
     <div class="grid-2">
 
@@ -56,8 +55,8 @@
         <div class="card-icon icon-violet">
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <h3 style="margin-bottom: 0.5rem;">Frontend de alto rendimiento</h3>
-        <p style="font-size: 14px;">Interfaces responsivas, accesibles y optimizadas. Se ven perfectas en cualquier dispositivo desde el primer render.</p>
+        <h3 style="margin-bottom: 0.5rem;">{{ t('index.comp.card1.h') }}</h3>
+        <p style="font-size: 14px;">{{ t('index.comp.card1.p') }}</p>
         <span class="card-tag">HTML · CSS · JavaScript</span>
       </div>
 
@@ -66,8 +65,8 @@
         <div class="card-icon icon-green">
           <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
         </div>
-        <h3 style="margin-bottom: 0.5rem;">Backend robusto y seguro</h3>
-        <p style="font-size: 14px;">APIs REST con Flask, autenticación JWT, base de datos relacional y lógica de negocio lista para escalar.</p>
+        <h3 style="margin-bottom: 0.5rem;">{{ t('index.comp.card2.h') }}</h3>
+        <p style="font-size: 14px;">{{ t('index.comp.card2.p') }}</p>
         <span class="card-tag">Python · Flask · MySQL</span>
       </div>
 
@@ -78,8 +77,8 @@
             <div class="card-icon icon-amber">
               <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             </div>
-            <h3 style="margin-bottom: 0.5rem;">Stack tecnológico moderno</h3>
-            <p style="font-size: 14px;">Usamos las herramientas correctas para cada proyecto, sin sobre-ingeniería, sin comprometer calidad.</p>
+            <h3 style="margin-bottom: 0.5rem;">{{ t('index.comp.card3.h') }}</h3>
+            <p style="font-size: 14px;">{{ t('index.comp.card3.p') }}</p>
             <div class="tech-tags">
               <span class="tech-tag">Python</span>
               <span class="tech-tag">Flask</span>
@@ -117,16 +116,16 @@
 <!-- ===== PROCESO (resumen) ===== -->
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Cómo trabajamos</div>
-    <h2 class="section-title">De la idea al sitio en vivo</h2>
-    <p class="section-sub">Cuatro pasos claros, sin sorpresas, con resultados desde el día uno.</p>
+    <div class="section-eyebrow">{{ t('index.proc.eyebrow') }}</div>
+    <h2 class="section-title">{{ t('index.proc.title') }}</h2>
+    <p class="section-sub">{{ t('index.proc.sub') }}</p>
 
     <div>
       {% set pasos = [
-        ('01', 'Reunión de descubrimiento',  'Entendemos tu negocio, objetivos y qué necesitas que haga tu sitio.'),
-        ('02', 'Diseño y propuesta técnica', 'Wireframe visual y arquitectura Flask antes de escribir una sola línea de código.'),
-        ('03', 'Desarrollo full-stack',       'Frontend HTML/CSS/JS + backend Python Flask + base de datos, con actualizaciones constantes.'),
-        ('04', 'Deploy y soporte',            'Publicación en servidor, dominio y 30 días de soporte incluidos.')
+        ('01', t('index.proc.p1.t'), t('index.proc.p1.d')),
+        ('02', t('index.proc.p2.t'), t('index.proc.p2.d')),
+        ('03', t('index.proc.p3.t'), t('index.proc.p3.d')),
+        ('04', t('index.proc.p4.t'), t('index.proc.p4.d'))
       ] %}
       {% for num, titulo, desc in pasos %}
       <div class="process-item">
@@ -140,7 +139,7 @@
     </div>
 
     <div style="margin-top: 2.5rem;">
-      <a href="{{ url_for('main.proceso') }}" class="btn btn-ghost">Ver proceso completo →</a>
+      <a href="{{ url_for('main.proceso') }}" class="btn btn-ghost">{{ t('index.proc.cta') }}</a>
     </div>
   </div>
 </section>
@@ -150,12 +149,12 @@
   <div class="container">
     <div class="badge badge-violet" style="margin-bottom: 1.5rem;">
       <span class="badge-dot"></span>
-      Plazas disponibles este mes
+      {{ t('index.cta.badge') }}
     </div>
-    <h2 style="margin-bottom: 0.75rem;">¿Listo para empezar?</h2>
-    <p style="margin-bottom: 2rem;">Cuéntanos tu idea — te respondemos en menos de 24 horas con una propuesta.</p>
+    <h2 style="margin-bottom: 0.75rem;">{{ t('index.cta.h') }}</h2>
+    <p style="margin-bottom: 2rem;">{{ t('index.cta.p') }}</p>
     <a href="{{ url_for('main.contacto') }}" class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">
-      Cotizar mi proyecto
+      {{ t('index.cta.btn') }}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>

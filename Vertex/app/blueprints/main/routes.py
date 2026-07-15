@@ -35,11 +35,12 @@ def contacto():
 
 # Mapa slug → template
 SERVICIOS = {
-    'landing-page': 'servicio_landing_page.html',
-    'frontend':     'servicio_frontend.html',
-    'backend':      'servicio_backend.html',
-    'fullstack':    'servicio_fullstack.html',
-    'blog-cms':     'servicio_blog_cms.html',
+    'landing-page':  'servicio_landing_page.html',
+    'frontend':      'servicio_frontend.html',
+    'backend':       'servicio_backend.html',
+    'fullstack':     'servicio_fullstack.html',
+    'blog-cms':      'servicio_blog_cms.html',
+    'mantenimiento': 'servicio_mantenimiento.html',
 }
 
 @main_bp.route('/servicios/<slug>')

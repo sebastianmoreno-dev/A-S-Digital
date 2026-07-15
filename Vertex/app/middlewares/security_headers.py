@@ -8,12 +8,13 @@ from flask import Response
 
 from app.extensions import talisman
 
-# Solo se usan Google Fonts como recurso externo (ver base.html) — nada de CDNs.
+# Todo es first-party: fuentes, CSS y JS se sirven desde /static (las fuentes
+# ahora son woff2 auto-hospedadas, ya no se usa Google Fonts) — CSP estricto.
 CONTENT_SECURITY_POLICY = {
     'default-src': "'self'",
     'script-src': "'self'",
-    'style-src': ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
-    'font-src': ['https://fonts.gstatic.com'],
+    'style-src': ["'self'", "'unsafe-inline'"],
+    'font-src': ["'self'"],
     'img-src': ["'self'", 'data:'],
     'connect-src': "'self'",
     'object-src': "'none'",
@@ -39,8 +40,14 @@ def init_security_headers(app) -> None:
     # hook se registra ANTES de talisman.init_app() para que se ejecute
     # DESPUÉS y su valor gane.
     @app.after_request
-    def _permissions_policy(response: Response) -> Response:
+    def _extra_security_headers(response: Response) -> Response:
         response.headers['Permissions-Policy'] = PERMISSIONS_POLICY
+        # 7º header del checklist clásico (OWASP Secure Headers): Talisman
+        # dejó de emitirlo por default desde 1.0. Header legacy solo relevante
+        # para navegadores antiguos; en modernos el filtro XSS ya no existe y
+        # la protección real la da el CSP. Se emite para pasar auditorías que
+        # lo exigen sin debilitar nada.
+        response.headers['X-XSS-Protection'] = '1; mode=block'
         return response
 
     talisman.init_app(

@@ -1,8 +1,14 @@
+import mimetypes
+
 from flask import Flask
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from app.config import get_config
 from app.extensions import csrf, db, login_manager, mail, migrate
+
+# Windows a veces adivina application/octet-stream para .woff2, lo que rompe
+# el <link rel="preload" type="font/woff2"> (el navegador re-descarga la fuente).
+mimetypes.add_type('font/woff2', '.woff2')
 
 
 def create_app(config_object=None):
@@ -22,6 +28,7 @@ def create_app(config_object=None):
     _init_extensions(app)
     _register_blueprints(app)
     _init_translations(app)
+    _init_seo(app)
 
     # En producción el esquema se gestiona con `flask db upgrade`
     # (Alembic); create_all() aquí es solo comodidad para dev/tests,
@@ -73,3 +80,30 @@ def _init_translations(app: Flask) -> None:
     @app.context_processor
     def inject_translator():
         return dict(t=t)
+
+
+def _init_seo(app: Flask) -> None:
+    """Inyecta variables SEO (canonical, og:url, locale) en cada template.
+
+    La URL canónica se construye siempre sobre el dominio oficial (SITE_URL),
+    con el path limpio del endpoint actual (sin query string ni host www),
+    así las 14 páginas quedan con UNA sola canonical estable. El idioma vive
+    en sesión, no en la URL, por lo que ES/EN comparten la misma canonical
+    (no se generan URLs duplicadas); el idioma activo solo cambia og:locale.
+    """
+    from flask import request, session, url_for
+
+    @app.context_processor
+    def inject_seo():
+        site = app.config['SITE_URL'].rstrip('/')
+        try:
+            path = url_for(request.endpoint, **(request.view_args or {}))
+        except Exception:
+            path = request.path or '/'
+        lang = session.get('lang', 'es')
+        return {
+            'SITE_URL': site,
+            'canonical_url': site + path,
+            'og_default_image': site + '/static/img/og-image.png',
+            'og_locale': 'es_MX' if lang == 'es' else 'en_US',
+        }

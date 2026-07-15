@@ -6,7 +6,8 @@ Flask-Mail==0.10.0
 python-dotenv==1.0.1
 
 # ── Base de datos ───────────────────────────────────────────────
-PyMySQL==1.1.1
+psycopg2-binary==2.9.12   # PostgreSQL (producción / homelab)
+PyMySQL==1.1.1            # MySQL (compatibilidad; opcional)
 cryptography==43.0.1
 
 # ── Seguridad ───────────────────────────────────────────────────

@@ -3,15 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="{% block meta_desc %}AS Vertex — Desarrollo web profesional con Python, Flask, JavaScript, HTML y CSS.{% endblock %}" />
+  <meta name="description" content="{% block meta_desc %}{{ t('meta.default') }}{% endblock %}" />
   <title>{% block title %}AS Vertex{% endblock %}</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  {# ── URL canónica: una sola por página, dominio oficial, sin query ── #}
+  <link rel="canonical" href="{{ canonical_url }}" />
+
+  {# ── Open Graph (defaults sobrescribibles por página) ── #}
+  <meta property="og:site_name" content="AS Vertex" />
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}" />
+  <meta property="og:locale" content="{{ og_locale }}" />
+  <meta property="og:url" content="{{ canonical_url }}" />
+  <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}" />
+  <meta property="og:description" content="{% block og_description %}{{ self.meta_desc() }}{% endblock %}" />
+  <meta property="og:image" content="{% block og_image %}{{ og_default_image }}{% endblock %}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="AS Vertex — Desarrollo Web Profesional" />
+
+  {# ── Twitter Cards (reutiliza los valores de Open Graph) ── #}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ self.og_title() }}" />
+  <meta name="twitter:description" content="{{ self.og_description() }}" />
+  <meta name="twitter:image" content="{{ self.og_image() }}" />
+
+  {# ── Favicons ── #}
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}" />
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}" />
+  <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}" />
+  <meta name="theme-color" content="#0d0d14" />
+
+  {# ── Fuentes auto-hospedadas: preload de las críticas (LCP) + CSS ── #}
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{{ url_for('static', filename='fonts/inter-700-latin.woff2') }}" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{{ url_for('static', filename='fonts/inter-400-latin.woff2') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}" />
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   {% block extra_css %}{% endblock %}
+
+  {# ── Datos estructurados (schema.org). Default: Organización/servicio ── #}
+  {% block jsonld %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AS Vertex",
+    "url": "{{ SITE_URL }}",
+    "logo": "{{ SITE_URL }}/static/android-chrome-512x512.png",
+    "image": "{{ og_default_image }}",
+    "description": "Desarrollo web profesional con Python, Flask, JavaScript, HTML y CSS.",
+    "email": "contacto.asvertex@gmail.com",
+    "areaServed": { "@type": "Country", "name": "México" },
+    "sameAs": ["https://github.com/ASVertex"]
+  }
+  </script>
+  {% endblock %}
 </head>
 <body>
 
@@ -127,6 +178,7 @@
             <a href="{{ url_for('main.servicio_detalle', slug='backend') }}" class="footer-link">{{ t('footer.servicio.backend') }}</a>
             <a href="{{ url_for('main.servicio_detalle', slug='fullstack') }}" class="footer-link">{{ t('footer.servicio.fullstack') }}</a>
             <a href="{{ url_for('main.servicio_detalle', slug='blog-cms') }}" class="footer-link">{{ t('footer.servicio.blogcms') }}</a>
+            <a href="{{ url_for('main.servicio_detalle', slug='mantenimiento') }}" class="footer-link">{{ t('serv.mant.kicker') }}</a>
           </nav>
         </div>
 
@@ -167,7 +219,7 @@
     </div>
   </footer>
 
-  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

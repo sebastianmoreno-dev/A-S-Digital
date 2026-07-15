@@ -397,6 +397,10 @@ p  { color: var(--text-secondary); line-height: 1.75; }
 .process-body h4 { margin-bottom: 0.35rem; }
 .process-body p  { font-size: clamp(12px, 1.4vw, 13px); }
 
+/* Énfasis dentro de párrafos: los textos traducidos usan <strong>/<em>
+   planos (sin style inline) y aquí reciben el color de resalte. */
+p strong, p em { color: var(--text-primary); }
+
 /* ---------- Form elements ---------- */
 .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: var(--space-sm); }
 label { font-size: clamp(12px, 1.3vw, 13px); font-weight: 500; color: var(--text-secondary); }
@@ -490,6 +494,10 @@ select option { background: var(--bg-card); }
 .page-header .badge { margin-bottom: clamp(1rem, 2vw, 1.4rem); }
 .page-header h1 { margin-bottom: 0.85rem; }
 .page-header p  { font-size: clamp(14px, 1.8vw, 16px); max-width: 520px; line-height: 1.75; }
+
+/* Páginas legales: los <strong> dentro del texto traducido resaltan en primario */
+.legal strong { color: var(--text-primary); font-weight: 700; }
+.legal a { color: var(--green); }
 
 /* ---------- Footer ---------- */
 .footer { border-top: 0.5px solid var(--border); padding: clamp(1.5rem, 3vw, 2.25rem) 0; }
