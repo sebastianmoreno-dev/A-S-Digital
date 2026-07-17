@@ -52,15 +52,15 @@ PERMISOS = [
 ]
 
 SERVICIOS = [
-    dict(clave='landing-page', nombre='Landing Page', precio_desde=3500, orden=1,
+    dict(clave='landing-page', nombre='Landing Page', precio_desde=4500, orden=1,
          descripcion='Página única enfocada en conversión: presentación, servicios y contacto.'),
-    dict(clave='frontend', nombre='Solo Frontend', precio_desde=5500, orden=2,
+    dict(clave='frontend', nombre='Solo Frontend', precio_desde=7000, orden=2,
          descripcion='Diseño e implementación de interfaz — HTML, CSS y JavaScript.'),
-    dict(clave='backend', nombre='Solo Backend / API', precio_desde=7500, orden=3,
+    dict(clave='backend', nombre='Solo Backend / API', precio_desde=9000, orden=3,
          descripcion='API y lógica de servidor con Flask/Python y base de datos.'),
-    dict(clave='fullstack', nombre='Sitio Completo (Full Stack)', precio_desde=14000, orden=4,
+    dict(clave='fullstack', nombre='Sitio Completo (Full Stack)', precio_desde=12000, orden=4,
          descripcion='Frontend + backend + base de datos, listo para producción.'),
-    dict(clave='blog-cms', nombre='Blog / CMS', precio_desde=9000, orden=5,
+    dict(clave='blog-cms', nombre='Blog / CMS', precio_desde=15000, orden=5,
          descripcion='Sitio con panel para publicar contenido sin tocar código.'),
     dict(clave='otro', nombre='Otro / No sé aún', precio_desde=None, orden=6,
          descripcion='El cliente todavía no tiene claro qué necesita.'),

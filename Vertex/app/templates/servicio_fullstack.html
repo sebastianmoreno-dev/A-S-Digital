@@ -164,8 +164,8 @@
     </p>
     <div class="grid-3" style="align-items: start;">
       {% for nombre, precio, plazo, desc, features, destacado in [
-        (t('fs.plan1.nombre'), '9,500', t('fs.plan1.plazo'), t('fs.plan1.desc'), [t('fs.plan1.f1'), t('fs.plan1.f2'), t('fs.plan1.f3'), t('fs.plan1.f4'), t('fs.plan1.f5')], False),
-        (t('fs.plan2.nombre'), '15,000', t('fs.plan2.plazo'), t('fs.plan2.desc'), [t('fs.plan2.f1'), t('fs.plan2.f2'), t('fs.plan2.f3'), t('fs.plan2.f4'), t('fs.plan2.f5'), t('fs.plan2.f6')], True),
+        (t('fs.plan1.nombre'), '12,000', t('fs.plan1.plazo'), t('fs.plan1.desc'), [t('fs.plan1.f1'), t('fs.plan1.f2'), t('fs.plan1.f3'), t('fs.plan1.f4'), t('fs.plan1.f5')], False),
+        (t('fs.plan2.nombre'), '22,000', t('fs.plan2.plazo'), t('fs.plan2.desc'), [t('fs.plan2.f1'), t('fs.plan2.f2'), t('fs.plan2.f3'), t('fs.plan2.f4'), t('fs.plan2.f5'), t('fs.plan2.f6')], True),
         (t('fs.plan3.nombre'), none, t('fs.plan3.plazo'), t('fs.plan3.desc'), [t('fs.plan3.f1'), t('fs.plan3.f2'), t('fs.plan3.f3'), t('fs.plan3.f4'), t('fs.plan3.f5')], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
