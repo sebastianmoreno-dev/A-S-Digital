@@ -130,8 +130,8 @@
     <h2 class="section-title">{{ t('mant.pre.title') }}</h2>
     <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
       {% for nombre, precio, plazo, desc, features, destacado in [
-        (t('mant.plan1.nombre'), '2,500', t('mant.plan1.plazo'), t('mant.plan1.desc'), [t('mant.plan1.f1'), t('mant.plan1.f2'), t('mant.plan1.f3'), t('mant.plan1.f4')], False),
-        (t('mant.plan2.nombre'), '4,500', t('mant.plan2.plazo'), t('mant.plan2.desc'), [t('mant.plan2.f1'), t('mant.plan2.f2'), t('mant.plan2.f3'), t('mant.plan2.f4'), t('mant.plan2.f5')], True),
+        (t('mant.plan1.nombre'), '2,000', t('mant.plan1.plazo'), t('mant.plan1.desc'), [t('mant.plan1.f1'), t('mant.plan1.f2'), t('mant.plan1.f3'), t('mant.plan1.f4')], False),
+        (t('mant.plan2.nombre'), '3,600', t('mant.plan2.plazo'), t('mant.plan2.desc'), [t('mant.plan2.f1'), t('mant.plan2.f2'), t('mant.plan2.f3'), t('mant.plan2.f4'), t('mant.plan2.f5')], True),
         (t('mant.plan3.nombre'), none, t('mant.plan3.plazo'), t('mant.plan3.desc'), [t('mant.plan3.f1'), t('mant.plan3.f2'), t('mant.plan3.f3'), t('mant.plan3.f4')], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
