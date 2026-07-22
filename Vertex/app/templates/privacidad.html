@@ -1,44 +1,44 @@
 {% extends "base.html" %}
-{% block title %}{{ t('priv.title') }}{% endblock %}
-{% block meta_desc %}{{ t('priv.meta') }}{% endblock %}
-
+{% block title %}Aviso de Privacidad — AS Vertex{% endblock %}
+{% block meta_desc %}Aviso de Privacidad Integral de AS Vertex conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.{% endblock %}
+ 
 {% block content %}
-
+ 
 <div class="page-header">
   <div class="container">
-    <div class="badge badge-violet"><span class="badge-dot"></span>{{ t('legal.badge') }}</div>
-    <h1>{{ t('priv.h1') }}</h1>
-    <p>{{ t('legal.updated') }} {{ fecha_actualizacion if fecha_actualizacion else t('legal.updated_date') }}</p>
+    <div class="badge badge-violet"><span class="badge-dot"></span>Documento legal</div>
+    <h1>Aviso de Privacidad Integral</h1>
+    <p>Última actualización: {{ fecha_actualizacion if fecha_actualizacion else "21 de julio de 2026" }}</p>
   </div>
 </div>
-
+ 
 <section class="section legal" style="border-bottom: none;">
   <div class="container">
     <div style="max-width: var(--measure); display: flex; flex-direction: column; gap: 2.5rem;">
-
+ 
       <div class="card" style="border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.05);">
-        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">{{ t('priv.intro') | safe }}</p>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">El presente Aviso de Privacidad se emite en cumplimiento de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), su Reglamento y demás disposiciones aplicables. Su objetivo es informarle de manera clara sobre el tratamiento que daremos a los datos personales que usted nos proporcione, así como los derechos que la ley le reconoce como titular de dichos datos.</p>
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s1.h') }}</h2>
-        <p style="margin-bottom: 0.75rem;">{{ t('priv.s1.p1') | safe }}</p>
+        <h2>1. Identidad y domicilio del responsable</h2>
+        <p style="margin-bottom: 0.75rem;"><strong>AS Vertex</strong> (en adelante, "AS Vertex", "nosotros" o el "Responsable") es el responsable del tratamiento de sus datos personales, conforme a lo establecido en el artículo 15 de la LFPDPPP.</p>
         <p>
-          {{ t('priv.s1.p2') }}
+          Para cualquier asunto relacionado con el tratamiento de sus datos personales o para el ejercicio de sus derechos, puede contactarnos al siguiente correo electrónico:
           <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a>
         </p>
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s2.h') }}</h2>
-        <p style="margin-bottom: 1rem;">{{ t('priv.s2.intro') }}</p>
-
+        <h2>2. Datos personales que recabamos</h2>
+        <p style="margin-bottom: 1rem;">Para las finalidades descritas en este Aviso, podemos recabar las siguientes categorías de datos personales, ya sea de forma directa a través de nuestros formularios y correos electrónicos, o de forma indirecta a través de tecnologías de rastreo en nuestro sitio web:</p>
+ 
         <div class="grid-2" style="gap: 10px; margin-bottom: 1rem;">
           {% for categoria, items in [
-            (t('priv.s2.cat1.h'), [t('priv.s2.cat1.i1'), t('priv.s2.cat1.i2')]),
-            (t('priv.s2.cat2.h'), [t('priv.s2.cat2.i1'), t('priv.s2.cat2.i2')]),
-            (t('priv.s2.cat3.h'), [t('priv.s2.cat3.i1'), t('priv.s2.cat3.i2'), t('priv.s2.cat3.i3')]),
-            (t('priv.s2.cat4.h'), [t('priv.s2.cat4.i1'), t('priv.s2.cat4.i2'), t('priv.s2.cat4.i3'), t('priv.s2.cat4.i4')]),
+            ('Datos de identificación', ['Nombre completo o razón social', 'Puesto o cargo dentro de su organización']),
+            ('Datos de contacto', ['Correo electrónico', 'Número telefónico']),
+            ('Datos del proyecto o negocio', ['Nombre del negocio, marca o proyecto', 'Giro o sector de actividad', 'Requerimientos técnicos y contenido para el desarrollo']),
+            ('Datos técnicos y de navegación', ['Dirección IP', 'Tipo y versión de navegador', 'Sistema operativo y tipo de dispositivo', 'Páginas visitadas y tiempo de navegación']),
           ] %}
           <div class="card" style="padding: 1.25rem;">
             <h4 style="font-size: 13px; color: var(--green); margin-bottom: 0.6rem;">{{ categoria }}</h4>
@@ -52,41 +52,51 @@
           </div>
           {% endfor %}
         </div>
-
+ 
         <div class="card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.05); padding: 1.1rem;">
-          <p style="font-size: 13px; color: var(--text-secondary);">{{ t('priv.s2.sensibles') | safe }}</p>
+          <p style="font-size: 13px; color: var(--text-secondary);"><strong>No solicitamos datos personales sensibles.</strong> Conforme al artículo 3 de la LFPDPPP, se consideran datos sensibles aquellos que puedan revelar aspectos como origen racial, estado de salud, información genética, creencias religiosas, opiniones políticas o preferencia sexual. Si en el curso de un proyecto usted decide compartir con nosotros información de esta naturaleza, le solicitaremos su consentimiento expreso por escrito antes de tratarla.</p>
         </div>
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s3.h') }}</h2>
-
-        <p style="margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">{{ t('priv.s3.prim_label') }}</p>
-        {% for fin in [t('priv.s3.p1'), t('priv.s3.p2'), t('priv.s3.p3'), t('priv.s3.p4'), t('priv.s3.p5')] %}
+        <h2>3. Finalidades del tratamiento</h2>
+ 
+        <p style="margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">Finalidades primarias (no requieren consentimiento adicional):</p>
+        {% for fin in [
+          'Atender solicitudes de información, cotización y contacto que usted nos envíe.',
+          'Formalizar y ejecutar la relación contractual para la prestación de nuestros servicios.',
+          'Diseñar, desarrollar, entregar y dar mantenimiento a los proyectos web contratados.',
+          'Prestar los servicios de hosting contratados y comunicarle asuntos técnicos, incidentes o renovaciones.',
+          'Emitir comprobantes, facturación y cumplir con obligaciones fiscales y legales aplicables.'
+        ] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"/></svg>
           <p style="font-size: 14px;">{{ fin }}</p>
         </div>
         {% endfor %}
-
-        <p style="margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">{{ t('priv.s3.sec_label') }}</p>
-        {% for fin in [t('priv.s3.s1'), t('priv.s3.s2'), t('priv.s3.s3')] %}
+ 
+        <p style="margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600; color: var(--text-primary); font-size: 14px;">Finalidades secundarias (requieren su consentimiento):</p>
+        {% for fin in [
+          'Envío de comunicaciones informativas sobre nuevos servicios, promociones o contenidos.',
+          'Solicitud de testimonios o casos de éxito para fines de portafolio y difusión.',
+          'Análisis estadísticos internos para mejorar la calidad de nuestros servicios y sitio web.'
+        ] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--violet-light)" stroke-width="2.5" style="margin-top: 2px; flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <p style="font-size: 14px;">{{ fin }}</p>
         </div>
         {% endfor %}
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s4.h') }}</h2>
-        <p style="margin-bottom: 1.25rem;">{{ t('priv.s4.intro') | safe }}</p>
+        <h2>4. Sus derechos ARCO</h2>
+        <p style="margin-bottom: 1.25rem;">Como titular de los datos personales, usted tiene en todo momento el derecho de <strong>Acceder, Rectificar, Cancelar u Oponerse</strong> al tratamiento de sus datos (derechos ARCO), así como de <strong>revocar el consentimiento</strong> que en su caso nos haya otorgado.</p>
         <div class="grid-2" style="gap: 10px;">
           {% for letra, nombre, desc in [
-            ('A', t('priv.s4.arco1.n'), t('priv.s4.arco1.d')),
-            ('R', t('priv.s4.arco2.n'), t('priv.s4.arco2.d')),
-            ('C', t('priv.s4.arco3.n'), t('priv.s4.arco3.d')),
-            ('O', t('priv.s4.arco4.n'), t('priv.s4.arco4.d')),
+            ('A', 'Acceso', 'Conocer qué datos personales tenemos de usted y los detalles de su tratamiento.'),
+            ('R', 'Rectificación', 'Solicitar la corrección de sus datos cuando resulten inexactos o incompletos.'),
+            ('C', 'Cancelación', 'Solicitar que sus datos sean eliminados de nuestros registros cuando ya no sean necesarios.'),
+            ('O', 'Oposición', 'Oponerse al uso de sus datos personales para fines específicos.'),
           ] %}
           <div class="card" style="padding: 1.25rem;">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem;">
@@ -97,38 +107,47 @@
           </div>
           {% endfor %}
         </div>
-
+ 
         <div class="card" style="margin-top: 1rem; padding: 1.25rem;">
-          <h4 style="font-size: 14px; margin-bottom: 0.6rem;">{{ t('priv.s4.como.h') }}</h4>
-          <p style="font-size: 13px; margin-bottom: 0.5rem;">{{ t('priv.s4.como.p') }} <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a> {{ t('priv.s4.como.p2') }}</p>
-          {% for req in [t('priv.s4.como.r1'), t('priv.s4.como.r2'), t('priv.s4.como.r3')] %}
+          <h4 style="font-size: 14px; margin-bottom: 0.6rem;">¿Cómo ejercer sus derechos ARCO?</h4>
+          <p style="font-size: 13px; margin-bottom: 0.5rem;">Debe enviar una solicitud al correo electrónico <a href="mailto:contacto.asvertex@gmail.com" style="color: var(--green);">contacto.asvertex@gmail.com</a> con el asunto "Ejercicio de derechos ARCO". Su solicitud deberá contener la información y documentación siguiente:</p>
+          {% for req in [
+            'Nombre completo del titular y correo electrónico para recibir respuesta.',
+            'Documento oficial que acredite su identidad (o la del representante, en su caso).',
+            'Descripción clara y precisa de los datos y del derecho que desea ejercer.'
+          ] %}
           <div style="font-size: 13px; color: var(--text-secondary); padding: 4px 0; display: flex; gap: 8px;">
             <span style="color: var(--green);">›</span> {{ req }}
           </div>
           {% endfor %}
-          <p style="font-size: 12px; color: var(--text-muted); margin-top: 0.75rem;">{{ t('priv.s4.como.plazo') | safe }}</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 0.75rem;">Daremos respuesta a su solicitud en un plazo máximo de <strong>veinte días hábiles</strong> contados a partir de su recepción, conforme al artículo 32 de la LFPDPPP. En caso de que la solicitud resulte procedente, la haremos efectiva dentro de los quince días hábiles siguientes.</p>
         </div>
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s5.h') }}</h2>
-        <p style="margin-bottom: 1rem;">{{ t('priv.s5.intro') | safe }}</p>
-        {% for sup in [t('priv.s5.i1'), t('priv.s5.i2'), t('priv.s5.i3'), t('priv.s5.i4')] %}
+        <h2>5. Limitación de uso, divulgación y revocación del consentimiento</h2>
+        <p style="margin-bottom: 1rem;">Usted puede en cualquier momento <strong>limitar el uso o divulgación</strong> de sus datos personales, o <strong>revocar el consentimiento</strong> que nos haya otorgado para el tratamiento con fines secundarios. Para ello, envíe una solicitud a nuestro correo de contacto indicando expresamente:</p>
+        {% for sup in [
+          'Que desea dejar de recibir comunicaciones comerciales o promocionales.',
+          'Que retira su autorización para el uso de su testimonio o proyecto en portafolio.',
+          'Que solicita la exclusión de sus datos de análisis estadísticos internos.',
+          'Cualquier otra limitación específica sobre el tratamiento de sus datos.'
+        ] %}
         <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--border);">
           <span style="color: var(--violet-light); font-size: 11px; margin-top: 3px; flex-shrink: 0;">▸</span>
           <p style="font-size: 14px;">{{ sup }}</p>
         </div>
         {% endfor %}
-        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">{{ t('priv.s5.nota') }}</p>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">La revocación de finalidades secundarias no afectará la prestación de los servicios que ya tenga contratados con nosotros.</p>
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s6.h') }}</h2>
-        <p style="margin-bottom: 1rem;">{{ t('priv.s6.intro') | safe }}</p>
+        <h2>6. Uso de cookies y tecnologías de rastreo</h2>
+        <p style="margin-bottom: 1rem;">Nuestro sitio web utiliza cookies y tecnologías similares con la finalidad de mejorar su experiencia de navegación. Las cookies son pequeños archivos de texto que se almacenan en su dispositivo y permiten identificar preferencias del usuario.</p>
         <div class="grid-2" style="gap: 10px;">
           {% for tipo, desc, color in [
-            (t('priv.s6.c1.h'), t('priv.s6.c1.d'), 'var(--green)'),
-            (t('priv.s6.c2.h'), t('priv.s6.c2.d'), 'var(--violet-light)'),
+            ('Cookies esenciales', 'Necesarias para el funcionamiento del sitio, incluyendo el manejo de sesión y la selección de idioma. No es posible desactivarlas sin afectar la funcionalidad básica.', 'var(--green)'),
+            ('Cookies analíticas', 'Nos permiten conocer de forma agregada cómo se utiliza el sitio para mejorarlo. No identifican al usuario de forma directa.', 'var(--violet-light)'),
           ] %}
           <div class="card" style="padding: 1.25rem;">
             <h4 style="font-size: 13px; color: {{ color }}; margin-bottom: 0.5rem;">{{ tipo }}</h4>
@@ -136,28 +155,29 @@
           </div>
           {% endfor %}
         </div>
-        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">{{ t('priv.s6.nota') }}</p>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 1rem;">Usted puede configurar su navegador para bloquear o eliminar las cookies en cualquier momento. Consulte la sección de ayuda de su navegador para conocer el procedimiento aplicable.</p>
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s7.h') }}</h2>
-        <p>{{ t('priv.s7.p') | safe }}</p>
+        <h2>7. Transferencia de datos personales</h2>
+        <p>AS Vertex <strong>no transfiere ni comercializa sus datos personales</strong> con terceros para fines distintos a la prestación del servicio contratado. Sus datos podrán ser compartidos únicamente con proveedores tecnológicos que actúan como encargados del tratamiento (por ejemplo, servicios de infraestructura de hosting o de correo electrónico), quienes están obligados contractualmente a mantener la confidencialidad de la información. También podrán transmitirse cuando exista un requerimiento de autoridad competente, en los términos que la ley aplicable establezca.</p>
       </div>
-
+ 
       <div>
-        <h2>{{ t('priv.s8.h') }}</h2>
+        <h2>8. Modificaciones al Aviso de Privacidad</h2>
         <p>
-          {{ t('priv.s8.p') | safe }}
+          AS Vertex se reserva el derecho de modificar el presente Aviso en cualquier momento para reflejar cambios legales, operativos o de nuestras prácticas de tratamiento. Cualquier modificación será publicada en esta misma página, indicando la fecha de la última actualización. Le recomendamos revisarla periódicamente. El uso continuo de nuestros servicios y sitio web posterior a la publicación implicará la aceptación del Aviso vigente.
         </p>
       </div>
-
+ 
       <div style="padding-top: 1rem; border-top: 0.5px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap;">
-        <a href="{{ url_for('main.index') }}" class="btn btn-ghost">{{ t('legal.volver') }}</a>
-        <a href="{{ url_for('main.terminos') }}" class="btn btn-ghost">{{ t('legal.a_terminos') }}</a>
+        <a href="{{ url_for('main.index') }}" class="btn btn-ghost">Volver al inicio</a>
+        <a href="{{ url_for('main.terminos') }}" class="btn btn-ghost">Ver Términos y Condiciones</a>
       </div>
-
+ 
     </div>
   </div>
 </section>
-
+ 
 {% endblock %}
+
