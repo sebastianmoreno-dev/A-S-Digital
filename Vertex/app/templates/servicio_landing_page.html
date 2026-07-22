@@ -144,9 +144,9 @@
     <h2 class="section-title">{{ t('lp.pre.title') }}</h2>
     <div class="grid-3" style="align-items: start; margin-top: 1.5rem;">
       {% for nombre, precio, plazo, desc, features, destacado in [
-        (t('lp.plan1.nombre'), '4,500', t('lp.plan1.plazo'), t('lp.plan1.desc'), [t('lp.plan1.f1'), t('lp.plan1.f2'), t('lp.plan1.f3'), t('lp.plan1.f4'), t('lp.plan1.f5')], False),
-        (t('lp.plan2.nombre'), '9,500', t('lp.plan2.plazo'), t('lp.plan2.desc'), [t('lp.plan2.f1'), t('lp.plan2.f2'), t('lp.plan2.f3'), t('lp.plan2.f4'), t('lp.plan2.f5'), t('lp.plan2.f6')], True),
-        (t('lp.plan3.nombre'), '14,000', t('lp.plan3.plazo'), t('lp.plan3.desc'), [t('lp.plan3.f1'), t('lp.plan3.f2'), t('lp.plan3.f3'), t('lp.plan3.f4'), t('lp.plan3.f5')], False),
+        (t('lp.plan1.nombre'), '3,600', t('lp.plan1.plazo'), t('lp.plan1.desc'), [t('lp.plan1.f1'), t('lp.plan1.f2'), t('lp.plan1.f3'), t('lp.plan1.f4'), t('lp.plan1.f5')], False),
+        (t('lp.plan2.nombre'), '7,600', t('lp.plan2.plazo'), t('lp.plan2.desc'), [t('lp.plan2.f1'), t('lp.plan2.f2'), t('lp.plan2.f3'), t('lp.plan2.f4'), t('lp.plan2.f5'), t('lp.plan2.f6')], True),
+        (t('lp.plan3.nombre'), '11,200', t('lp.plan3.plazo'), t('lp.plan3.desc'), [t('lp.plan3.f1'), t('lp.plan3.f2'), t('lp.plan3.f3'), t('lp.plan3.f4'), t('lp.plan3.f5')], False),
       ] %}
       <div class="card pricing-card {% if destacado %}featured{% endif %}" style="position: relative;">
         {% if destacado %}<div class="pricing-badge">{{ t('common.mas_pedido') }}</div>{% endif %}

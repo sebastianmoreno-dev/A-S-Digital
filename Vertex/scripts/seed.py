@@ -52,26 +52,26 @@ PERMISOS = [
 ]
 
 SERVICIOS = [
-    dict(clave='landing-page', nombre='Landing Page', precio_desde=4500, orden=1,
+    dict(clave='landing-page', nombre='Landing Page', precio_desde=3600, orden=1,
          descripcion='Página única enfocada en conversión: presentación, servicios y contacto.'),
-    dict(clave='frontend', nombre='Solo Frontend', precio_desde=7000, orden=2,
+    dict(clave='frontend', nombre='Solo Frontend', precio_desde=5600, orden=2,
          descripcion='Diseño e implementación de interfaz — HTML, CSS y JavaScript.'),
-    dict(clave='backend', nombre='Solo Backend / API', precio_desde=9000, orden=3,
+    dict(clave='backend', nombre='Solo Backend / API', precio_desde=7200, orden=3,
          descripcion='API y lógica de servidor con Flask/Python y base de datos.'),
-    dict(clave='fullstack', nombre='Sitio Completo (Full Stack)', precio_desde=12000, orden=4,
+    dict(clave='fullstack', nombre='Sitio Completo (Full Stack)', precio_desde=9600, orden=4,
          descripcion='Frontend + backend + base de datos, listo para producción.'),
-    dict(clave='blog-cms', nombre='Blog / CMS', precio_desde=15000, orden=5,
+    dict(clave='blog-cms', nombre='Blog / CMS', precio_desde=12000, orden=5,
          descripcion='Sitio con panel para publicar contenido sin tocar código.'),
     dict(clave='otro', nombre='Otro / No sé aún', precio_desde=None, orden=6,
          descripcion='El cliente todavía no tiene claro qué necesita.'),
 ]
 
 RANGOS = [
-    dict(clave='menos5k', etiqueta='Menos de $5,000 MXN', monto_min=0, monto_max=5000, orden=1),
-    dict(clave='5k-10k', etiqueta='$5,000 – $10,000 MXN', monto_min=5000, monto_max=10000, orden=2),
-    dict(clave='10k-15k', etiqueta='$10,000 – $15,000 MXN', monto_min=10000, monto_max=15000, orden=3),
-    dict(clave='15k-25k', etiqueta='$15,000 – $25,000 MXN', monto_min=15000, monto_max=25000, orden=4),
-    dict(clave='mas25k', etiqueta='Más de $25,000 MXN', monto_min=25000, monto_max=None, orden=5),
+    dict(clave='menos5k', etiqueta='Menos de $4,000 MXN', monto_min=0, monto_max=4000, orden=1),
+    dict(clave='5k-10k', etiqueta='$4,000 – $8,000 MXN', monto_min=4000, monto_max=8000, orden=2),
+    dict(clave='10k-15k', etiqueta='$8,000 – $12,000 MXN', monto_min=8000, monto_max=12000, orden=3),
+    dict(clave='15k-25k', etiqueta='$12,000 – $20,000 MXN', monto_min=12000, monto_max=20000, orden=4),
+    dict(clave='mas25k', etiqueta='Más de $20,000 MXN', monto_min=20000, monto_max=None, orden=5),
 ]
 
 CONFIGURACION = [
