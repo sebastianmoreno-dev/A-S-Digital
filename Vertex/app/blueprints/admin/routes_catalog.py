@@ -1,4 +1,4 @@
-from flask import abort, flash, redirect, render_template, url_for
+from flask import abort, flash, redirect, render_template, request, url_for
 
 from app.blueprints.admin import admin_bp
 from app.blueprints.admin.forms import RangoPresupuestoForm, ServicioForm
@@ -54,6 +54,17 @@ def servicio_editar(servicio_id):
     return render_template('admin/servicio_form.html', form=form, titulo='Editar servicio')
 
 
+@admin_bp.route('/servicios/<int:servicio_id>/toggle', methods=['POST'])
+@permission_required('catalogo.manage')
+def servicio_toggle(servicio_id):
+    servicio = repo.obtener_servicio(servicio_id)
+    if servicio is None:
+        abort(404)
+    catalog_service.alternar_servicio(servicio)
+    flash(f'Servicio {"activado" if servicio.activo else "desactivado"}.', 'success')
+    return redirect(request.referrer or url_for('admin.servicios_list'))
+
+
 # ── Rangos de presupuesto ────────────────────────────────────────────
 
 @admin_bp.route('/presupuestos')
@@ -100,3 +111,14 @@ def rango_editar(rango_id):
         flash('Rango actualizado.', 'success')
         return redirect(url_for('admin.rangos_list'))
     return render_template('admin/rango_form.html', form=form, titulo='Editar rango de presupuesto')
+
+
+@admin_bp.route('/presupuestos/<int:rango_id>/toggle', methods=['POST'])
+@permission_required('catalogo.manage')
+def rango_toggle(rango_id):
+    rango = repo.obtener_rango(rango_id)
+    if rango is None:
+        abort(404)
+    catalog_service.alternar_rango(rango)
+    flash(f'Rango {"activado" if rango.activo else "desactivado"}.', 'success')
+    return redirect(request.referrer or url_for('admin.rangos_list'))

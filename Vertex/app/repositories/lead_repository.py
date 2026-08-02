@@ -14,10 +14,13 @@ def obtener_contacto(contacto_id: int):
     return Contacto.query.get(contacto_id)
 
 
-def listar_contactos(estado: str | None = None, page: int = 1, per_page: int = 25):
+def listar_contactos(estado: str | None = None, origen: str | None = None,
+                     page: int = 1, per_page: int = 25):
     query = Contacto.query.order_by(Contacto.creado_en.desc())
     if estado:
         query = query.filter_by(estado=estado)
+    if origen:
+        query = query.filter_by(origen=origen)
     return query.paginate(page=page, per_page=per_page, error_out=False)
 
 

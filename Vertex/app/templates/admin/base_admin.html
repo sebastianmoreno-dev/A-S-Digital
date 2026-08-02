@@ -9,31 +9,48 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
 </head>
-<body class="admin-body">
+<body class="admin-body{% if current_user.is_authenticated %} has-sidebar{% endif %}">
 
   {% if current_user.is_authenticated %}
-  <aside class="admin-sidebar">
+  {# ── Topbar sólo-mobile: marca + hamburguesa ─────────────────────── #}
+  <header class="admin-topbar">
+    <button type="button" class="admin-nav-toggle" id="adminNavToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="adminSidebar">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">AS Vertex · Admin</span>
+  </header>
+
+  <div class="admin-scrim" id="adminScrim" hidden></div>
+
+  <aside class="admin-sidebar" id="adminSidebar">
     <div class="brand">AS Vertex · Admin</div>
-    <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">Dashboard</a>
-    <a href="{{ url_for('admin.leads_list') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('admin.lead') }}">Leads</a>
-    <a href="{{ url_for('admin.servicios_list') }}" class="{{ 'active' if request.endpoint and 'servicio' in request.endpoint }}">Servicios</a>
-    <a href="{{ url_for('admin.rangos_list') }}" class="{{ 'active' if request.endpoint and 'rango' in request.endpoint }}">Presupuestos</a>
-    <a href="{{ url_for('admin.configuracion') }}" class="{{ 'active' if request.endpoint == 'admin.configuracion' }}">Configuración</a>
-    <form action="{{ url_for('admin.logout') }}" method="POST">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <button type="submit" class="logout">{{ current_user.email }} — Cerrar sesión</button>
-    </form>
+    <nav class="admin-nav">
+      <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">Dashboard</a>
+      <a href="{{ url_for('admin.leads_list') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('admin.lead') }}">Leads</a>
+      <a href="{{ url_for('admin.servicios_list') }}" class="{{ 'active' if request.endpoint and 'servicio' in request.endpoint }}">Servicios</a>
+      <a href="{{ url_for('admin.rangos_list') }}" class="{{ 'active' if request.endpoint and 'rango' in request.endpoint }}">Presupuestos</a>
+      <a href="{{ url_for('admin.configuracion') }}" class="{{ 'active' if request.endpoint == 'admin.configuracion' }}">Configuración</a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-email" title="{{ current_user.email }}">{{ current_user.email }}</div>
+      <form action="{{ url_for('admin.logout') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button type="submit" class="logout">Cerrar sesión</button>
+      </form>
+    </div>
   </aside>
   {% endif %}
 
   <main class="admin-main">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        {% for category, message in messages %}
-          <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}" style="margin-bottom: 1rem;">
-            {{ message }}
-          </div>
-        {% endfor %}
+        <div class="toast-stack" role="status" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
       {% endif %}
     {% endwith %}
 
