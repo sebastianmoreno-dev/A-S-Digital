@@ -24,14 +24,20 @@ def upgrade():
     bind = op.get_bind()
     es_pg = bind.dialect.name == 'postgresql'
 
-    # En Postgres los tipos ENUM se crean explícitamente (create_table sí los
-    # crea, pero se controla create_type=False abajo para evitar dobles CREATE).
+    # En Postgres los tipos ENUM se crean explícitamente y de forma idempotente
+    # (checkfirst=True). Los tipos de las columnas se marcan con create_type=False
+    # usando postgresql.ENUM — que SÍ respeta ese flag — para que op.create_table
+    # NO vuelva a emitir CREATE TYPE (el sa.Enum genérico lo ignora y provoca un
+    # 'ya existe un tipo ...'). En sqlite el ENUM se compila como VARCHAR + CHECK.
     if es_pg:
+        from sqlalchemy.dialects.postgresql import ENUM as PGEnum
         sa.Enum(*FRECUENCIAS, name='plan_frecuencia').create(bind, checkfirst=True)
         sa.Enum(*PARCIALIDAD_ESTADOS, name='parcialidad_estado').create(bind, checkfirst=True)
-
-    frecuencia_type = sa.Enum(*FRECUENCIAS, name='plan_frecuencia', create_type=False)
-    parcialidad_estado_type = sa.Enum(*PARCIALIDAD_ESTADOS, name='parcialidad_estado', create_type=False)
+        frecuencia_type = PGEnum(*FRECUENCIAS, name='plan_frecuencia', create_type=False)
+        parcialidad_estado_type = PGEnum(*PARCIALIDAD_ESTADOS, name='parcialidad_estado', create_type=False)
+    else:
+        frecuencia_type = sa.Enum(*FRECUENCIAS, name='plan_frecuencia')
+        parcialidad_estado_type = sa.Enum(*PARCIALIDAD_ESTADOS, name='parcialidad_estado')
 
     op.create_table(
         'planes_pago',
