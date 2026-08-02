@@ -7,7 +7,7 @@ from app.blueprints.admin import admin_bp
 from app.blueprints.admin.forms import LoginForm
 from app.models.contacto import Contacto
 from app.models.security import BitacoraEvento
-from app.repositories import log_repository
+from app.repositories import log_repository, pago_repository
 from app.services.auth_service import LoginError, cerrar_sesion, intentar_login
 
 
@@ -63,11 +63,18 @@ def dashboard():
     eventos_recientes = log_repository.listar_eventos_recientes(
         limit=20, categoria=categoria, nivel=nivel, desde=desde, hasta=hasta,
     )
+
+    # Widget de pagos: vencidas y próximas parcialidades.
+    pagos_vencidos = pago_repository.parcialidades_vencidas()
+    pagos_proximos = pago_repository.proximas_parcialidades(limite=5)
+
     return render_template(
         'admin/dashboard.html',
         conteos=conteos,
         ultimos_leads=ultimos_leads,
         eventos_recientes=eventos_recientes,
+        pagos_vencidos=pagos_vencidos,
+        pagos_proximos=pagos_proximos,
         evento_categoria=categoria,
         evento_nivel=nivel,
         evento_desde=request.args.get('desde', ''),

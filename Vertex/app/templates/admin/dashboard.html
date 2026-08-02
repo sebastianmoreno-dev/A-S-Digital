@@ -12,6 +12,35 @@
   {% endfor %}
 </div>
 
+{% if pagos_proximos or pagos_vencidos %}
+<div class="pagos-widget">
+  <div class="head">
+    <h2>Pagos</h2>
+    {% if pagos_vencidos %}
+    <span class="vencidas-pill">{{ pagos_vencidos|length }} vencida{{ 's' if pagos_vencidos|length != 1 }}</span>
+    {% endif %}
+  </div>
+  <ul>
+    {% for p in pagos_vencidos[:5] %}
+    <li class="vencida">
+      <span><a href="{{ url_for('admin.cliente_detail', cliente_id=p.plan.cliente_id) }}">{{ p.plan.cliente.nombre }}</a> · #{{ p.numero }}</span>
+      <span class="fecha">venció {{ p.fecha_vencimiento.strftime('%d/%m/%Y') }}</span>
+      <span class="monto">{{ "${:,.2f}".format(p.monto) }}</span>
+    </li>
+    {% endfor %}
+    {% for p in pagos_proximos %}
+    {% if not p.esta_vencida %}
+    <li>
+      <span><a href="{{ url_for('admin.cliente_detail', cliente_id=p.plan.cliente_id) }}">{{ p.plan.cliente.nombre }}</a> · #{{ p.numero }}</span>
+      <span class="fecha">vence {{ p.fecha_vencimiento.strftime('%d/%m/%Y') }}</span>
+      <span class="monto">{{ "${:,.2f}".format(p.monto) }}</span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
 <h2>Últimos leads</h2>
 {% if ultimos_leads %}
 <div class="admin-table-wrap">

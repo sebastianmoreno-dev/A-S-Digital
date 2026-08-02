@@ -1,7 +1,15 @@
 {% extends "admin/base_admin.html" %}
 {% block title %}Lead #{{ contacto.id }} — Panel AS Vertex{% endblock %}
 {% block content %}
-<h1>Lead #{{ contacto.id }} — {{ contacto.nombre }}</h1>
+<div class="admin-table-toolbar">
+  <h1 style="margin-bottom:0;">Lead #{{ contacto.id }} — {{ contacto.nombre }}</h1>
+  {% if contacto.estado == 'ganado' %}
+  <form method="POST" action="{{ url_for('admin.cliente_desde_lead', lead_id=contacto.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <button type="submit" class="btn btn-green">Convertir a cliente</button>
+  </form>
+  {% endif %}
+</div>
 
 <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
   <div style="flex: 1; min-width: 280px;">

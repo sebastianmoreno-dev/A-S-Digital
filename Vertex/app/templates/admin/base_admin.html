@@ -27,6 +27,7 @@
     <nav class="admin-nav">
       <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">Dashboard</a>
       <a href="{{ url_for('admin.leads_list') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('admin.lead') }}">Leads</a>
+      <a href="{{ url_for('admin.clientes_list') }}" class="{{ 'active' if request.endpoint and ('cliente' in request.endpoint or 'proyecto' in request.endpoint or 'parcialidad' in request.endpoint) }}">Clientes</a>
       <a href="{{ url_for('admin.servicios_list') }}" class="{{ 'active' if request.endpoint and 'servicio' in request.endpoint }}">Servicios</a>
       <a href="{{ url_for('admin.rangos_list') }}" class="{{ 'active' if request.endpoint and 'rango' in request.endpoint }}">Presupuestos</a>
       <a href="{{ url_for('admin.configuracion') }}" class="{{ 'active' if request.endpoint == 'admin.configuracion' }}">Configuración</a>

@@ -48,6 +48,7 @@ PERMISOS = [
     ('leads.edit', 'Editar estado/notas de un lead'),
     ('catalogo.manage', 'Administrar servicios y rangos de presupuesto'),
     ('config.manage', 'Administrar la configuración operativa del sitio'),
+    ('clientes.manage', 'Administrar clientes, proyectos y planes de pago'),
     ('admins.manage', 'Administrar cuentas de administradores (futuro)'),
 ]
 

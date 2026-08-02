@@ -14,6 +14,7 @@ from app.models.catalog import RangoPresupuesto, Servicio
 from app.models.comms import CorreoEnviado
 from app.models.config import ConfiguracionSitio
 from app.models.contacto import Contacto
+from app.models.pagos import Parcialidad, PlanPago
 from app.models.security import BitacoraEvento, ListaNegraIP, RateLimitViolacion
 from app.models.future import (  # noqa: F401 - registra los modelos futuros en el metadata
     BlogCategoria,
@@ -40,6 +41,7 @@ __all__ = [
     'CorreoEnviado',
     'ConfiguracionSitio',
     'Contacto',
+    'Parcialidad', 'PlanPago',
     'BitacoraEvento', 'ListaNegraIP', 'RateLimitViolacion',
     'BlogCategoria', 'BlogPost', 'ChatConversacion', 'ChatMensaje', 'Cliente', 'Cotizacion',
     'ArchivoAdjunto', 'NewsletterSuscriptor', 'PortafolioImagen', 'PortafolioProyecto',

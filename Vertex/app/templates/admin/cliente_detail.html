@@ -1,0 +1,115 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ cliente.nombre }} — Panel AS Vertex{% endblock %}
+{% block content %}
+<div class="admin-table-toolbar">
+  <h1 style="margin-bottom:0;">{{ cliente.nombre }}</h1>
+  <a href="{{ url_for('admin.clientes_list') }}" style="font-size:13px; color:var(--admin-text-2);">← Clientes</a>
+</div>
+
+<div style="display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start; margin-bottom:2rem;">
+  <div style="flex:1; min-width:280px;">
+    <table class="admin-table">
+      <tbody>
+        <tr><th>Empresa</th><td>{{ cliente.empresa or '—' }}</td></tr>
+        <tr><th>Email</th><td>{{ cliente.email or '—' }}</td></tr>
+        <tr><th>Teléfono</th><td>{{ cliente.telefono or '—' }}</td></tr>
+        <tr><th>Notas</th><td>{{ cliente.notas or '—' }}</td></tr>
+        {% if cliente.contacto_origen %}
+        <tr><th>Lead de origen</th><td><a href="{{ url_for('admin.lead_detail', lead_id=cliente.contacto_origen.id) }}">Lead #{{ cliente.contacto_origen.id }}</a></td></tr>
+        {% endif %}
+        <tr><th>Alta</th><td>{{ cliente.creado_en.strftime('%d/%m/%Y') }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{# ── Proyectos / sitios ─────────────────────────────────────────── #}
+<div class="admin-table-toolbar">
+  <h2 style="margin-bottom:0;">Proyectos / sitios</h2>
+  <a href="{{ url_for('admin.proyecto_nuevo', cliente_id=cliente.id) }}" class="btn btn-ghost">+ Agregar sitio</a>
+</div>
+{% if cliente.proyectos %}
+<div class="admin-table-wrap">
+<table class="admin-table" style="margin-bottom:2rem;">
+  <thead><tr><th>Nombre</th><th>Estado</th><th>Monto acordado</th></tr></thead>
+  <tbody>
+    {% for p in cliente.proyectos %}
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td><span class="admin-badge estado-{{ p.estado }}">{{ p.estado.replace('_',' ') }}</span></td>
+      <td>{{ "${:,.2f}".format(p.monto_acordado) if p.monto_acordado is not none else '—' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="admin-empty" style="margin-bottom:2rem;">
+  <p>Este cliente todavía no tiene proyectos/sitios.</p>
+  <span class="hint">Usa “+ Agregar sitio”.</span>
+</div>
+{% endif %}
+
+{# ── Estado financiero ──────────────────────────────────────────── #}
+<div class="admin-table-toolbar">
+  <h2 style="margin-bottom:0;">Estado financiero</h2>
+  {% if plan %}
+  <a href="{{ url_for('admin.cliente_plan', cliente_id=cliente.id) }}" class="btn btn-ghost">Editar plan</a>
+  {% else %}
+  <a href="{{ url_for('admin.cliente_plan', cliente_id=cliente.id) }}" class="btn btn-primary">Configurar plan de pagos</a>
+  {% endif %}
+</div>
+
+{% if plan %}
+<div class="finance-summary">
+  <div class="box"><div class="k">Total</div><div class="v">{{ "${:,.2f}".format(resumen.total) }}</div></div>
+  <div class="box"><div class="k">Pagado</div><div class="v">{{ "${:,.2f}".format(resumen.pagado) }}</div></div>
+  <div class="box"><div class="k">Pendiente</div><div class="v">{{ "${:,.2f}".format(resumen.pendiente) }}</div></div>
+  <div class="box"><div class="k">Próximo pago</div><div class="v">{{ resumen.proxima_fecha.strftime('%d/%m/%Y') if resumen.proxima_fecha else '—' }}</div></div>
+  <div class="box {{ 'alert-vencidas' if resumen.num_vencidas }}"><div class="k">Vencidas</div><div class="v">{{ resumen.num_vencidas }}</div></div>
+</div>
+
+<p style="font-size:12px; color:var(--admin-text-2); margin-bottom:0.75rem;">
+  {{ plan.num_parcialidades }} parcialidades · quincenal (15 y último de mes) · inicio {{ plan.fecha_inicio.strftime('%d/%m/%Y') }} · {{ plan.moneda }}
+</p>
+
+<div class="admin-table-wrap">
+<table class="admin-table">
+  <thead>
+    <tr><th>#</th><th>Vencimiento</th><th>Monto</th><th>Estado</th><th>Pago</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for p in plan.parcialidades %}
+    <tr>
+      <td>{{ p.numero }}</td>
+      <td>{{ p.fecha_vencimiento.strftime('%d/%m/%Y') }}</td>
+      <td>{{ "${:,.2f}".format(p.monto) }}</td>
+      <td><span class="admin-badge estado-{{ p.estado_visible }}">{{ p.estado_visible }}</span></td>
+      <td>{{ p.fecha_pago.strftime('%d/%m/%Y') if p.fecha_pago else '—' }}</td>
+      <td>
+        {% if p.estado == 'pagada' %}
+        <form method="POST" action="{{ url_for('admin.parcialidad_revertir', parcialidad_id=p.id) }}" style="display:inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <button type="submit" title="Revertir a pendiente" style="background:none; border:none; color:var(--red); font-size:12px; cursor:pointer; padding:0.3rem 0.4rem;">Revertir</button>
+        </form>
+        {% else %}
+        <form method="POST" action="{{ url_for('admin.parcialidad_pagar', parcialidad_id=p.id) }}" style="display:flex; gap:0.4rem; align-items:center;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <input type="date" name="fecha_pago" value="{{ hoy.isoformat() }}" style="padding:0.25rem 0.4rem; font-size:12px; background:var(--bg-code); border:1px solid var(--border-med); border-radius:var(--radius-sm); color:var(--text-primary);" />
+          <button type="submit" class="btn btn-green" style="padding:0.3rem 0.7rem; font-size:12px;">Pagar</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="admin-empty">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+  <p>Este cliente no tiene un plan de pagos configurado.</p>
+  <span class="hint">Usa “Configurar plan de pagos” para generarlo.</span>
+</div>
+{% endif %}
+{% endblock %}
