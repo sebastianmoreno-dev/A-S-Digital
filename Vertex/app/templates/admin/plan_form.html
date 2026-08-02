@@ -1,0 +1,52 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Plan de pagos — {{ cliente.nombre }}{% endblock %}
+{% block content %}
+<h1>Plan de pagos — {{ cliente.nombre }}</h1>
+<p style="color:var(--admin-text-2); font-size:14px; margin-top:-0.75rem; margin-bottom:1.5rem;">
+  {% if plan %}Editar el plan existente.{% else %}Configura el plan de pagos del cliente.{% endif %}
+  El esquema quincenal vence los días 15 y último de cada mes.
+</p>
+
+{% if plan %}
+<div class="alert alert-error" style="max-width:560px; margin-bottom:1.5rem;">
+  Ojo: guardar <strong>regenera todas las parcialidades</strong>. Solo se permite si aún no hay pagos registrados.
+</div>
+{% endif %}
+
+<form method="POST" class="admin-form" novalidate>
+  {{ form.hidden_tag() }}
+
+  <div class="form-group">
+    {{ form.monto_total.label }}
+    {{ form.monto_total(type="number", step="0.01", placeholder="12000.00") }}
+    {% for e in form.monto_total.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+  </div>
+  <div class="form-group">
+    {{ form.frecuencia.label }}
+    {{ form.frecuencia() }}
+  </div>
+  <div class="form-group">
+    {{ form.fecha_inicio.label }}
+    {{ form.fecha_inicio() }}
+    {% for e in form.fecha_inicio.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+  </div>
+  <div class="form-group">
+    {{ form.num_parcialidades.label }}
+    {{ form.num_parcialidades(type="number", placeholder="24") }}
+    {% for e in form.num_parcialidades.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+    <div style="font-size:12px; color:var(--text-muted); margin-top:0.3rem;">Deja esto vacío si prefieres indicar una fecha de fin.</div>
+  </div>
+  <div class="form-group">
+    {{ form.fecha_fin.label }}
+    {{ form.fecha_fin() }}
+    {% for e in form.fecha_fin.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+  </div>
+  <div class="form-group">
+    {{ form.notas.label }}
+    {{ form.notas() }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">{{ 'Regenerar plan' if plan else 'Generar plan' }}</button>
+  <a href="{{ url_for('admin.cliente_detail', cliente_id=cliente.id) }}" style="margin-left:1rem; font-size:13px; color:var(--admin-text-2);">Cancelar</a>
+</form>
+{% endblock %}

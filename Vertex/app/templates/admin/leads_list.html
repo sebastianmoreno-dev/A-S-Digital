@@ -1,20 +1,36 @@
 {% extends "admin/base_admin.html" %}
 {% block title %}Leads — Panel AS Vertex{% endblock %}
 {% block content %}
-<h1>Leads</h1>
-
 <div class="admin-table-toolbar">
+  <h1 style="margin-bottom:0;">Leads</h1>
+  <a href="{{ url_for('admin.lead_nuevo') }}" class="btn btn-primary">+ Nuevo lead</a>
+</div>
+
+<div class="admin-filter-row">
+  <span class="lbl">Estado</span>
   <div class="admin-filters">
-    <a href="{{ url_for('admin.leads_list') }}" class="{{ 'active' if not estado_filtro }}">Todos</a>
+    <a href="{{ url_for('admin.leads_list', origen=origen_filtro) }}" class="{{ 'active' if not estado_filtro }}">Todos</a>
     {% for estado in ['nuevo', 'en_seguimiento', 'cotizado', 'ganado', 'perdido', 'descartado'] %}
-    <a href="{{ url_for('admin.leads_list', estado=estado) }}" class="{{ 'active' if estado_filtro == estado }}">{{ estado.replace('_', ' ') }}</a>
+    <a href="{{ url_for('admin.leads_list', estado=estado, origen=origen_filtro) }}" class="{{ 'active' if estado_filtro == estado }}">{{ estado.replace('_', ' ') }}</a>
     {% endfor %}
   </div>
 </div>
 
+<div class="admin-filter-row">
+  <span class="lbl">Origen</span>
+  <div class="admin-filters">
+    <a href="{{ url_for('admin.leads_list', estado=estado_filtro) }}" class="{{ 'active' if not origen_filtro }}">Todos</a>
+    {% for origen in origenes %}
+    <a href="{{ url_for('admin.leads_list', estado=estado_filtro, origen=origen) }}" class="{{ 'active' if origen_filtro == origen }}">{{ origen.replace('_', ' ') }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+{% if paginacion.items %}
+<div class="admin-table-wrap">
 <table class="admin-table">
   <thead>
-    <tr><th>Nombre</th><th>Email</th><th>Servicio</th><th>Estado</th><th>Fecha</th></tr>
+    <tr><th>Nombre</th><th>Email</th><th>Servicio</th><th>Origen</th><th>Estado</th><th>Fecha</th></tr>
   </thead>
   <tbody>
     {% for lead in paginacion.items %}
@@ -22,22 +38,34 @@
       <td>{{ lead.nombre }}</td>
       <td>{{ lead.email }}</td>
       <td>{{ lead.servicio.nombre }}</td>
+      <td><span class="admin-badge origen-{{ lead.origen }}">{{ lead.origen.replace('_',' ') }}</span></td>
       <td><span class="admin-badge estado-{{ lead.estado }}">{{ lead.estado.replace('_',' ') }}</span></td>
       <td>{{ lead.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
     </tr>
-    {% else %}
-    <tr><td colspan="5">No hay leads con este filtro.</td></tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
 
-<div style="margin-top: 1rem; display: flex; gap: 0.75rem; font-size: 13px;">
+<div style="margin-top: 1rem; display: flex; gap: 0.75rem; font-size: 13px; align-items: center;">
   {% if paginacion.has_prev %}
-  <a href="{{ url_for('admin.leads_list', estado=estado_filtro, page=paginacion.prev_num) }}">← Anterior</a>
+  <a href="{{ url_for('admin.leads_list', estado=estado_filtro, origen=origen_filtro, page=paginacion.prev_num) }}">← Anterior</a>
   {% endif %}
-  <span style="color: var(--text-muted);">Página {{ paginacion.page }} de {{ paginacion.pages or 1 }}</span>
+  <span style="color: var(--admin-text-2);">Página {{ paginacion.page }} de {{ paginacion.pages or 1 }}</span>
   {% if paginacion.has_next %}
-  <a href="{{ url_for('admin.leads_list', estado=estado_filtro, page=paginacion.next_num) }}">Siguiente →</a>
+  <a href="{{ url_for('admin.leads_list', estado=estado_filtro, origen=origen_filtro, page=paginacion.next_num) }}">Siguiente →</a>
   {% endif %}
 </div>
+{% else %}
+<div class="admin-empty">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  {% if estado_filtro or origen_filtro %}
+  <p>No hay leads con este filtro.</p>
+  <span class="hint">Prueba con otro estado u origen, o <a href="{{ url_for('admin.leads_list') }}">quita los filtros</a>.</span>
+  {% else %}
+  <p>Todavía no hay leads.</p>
+  <span class="hint">Los del formulario web aparecen aquí solos; usa “+ Nuevo lead” para registrar uno a mano.</span>
+  {% endif %}
+</div>
+{% endif %}
 {% endblock %}

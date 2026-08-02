@@ -1,7 +1,15 @@
 {% extends "admin/base_admin.html" %}
 {% block title %}Lead #{{ contacto.id }} — Panel AS Vertex{% endblock %}
 {% block content %}
-<h1>Lead #{{ contacto.id }} — {{ contacto.nombre }}</h1>
+<div class="admin-table-toolbar">
+  <h1 style="margin-bottom:0;">Lead #{{ contacto.id }} — {{ contacto.nombre }}</h1>
+  {% if contacto.estado == 'ganado' %}
+  <form method="POST" action="{{ url_for('admin.cliente_desde_lead', lead_id=contacto.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <button type="submit" class="btn btn-green">Convertir a cliente</button>
+  </form>
+  {% endif %}
+</div>
 
 <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
   <div style="flex: 1; min-width: 280px;">
@@ -13,6 +21,7 @@
         <tr><th>Teléfono</th><td>{{ contacto.telefono or '—' }}</td></tr>
         <tr><th>Servicio</th><td>{{ contacto.servicio.nombre }}</td></tr>
         <tr><th>Presupuesto</th><td>{{ contacto.rango_presupuesto.etiqueta if contacto.rango_presupuesto else '—' }}</td></tr>
+        <tr><th>Origen</th><td><span class="admin-badge origen-{{ contacto.origen }}">{{ contacto.origen.replace('_',' ') }}</span></td></tr>
         <tr><th>Descripción</th><td>{{ contacto.descripcion_proyecto }}</td></tr>
         <tr><th>IP</th><td>{{ contacto.ip }}</td></tr>
         <tr><th>User-Agent</th><td style="font-size:12px; color:var(--text-muted);">{{ contacto.user_agent or '—' }}</td></tr>

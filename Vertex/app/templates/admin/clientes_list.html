@@ -1,0 +1,47 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Clientes — Panel AS Vertex{% endblock %}
+{% block content %}
+<div class="admin-table-toolbar">
+  <h1 style="margin-bottom:0;">Clientes</h1>
+  <a href="{{ url_for('admin.cliente_nuevo') }}" class="btn btn-primary">+ Nuevo cliente</a>
+</div>
+
+{% if clientes %}
+<div class="admin-table-wrap">
+<table class="admin-table">
+  <thead>
+    <tr><th>Nombre</th><th>Empresa</th><th>Sitios</th><th>Plan</th><th>Próximo pago</th><th>Alta</th></tr>
+  </thead>
+  <tbody>
+    {% for c in clientes %}
+    {% set r = resumenes[c.id] %}
+    <tr class="row-link" data-href="{{ url_for('admin.cliente_detail', cliente_id=c.id) }}">
+      <td>{{ c.nombre }}</td>
+      <td>{{ c.empresa or '—' }}</td>
+      <td>{{ c.proyectos|length }}</td>
+      <td>
+        {% if r %}
+          {% if r.num_vencidas %}
+          <span class="admin-badge estado-vencida">{{ r.num_vencidas }} vencida{{ 's' if r.num_vencidas != 1 }}</span>
+          {% else %}
+          <span class="admin-badge estado-pagada">al corriente</span>
+          {% endif %}
+        {% else %}
+          <span class="admin-badge estado-descartado">sin plan</span>
+        {% endif %}
+      </td>
+      <td>{{ r.proxima_fecha.strftime('%d/%m/%Y') if r and r.proxima_fecha else '—' }}</td>
+      <td>{{ c.creado_en.strftime('%d/%m/%Y') }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="admin-empty">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  <p>Todavía no hay clientes.</p>
+  <span class="hint">Convierte un lead ganado a cliente, o usa “+ Nuevo cliente”.</span>
+</div>
+{% endif %}
+{% endblock %}

@@ -6,6 +6,8 @@
   <a href="{{ url_for('admin.rango_nuevo') }}" class="btn btn-primary">+ Nuevo rango</a>
 </div>
 
+{% if rangos %}
+<div class="admin-table-wrap">
 <table class="admin-table">
   <thead>
     <tr><th>Clave</th><th>Etiqueta</th><th>Mín</th><th>Máx</th><th>Activo</th><th>Orden</th><th></th></tr>
@@ -17,13 +19,25 @@
       <td>{{ rango.etiqueta }}</td>
       <td>{{ '$%.2f'|format(rango.monto_min) if rango.monto_min is not none else '—' }}</td>
       <td>{{ '$%.2f'|format(rango.monto_max) if rango.monto_max is not none else '—' }}</td>
-      <td>{{ 'Sí' if rango.activo else 'No' }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('admin.rango_toggle', rango_id=rango.id) }}" class="admin-toggle">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <button type="submit" aria-pressed="{{ 'true' if rango.activo else 'false' }}"
+                  aria-label="{{ 'Desactivar' if rango.activo else 'Activar' }} {{ rango.etiqueta }}"></button>
+        </form>
+      </td>
       <td>{{ rango.orden }}</td>
       <td><a href="{{ url_for('admin.rango_editar', rango_id=rango.id) }}">Editar</a></td>
     </tr>
-    {% else %}
-    <tr><td colspan="7">No hay rangos registrados todavía.</td></tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
+{% else %}
+<div class="admin-empty">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+  <p>No hay rangos registrados todavía.</p>
+  <span class="hint">Usa “+ Nuevo rango” para agregar el primero.</span>
+</div>
+{% endif %}
 {% endblock %}

@@ -31,3 +31,14 @@ def actualizar_rango(rango: RangoPresupuesto, **campos) -> RangoPresupuesto:
     for clave, valor in campos.items():
         setattr(rango, clave, valor)
     return repo.guardar_rango(rango)
+
+
+def alternar_servicio(servicio: Servicio) -> Servicio:
+    """Invierte el estado activo/inactivo (para el toggle inline)."""
+    servicio.activo = not servicio.activo
+    return repo.guardar_servicio(servicio)
+
+
+def alternar_rango(rango: RangoPresupuesto) -> RangoPresupuesto:
+    rango.activo = not rango.activo
+    return repo.guardar_rango(rango)

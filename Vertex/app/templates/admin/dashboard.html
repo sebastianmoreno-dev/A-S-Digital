@@ -12,10 +12,41 @@
   {% endfor %}
 </div>
 
+{% if pagos_proximos or pagos_vencidos %}
+<div class="pagos-widget">
+  <div class="head">
+    <h2>Pagos</h2>
+    {% if pagos_vencidos %}
+    <span class="vencidas-pill">{{ pagos_vencidos|length }} vencida{{ 's' if pagos_vencidos|length != 1 }}</span>
+    {% endif %}
+  </div>
+  <ul>
+    {% for p in pagos_vencidos[:5] %}
+    <li class="vencida">
+      <span><a href="{{ url_for('admin.cliente_detail', cliente_id=p.plan.cliente_id) }}">{{ p.plan.cliente.nombre }}</a> · #{{ p.numero }}</span>
+      <span class="fecha">venció {{ p.fecha_vencimiento.strftime('%d/%m/%Y') }}</span>
+      <span class="monto">{{ "${:,.2f}".format(p.monto) }}</span>
+    </li>
+    {% endfor %}
+    {% for p in pagos_proximos %}
+    {% if not p.esta_vencida %}
+    <li>
+      <span><a href="{{ url_for('admin.cliente_detail', cliente_id=p.plan.cliente_id) }}">{{ p.plan.cliente.nombre }}</a> · #{{ p.numero }}</span>
+      <span class="fecha">vence {{ p.fecha_vencimiento.strftime('%d/%m/%Y') }}</span>
+      <span class="monto">{{ "${:,.2f}".format(p.monto) }}</span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
 <h2>Últimos leads</h2>
+{% if ultimos_leads %}
+<div class="admin-table-wrap">
 <table class="admin-table" style="margin-bottom: 2rem;">
   <thead>
-    <tr><th>Nombre</th><th>Email</th><th>Servicio</th><th>Estado</th><th>Fecha</th></tr>
+    <tr><th>Nombre</th><th>Email</th><th>Servicio</th><th>Origen</th><th>Estado</th><th>Fecha</th></tr>
   </thead>
   <tbody>
     {% for lead in ultimos_leads %}
@@ -23,32 +54,89 @@
       <td>{{ lead.nombre }}</td>
       <td>{{ lead.email }}</td>
       <td>{{ lead.servicio.nombre }}</td>
+      <td><span class="admin-badge origen-{{ lead.origen }}">{{ lead.origen.replace('_',' ') }}</span></td>
       <td><span class="admin-badge estado-{{ lead.estado }}">{{ lead.estado.replace('_',' ') }}</span></td>
       <td>{{ lead.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
     </tr>
-    {% else %}
-    <tr><td colspan="5">Todavía no hay leads.</td></tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
+{% else %}
+<div class="admin-empty" style="margin-bottom: 2rem;">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  <p>Todavía no hay leads.</p>
+</div>
+{% endif %}
 
-<h2>Eventos recientes</h2>
+<h2>Actividad</h2>
+{# Tabs Negocio / Seguridad — mismo patrón visual que los filtros de Leads. #}
+<div class="admin-filter-row">
+  <div class="admin-filters">
+    <a href="{{ url_for('admin.dashboard', cat='negocio', nivel=evento_nivel, desde=evento_desde, hasta=evento_hasta) }}"
+       class="{{ 'active' if evento_categoria == 'negocio' }}">Negocio</a>
+    <a href="{{ url_for('admin.dashboard', cat='seguridad', nivel=evento_nivel, desde=evento_desde, hasta=evento_hasta) }}"
+       class="{{ 'active' if evento_categoria == 'seguridad' }}">Seguridad</a>
+  </div>
+</div>
+
+<form method="GET" action="{{ url_for('admin.dashboard') }}" class="admin-filter-form">
+  <input type="hidden" name="cat" value="{{ evento_categoria }}" />
+  <div class="fld">
+    <label for="f-nivel">Nivel</label>
+    <select name="nivel" id="f-nivel">
+      <option value="">Todos</option>
+      {% for n in niveles %}
+      <option value="{{ n }}" {{ 'selected' if evento_nivel == n }}>{{ n }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="fld">
+    <label for="f-desde">Desde</label>
+    <input type="date" name="desde" id="f-desde" value="{{ evento_desde }}" />
+  </div>
+  <div class="fld">
+    <label for="f-hasta">Hasta</label>
+    <input type="date" name="hasta" id="f-hasta" value="{{ evento_hasta }}" />
+  </div>
+  <button type="submit" class="btn btn-ghost">Filtrar</button>
+  {% if evento_nivel or evento_desde or evento_hasta %}
+  <a href="{{ url_for('admin.dashboard', cat=evento_categoria) }}" style="font-size:13px; color:var(--admin-text-2); align-self:center;">Limpiar</a>
+  {% endif %}
+</form>
+
+{% if eventos_recientes %}
+<div class="admin-table-wrap">
 <table class="admin-table">
   <thead>
+    {% if evento_categoria == 'seguridad' %}
     <tr><th>Tipo</th><th>Nivel</th><th>Descripción</th><th>IP</th><th>Fecha</th></tr>
+    {% else %}
+    <tr><th>Tipo</th><th>Nivel</th><th>Descripción</th><th>Fecha</th></tr>
+    {% endif %}
   </thead>
   <tbody>
     {% for evento in eventos_recientes %}
     <tr>
-      <td>{{ evento.tipo_evento }}</td>
-      <td>{{ evento.nivel }}</td>
-      <td>{{ evento.descripcion }}</td>
-      <td>{{ evento.ip }}</td>
+      <td>{{ evento.tipo_evento.replace('_', ' ') }}</td>
+      <td><span class="admin-badge nivel-{{ evento.nivel }}">{{ evento.nivel }}</span></td>
+      <td>{{ evento.descripcion or '—' }}</td>
+      {% if evento_categoria == 'seguridad' %}
+      <td>{{ evento.ip or '—' }}</td>
+      {% endif %}
       <td>{{ evento.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
     </tr>
-    {% else %}
-    <tr><td colspan="5">Sin eventos todavía.</td></tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
+{% else %}
+<div class="admin-empty">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+  <p>Sin eventos {{ 'de negocio' if evento_categoria == 'negocio' else 'de seguridad' }} en este rango.</p>
+  {% if evento_nivel or evento_desde or evento_hasta %}
+  <span class="hint"><a href="{{ url_for('admin.dashboard', cat=evento_categoria) }}">Quitar filtros</a></span>
+  {% endif %}
+</div>
+{% endif %}
 {% endblock %}

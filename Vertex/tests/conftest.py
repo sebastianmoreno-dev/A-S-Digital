@@ -64,6 +64,7 @@ def rol_admin(app, db):
             Permiso(clave='leads.edit'),
             Permiso(clave='catalogo.manage'),
             Permiso(clave='config.manage'),
+            Permiso(clave='clientes.manage'),
         ]
         _db.session.add_all(permisos)
         _db.session.flush()

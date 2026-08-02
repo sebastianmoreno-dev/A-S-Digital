@@ -1,0 +1,33 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ titulo }} — Panel AS Vertex{% endblock %}
+{% block content %}
+<h1>{{ titulo }}</h1>
+
+<form method="POST" class="admin-form" novalidate>
+  {{ form.hidden_tag() }}
+  {% for field in form if field.name != 'csrf_token' %}
+  <div class="form-group {{ 'checkbox-row' if field.type == 'BooleanField' }}">
+    {{ field.label }}
+    {% if field.type == 'DecimalField' %}
+      {{ field(type="number", step="0.01") }}
+    {% elif field.type == 'IntegerField' %}
+      {{ field(type="number") }}
+    {% elif field.name == 'email' %}
+      {{ field(type="email") }}
+    {% elif field.name == 'telefono' %}
+      {{ field(type="tel") }}
+    {% else %}
+      {{ field() }}
+    {% endif %}
+    {% for e in field.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+  </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
+  {% if es_proyecto %}
+  <a href="{{ url_for('admin.cliente_detail', cliente_id=cliente.id) }}" style="margin-left:1rem; font-size:13px; color:var(--admin-text-2);">Cancelar</a>
+  {% else %}
+  <a href="{{ url_for('admin.clientes_list') }}" style="margin-left:1rem; font-size:13px; color:var(--admin-text-2);">Cancelar</a>
+  {% endif %}
+</form>
+{% endblock %}

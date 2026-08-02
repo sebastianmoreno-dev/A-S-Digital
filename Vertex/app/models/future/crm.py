@@ -31,6 +31,8 @@ class ProyectoCliente(db.Model, TimestampMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id', ondelete='CASCADE'), nullable=False, index=True)
+    # Lead ganado del que nació este sitio/proyecto (un cliente puede tener varios).
+    contacto_id = db.Column(db.Integer, db.ForeignKey('contactos.id', ondelete='SET NULL'), nullable=True)
     nombre = db.Column(db.String(160), nullable=False)
     descripcion = db.Column(db.Text, nullable=True)
     estado = db.Column(db.Enum(*ESTADOS, name='proyecto_estado'), default='propuesta', nullable=False)
@@ -40,6 +42,7 @@ class ProyectoCliente(db.Model, TimestampMixin):
     monto_acordado = db.Column(db.Numeric(10, 2), nullable=True)
 
     cliente = db.relationship('Cliente', back_populates='proyectos')
+    contacto = db.relationship('Contacto')
 
 
 class Cotizacion(db.Model, TimestampMixin):

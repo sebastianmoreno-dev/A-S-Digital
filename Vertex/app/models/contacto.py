@@ -7,6 +7,7 @@ class Contacto(db.Model, TimestampMixin, UpdatedAtMixin):
     __tablename__ = 'contactos'
 
     ESTADOS = ('nuevo', 'en_seguimiento', 'cotizado', 'ganado', 'perdido', 'descartado')
+    ORIGENES = ('formulario_web', 'referido', 'redes_sociales', 'contacto_directo', 'otro')
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -25,6 +26,14 @@ class Contacto(db.Model, TimestampMixin, UpdatedAtMixin):
     # ── Metadatos de la solicitud ────────────────────────────────────
     ip = db.Column(db.String(45), nullable=False)
     user_agent = db.Column(db.String(255), nullable=True)
+
+    # De dónde llegó el lead. Los del formulario público quedan en
+    # 'formulario_web' por defecto; los capturados a mano en el panel
+    # (referidos, redes, contacto directo) llevan su propio origen.
+    origen = db.Column(
+        db.Enum(*ORIGENES, name='contacto_origen'),
+        default='formulario_web', nullable=False, index=True,
+    )
 
     # ── Gestión interna (CRM básico) ─────────────────────────────────
     estado = db.Column(db.Enum(*ESTADOS, name='contacto_estado'), default='nuevo', nullable=False, index=True)
